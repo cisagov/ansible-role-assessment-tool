@@ -57,6 +57,6 @@ provisioner:
         # * https://github.com/ansible/ansible/blob/v2.10.1/lib/ansible/executor/interpreter_discovery.py
         ansible_python_interpreter: auto_legacy
 scenario:
-  name: mono
+  name: csharp
 verifier:
   name: testinfra

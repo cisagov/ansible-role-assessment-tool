@@ -67,5 +67,5 @@ jobs:
           pip install --upgrade --requirement requirements-test.txt
       - name: Run molecule tests
         run: |
-          molecule test --scenario-name=default &&
-          molecule test --scenario-name=mono
+          molecule test --scenario-name=csharp &&
+          molecule test --scenario-name=default
