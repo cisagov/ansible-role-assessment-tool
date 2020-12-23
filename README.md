@@ -4,13 +4,8 @@
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/cisagov/ansible-role-assessment-tool.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cisagov/ansible-role-assessment-tool/alerts/)
 [![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/cisagov/ansible-role-assessment-tool.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cisagov/ansible-role-assessment-tool/context:python)
 
-This is a skeleton project that can be used to quickly get a new
-[cisagov](https://github.com/cisagov) Ansible role GitHub project
-started.  This skeleton project contains
-[licensing information](LICENSE), as well as
-[pre-commit hooks](https://pre-commit.com) and
-[GitHub Actions](https://github.com/features/actions) configurations
-appropriate for an Ansible role.
+This Ansible role is used to install assessment tools to Kali Linux
+from a URL pointing to an archive (tar or zip) containing the tool.
 
 ## Requirements ##
 
@@ -18,7 +13,15 @@ None.
 
 ## Role Variables ##
 
-None.
+* archive_url - a URL pointing to an archive (tar or zip) containing
+  the tool
+* csharp - a Boolean indicating whether or not the tool is written in
+  C#; if it is then we will install the mono C# toolchain.  Defaults
+  to false.
+* group - the group that will own the directory where this tool is
+  installed.  Defaults to "root".
+* install_dir - the directory on the remote host where the tool should
+  be installed
 
 ## Dependencies ##
 
@@ -33,15 +36,12 @@ Here's how to use it in a playbook:
   become: yes
   become_method: sudo
   roles:
-    - skeleton
+    - role: assessment_tool
+      vars:
+        archive_url: https://github.com/eladshamir/Internal-Monologue/tarball/master/
+        install_dir: /tools/Internal-Monologue
+        csharp: yes
 ```
-
-## New Repositories from a Skeleton ##
-
-Please see our [Project Setup guide](https://github.com/cisagov/development-guide/tree/develop/project_setup)
-for step-by-step instructions on how to start a new repository from
-a skeleton. This will save you time and effort when configuring a
-new repository!
 
 ## Contributing ##
 
@@ -63,4 +63,4 @@ with this waiver of copyright interest.
 
 ## Author Information ##
 
-First Last - <first.last@trio.dhs.gov>
+Shane Frasier - <jeremy.frasier@trio.dhs.gov>
