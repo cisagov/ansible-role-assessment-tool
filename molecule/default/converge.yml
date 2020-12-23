@@ -4,6 +4,5 @@
   roles:
     - role: ansible-role-assessment-tool
       vars:
-        archive_url: https://github.com/eladshamir/Internal-Monologue/tarball/master/
-        install_dir: /tools/Internal-Monologue
-        mono: yes
+        archive_url: https://github.com/bovine/datapipe/tarball/master
+        install_dir: /tools/datapipe
