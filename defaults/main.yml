@@ -1,0 +1,7 @@
+---
+# Group ownership for the install directory and its contents
+group: root
+
+# If this is a mono project then we will install the tools required to
+# compile mono code
+mono: no

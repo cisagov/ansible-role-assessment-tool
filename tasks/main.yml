@@ -1,2 +1,36 @@
 ---
-# tasks file for skeleton
+- name: Create the install directory
+  ansible.builtin.file:
+    group: "{{ group }}"
+    # Allow both root and the desired group to have full permissions
+    # in these directories
+    mode: 0775
+    path: "{{ install_dir }}"
+    state: directory
+
+# These tools are used by the ansible.builtin.unarchive module below
+- name: Install tar and zip
+  ansible.builtin.package:
+    name:
+      - tar
+      - unzip
+      - zip
+
+- name: Install the tool
+  # ansible-lint E208 gives an error if we don't specify the mode, but
+  # we definitely don't want to do that here since it will override
+  # the permissions on the files in the archive.
+  ansible.builtin.unarchive: # noqa 208
+    dest: "{{ install_dir }}"
+    extra_opts:
+      - "--strip-components=1"
+    group: "{{ group }}"
+    remote_src: yes
+    src: "{{ archive_url }}"
+
+- name: Install mono if installing a C# tool
+  ansible.builtin.package:
+    name:
+      - mono-complete
+  when:
+    - mono
