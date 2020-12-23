@@ -33,4 +33,4 @@
     name:
       - mono-complete
   when:
-    - mono
+    - csharp

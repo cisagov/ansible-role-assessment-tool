@@ -5,5 +5,5 @@
     - role: ansible-role-assessment-tool
       vars:
         archive_url: https://github.com/eladshamir/Internal-Monologue/tarball/master/
+        csharp: yes
         install_dir: /tools/Internal-Monologue
-        mono: yes
