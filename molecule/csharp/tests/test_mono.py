@@ -13,18 +13,18 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
 
 
 @pytest.mark.parametrize(
-    "dir",
+    "d",
     [
         "/tools/Internal-Monologue",
     ],
 )
-def test_directories(host, dir):
+def test_directories(host, d):
     """Test that appropriate directories were created."""
-    directory = host.file(dir)
+    directory = host.file(d)
     assert directory.exists
     assert directory.is_directory
     # Make sure that the directory is not empty
-    assert host.run_expect([0], f'[ -n "$(ls -A {dir})" ]')
+    assert host.run_expect([0], f'[ -n "$(ls -A {d})" ]')
 
 
 @pytest.mark.parametrize(
