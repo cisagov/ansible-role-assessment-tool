@@ -3,5 +3,11 @@
 # to compile C# code
 csharp: no
 
-# Group ownership for the install directory and its contents
+# Group ownership for the install directory
 group: root
+
+# Mode for the install directory
+mode: 0775
+
+# If this is a Python project then we will create a Python virtualenv
+python: no

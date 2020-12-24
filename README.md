@@ -14,14 +14,26 @@ None.
 ## Role Variables ##
 
 * archive_url - a URL pointing to an archive (tar or zip) containing
-  the tool
+  the tool.  Required.
 * csharp - a Boolean indicating whether or not the tool is written in
   C#; if it is then we will install the mono C# toolchain.  Defaults
   to false.
 * group - the group that will own the directory where this tool is
   installed.  Defaults to "root".
 * install_dir - the directory on the remote host where the tool should
-  be installed
+  be installed.  Required.
+* mode - the mode to assign the directory where this tool is
+  installed.  Defaults to 0775.
+* pip_packages - a list of pip packages to install into the Python
+  virtualenv.  Only read if python is true.
+* pip_requirements_file - path to a pip requirements file listing
+  dependencies to install into the Python virtualenv.  Only read if
+  python is true.
+* python - a Boolean indicating whether or not the tool is
+  Python-based; if it is then a Python virtualenv will be created for
+  the tool.  Defaults to false.
+* virtualenv_dir - the directory where the Python virtualenv should be
+  created.  Defaults to install_dir/.venv.
 
 ## Dependencies ##
 

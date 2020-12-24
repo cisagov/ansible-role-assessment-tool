@@ -2,35 +2,53 @@
 - name: Create the install directory
   ansible.builtin.file:
     group: "{{ group }}"
-    # Allow both root and the desired group to have full permissions
-    # in these directories
-    mode: 0775
+    mode: "{{ mode }}"
     path: "{{ install_dir }}"
     state: directory
 
-# These tools are used by the ansible.builtin.unarchive module below
-- name: Install tar and zip
-  ansible.builtin.package:
-    name:
-      - tar
-      - unzip
-      - zip
-
 - name: Install the tool
-  # ansible-lint E208 gives an error if we don't specify the mode, but
-  # we definitely don't want to do that here since it will override
-  # the permissions on the files in the archive.
-  ansible.builtin.unarchive: # noqa 208
-    dest: "{{ install_dir }}"
-    extra_opts:
-      - "--strip-components=1"
-    group: "{{ group }}"
-    remote_src: yes
-    src: "{{ archive_url }}"
+  block:
+    # These tools are used by the ansible.builtin.unarchive module
+    # below
+    - name: Install tar and zip
+      ansible.builtin.package:
+        name:
+          - tar
+          - unzip
+          - zip
 
-- name: Install mono if installing a C# tool
+    - name: Install the tool
+      # ansible-lint E208 gives an error if we don't specify the mode,
+      # but we definitely don't want to do that here since it will
+      # override the permissions on the files in the archive.
+      ansible.builtin.unarchive: # noqa 208
+        dest: "{{ install_dir }}"
+        extra_opts:
+          - "--strip-components=1"
+        group: "{{ group }}"
+        remote_src: yes
+        src: "{{ archive_url }}"
+
+- name: Install mono if necessary
   ansible.builtin.package:
     name:
       - mono-complete
   when:
     - csharp
+
+- name: Create a Python virtualenv if necessary
+  block:
+    # These tools are used by the ansible.builtin.pip module below
+    - name: Install virtualenv
+      ansible.builtin.package:
+        name:
+          - virtualenv
+
+    - name: Create the virtualenv
+      ansible.builtin.pip:
+        chdir: "{{ install_dir }}"
+        name: "{{ pip_packages | default(omit) }}"
+        requirements: "{{ pip_requirements_file | default(omit) }}"
+        virtualenv: "{{ virtualenv_dir | default((install_dir, '.venv') | path_join) }}"
+  when:
+    - python
