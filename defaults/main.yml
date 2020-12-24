@@ -9,5 +9,9 @@ group: root
 # Mode for the install directory
 mode: 0775
 
+# If this is a PowerShell project then we will install the powershell
+# system package
+powershell: no
+
 # If this is a Python project then we will create a Python virtualenv
 python: no

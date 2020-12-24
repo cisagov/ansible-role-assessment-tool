@@ -29,11 +29,15 @@ None.
 * pip_requirements_file - path to a pip requirements file listing
   dependencies to install into the Python virtualenv.  Only read if
   python is true.
+* powershell - a Boolean indicating whether or not the tool is written
+  in PowerShell; if it is then we will install the powershell system
+  package.  Defaults to false.
 * python - a Boolean indicating whether or not the tool is
   Python-based; if it is then a Python virtualenv will be created for
   the tool.  Defaults to false.
 * virtualenv_dir - the directory where the Python virtualenv should be
-  created.  Defaults to install_dir/.venv.
+  created.  Defaults to install_dir/.venv.  Only read if python is
+  true.
 
 ## Dependencies ##
 
