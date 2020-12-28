@@ -1,5 +1,5 @@
 ---
-- name: Create the install directory
+- name: Create the directory {{ install_dir }}
   ansible.builtin.file:
     group: "{{ group }}"
     mode: "{{ mode }}"
@@ -17,7 +17,7 @@
           - unzip
           - zip
 
-    - name: Install the tool
+    - name: Install the tool from {{ archive_url }}
       # ansible-lint E208 gives an error if we don't specify the mode,
       # but we definitely don't want to do that here since it will
       # override the permissions on the files in the archive.
