@@ -23,6 +23,22 @@ extras:
   /path/to/tool/.venv/bin/activate`.  When you are done using the
   tool, simply `deactivate`.
 
+## Nota Bene ##
+
+By default, when using `vars:` within the `roles:` section of a
+playbook, the variables are added to the play variables.  This is
+normally not a problem, but it definitely can be if you are running
+the same role more than once with a different set of vars.
+Fortunately, Ansible provides the configuration setting
+`private_role_vars` to allow enabling of private role variables.  If
+you use this role more than once in a playbook, then you will want to
+set `private_role_vars` to `true`.
+
+For more details, see [this
+link](https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html#using-roles-at-the-play-level)
+and [this
+link](https://docs.ansible.com/ansible/latest/reference_appendices/config.html#default-private-role-vars).
+
 ## Requirements ##
 
 None.
