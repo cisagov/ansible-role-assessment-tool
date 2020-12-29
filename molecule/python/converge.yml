@@ -4,21 +4,21 @@
   roles:
     - role: ansible-role-assessment-tool
       vars:
-        archive_url: https://github.com/MacR6/sshenum/tarball/master
+        archive_src: https://github.com/MacR6/sshenum/tarball/master
         install_dir: /tools/sshenum
         pip_packages:
           - paramiko
         python: yes
     - role: ansible-role-assessment-tool
       vars:
-        archive_url: https://github.com/FortyNorthSecurity/Hasher/tarball/master
+        archive_src: https://github.com/FortyNorthSecurity/Hasher/tarball/master
         install_dir: /tools/Hasher
         pip_packages:
           - '.'
         python: yes
     - role: ansible-role-assessment-tool
       vars:
-        archive_url: https://github.com/maurosoria/dirsearch/tarball/master
+        archive_src: https://github.com/maurosoria/dirsearch/tarball/master
         install_dir: /tools/dirsearch
         pip_requirements_file: requirements.txt
         python: yes

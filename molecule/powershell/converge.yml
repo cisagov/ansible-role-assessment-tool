@@ -4,6 +4,6 @@
   roles:
     - role: ansible-role-assessment-tool
       vars:
-        archive_url: https://github.com/NetSPI/PowerUpSQL/tarball/master
+        archive_src: https://github.com/NetSPI/PowerUpSQL/tarball/master
         install_dir: /tools/PowerUpSQL
         powershell: yes

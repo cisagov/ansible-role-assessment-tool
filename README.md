@@ -45,8 +45,8 @@ None.
 
 ## Role Variables ##
 
-* `archive_url` - a URL pointing to an archive (tar or zip) containing
-  the tool.  Required.
+* `archive_src` - a URL pointing to an archive (tar or zip) containing
+  the tool.  Can also be a file path on the remote host.  Required.
 * `csharp` - a Boolean indicating whether or not the tool is written
   in C#; if it is then we will install the mono C# toolchain.
   Defaults to false.
