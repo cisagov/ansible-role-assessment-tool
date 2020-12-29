@@ -4,8 +4,7 @@
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/cisagov/ansible-role-assessment-tool.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cisagov/ansible-role-assessment-tool/alerts/)
 [![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/cisagov/ansible-role-assessment-tool.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cisagov/ansible-role-assessment-tool/context:python)
 
-This Ansible role is used to install assessment tools to Kali Linux
-from a URL pointing to an archive (tar or zip) containing the tool.
+This Ansible role is used to install assessment tools to Kali Linux.
 This role can also be configured to provide some language-specific
 extras:
 
@@ -45,28 +44,26 @@ None.
 
 ## Role Variables ##
 
-* `archive_src` - a URL pointing to an archive (tar or zip) containing
-  the tool.  Can also be a file path on the remote host.  Required.
+* `archive_src` - a URL or a file path on the remote host pointing to
+  an archive (tar or zip) containing the tool.  If left undefined then
+  no archive will be installed, but the install directory will still
+  be created and language-specific tooling will still be installed.
 * `csharp` - a Boolean indicating whether or not the tool is written
   in C#; if it is then we will install the mono C# toolchain.
   Defaults to false.
 * `group` - the group that will own the directory where this tool is
-  installed.  Defaults to "root".
+  installed.  Defaults to root.
 * `install_dir` - the directory on the remote host where the tool
   should be installed.  Required.
 * `mode` - the mode to assign the directory where this tool is
   installed.  Defaults to 0775.
 * `pip_packages` - a list of pip packages to install into the Python
-  virtualenv.  Only read if python is true.
+  virtualenv.
 * `pip_requirements_file` - path to a pip requirements file listing
-  dependencies to install into the Python virtualenv.  Only read if
-  python is true.
+  dependencies to install into the Python virtualenv.
 * `powershell` - a Boolean indicating whether or not the tool is
   written in PowerShell; if it is then we will install the powershell
   system package.  Defaults to false.
-* `python` - a Boolean indicating whether or not the tool is
-  Python-based; if it is then a Python virtualenv will be created for
-  the tool.  Defaults to false.
 * `virtualenv_dir` - the directory where the Python virtualenv should
   be created.  Defaults to install_dir/.venv.  Only read if python is
   true.
@@ -88,7 +85,7 @@ Here's how to use it in a playbook to install a C# tool:
   roles:
     - role: assessment_tool
       vars:
-        archive_url: https://github.com/eladshamir/Internal-Monologue/tarball/master/
+        archive_src: https://github.com/eladshamir/Internal-Monologue/tarball/master
         install_dir: /tools/Internal-Monologue
         csharp: yes
 ```
@@ -104,7 +101,7 @@ Here's how to use it in a playbook to install a PowerShell tool:
   roles:
     - role: assessment_tool
       vars:
-        archive_url: https://github.com/NetSPI/PowerUpSQL/tarball/master
+        archive_src: https://github.com/NetSPI/PowerUpSQL/tarball/master
         install_dir: /tools/PowerUpSQL
         powershell: yes
 ```
@@ -123,10 +120,9 @@ Here's how to use it in a playbook to install a Python tool using a
   roles:
     - role: assessment_tool
       vars:
-        archive_url: https://github.com/maurosoria/dirsearch/tarball/master
+        archive_src: https://github.com/maurosoria/dirsearch/tarball/master
         install_dir: /tools/dirsearch
         pip_requirements_file: requirements.txt
-        python: yes
 ```
 
 #### With Dependencies Listed in a `setup.py` File ####
@@ -141,11 +137,10 @@ Here's how to use it in a playbook to install a Python tool using a
   roles:
     - role: assessment_tool
       vars:
-        archive_url: https://github.com/FortyNorthSecurity/Hasher/tarball/master
+        archive_src: https://github.com/FortyNorthSecurity/Hasher/tarball/master
         install_dir: /tools/Hasher
         pip_packages:
           - '.'
-        python: yes
 ```
 
 #### Using a List of `pip` Packages ####
@@ -160,11 +155,27 @@ list of `pip` packages:
   roles:
     - role: assessment_tool
       vars:
-        archive_url: https://github.com/MacR6/sshenum/tarball/master
+        archive_src: https://github.com/MacR6/sshenum/tarball/master
         install_dir: /tools/sshenum
         pip_packages:
           - paramiko
-        python: yes
+```
+
+#### Simply Creating a Virtual Environment ####
+
+Here's how to use it in a playbook to simply create a virtual
+environment:
+
+```yaml
+- hosts: all
+  become: yes
+  become_method: sudo
+  roles:
+    - role: assessment_tool
+      vars:
+        install_dir: /tools/mitm6
+        pip_packages:
+          - mitm6
 ```
 
 ### Installing a Tool That Is Not Based on C#, PowerShell, or Python ###
@@ -179,7 +190,7 @@ this case) tool:
   roles:
     - role: assessment_tool
       vars:
-        archive_url: https://github.com/bovine/datapipe/tarball/master
+        archive_src: https://github.com/bovine/datapipe/tarball/master
         install_dir: /tools/datapipe
 ```
 

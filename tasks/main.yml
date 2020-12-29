@@ -6,7 +6,7 @@
     path: "{{ install_dir }}"
     state: directory
 
-- name: Install the tool
+- name: Install the tool if necessary
   block:
     # These tools are used by the ansible.builtin.unarchive module
     # below
@@ -28,6 +28,8 @@
         group: "{{ group }}"
         remote_src: yes
         src: "{{ archive_src }}"
+  when:
+    - archive_src is defined
 
 - name: Install mono if necessary
   ansible.builtin.package:
@@ -57,7 +59,7 @@
         # this task _only_ in that one case.
         - molecule-idempotence-notest
   when:
-    - python
+    - pip_packages is defined or pip_requirements_file is defined
 
 - name: Install powershell if necessary
   ansible.builtin.package:

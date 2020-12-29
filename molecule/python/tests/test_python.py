@@ -18,6 +18,7 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
         "/tools/sshenum",
         "/tools/Hasher",
         "/tools/dirsearch",
+        "/tools/mitm6",
     ],
 )
 def test_directories(host, d):
@@ -49,6 +50,7 @@ def test_packages(host, pkg):
             "/tools/dirsearch/.venv",
             ["certifi", "chardet", "urllib3", "cryptography", "PySocks"],
         ),
+        ("/tools/mitm6/.venv", ["mitm6"]),
     ],
 )
 def test_venvs(host, d, pkgs):

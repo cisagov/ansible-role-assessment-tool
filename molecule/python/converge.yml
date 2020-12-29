@@ -8,17 +8,19 @@
         install_dir: /tools/sshenum
         pip_packages:
           - paramiko
-        python: yes
     - role: ansible-role-assessment-tool
       vars:
         archive_src: https://github.com/FortyNorthSecurity/Hasher/tarball/master
         install_dir: /tools/Hasher
         pip_packages:
           - '.'
-        python: yes
     - role: ansible-role-assessment-tool
       vars:
         archive_src: https://github.com/maurosoria/dirsearch/tarball/master
         install_dir: /tools/dirsearch
         pip_requirements_file: requirements.txt
-        python: yes
+    - role: ansible-role-assessment-tool
+      vars:
+        install_dir: /tools/mitm6
+        pip_packages:
+          - mitm6
