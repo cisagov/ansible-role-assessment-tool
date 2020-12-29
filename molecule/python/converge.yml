@@ -8,12 +8,13 @@
         install_dir: /tools/sshenum
         pip_packages:
           - paramiko
-    - role: ansible-role-assessment-tool
-      vars:
-        archive_src: https://github.com/FortyNorthSecurity/Hasher/tarball/master
-        install_dir: /tools/Hasher
-        pip_packages:
-          - '.'
+    # It would be nice to testy this case, but pip install . is not idempotent.
+    # - role: ansible-role-assessment-tool
+    #   vars:
+    #     archive_src: https://github.com/FortyNorthSecurity/Hasher/tarball/master
+    #     install_dir: /tools/Hasher
+    #     pip_packages:
+    #       - '.'
     - role: ansible-role-assessment-tool
       vars:
         archive_src: https://github.com/maurosoria/dirsearch/tarball/master
