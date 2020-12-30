@@ -15,6 +15,7 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
 @pytest.mark.parametrize(
     "d",
     [
+        "/tools/aquatone",
         "/tools/datapipe",
     ],
 )
