@@ -3,3 +3,4 @@
   ansible.builtin.package:
     name:
       - python2
+      - python2-dev
