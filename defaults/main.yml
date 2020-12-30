@@ -13,5 +13,6 @@ mode: 0775
 # system package
 powershell: no
 
-# If this is a Python project then we will create a Python virtualenv
-python: no
+# If this is a Python 2 project then we will install a Python 2
+# interpreter and will create a Python 2 virtualenv
+python2: no

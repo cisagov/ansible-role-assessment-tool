@@ -64,6 +64,10 @@ None.
 * `powershell` - a Boolean indicating whether or not the tool is
   written in PowerShell; if it is then we will install the powershell
   system package.  Defaults to false.
+* `python2` - a Boolean indicating whether or not the tool is strictly
+  for Python 2; if it is then we will install the system package that
+  provides the Python 2 interpreter and will create a Python 2 virtual
+  environment.  Defaults to false.
 * `virtualenv_dir` - the directory where the Python virtualenv should
   be created.  Defaults to install_dir/.venv.  Only read if python is
   true.

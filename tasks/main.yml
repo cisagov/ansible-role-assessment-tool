@@ -21,6 +21,11 @@
   when:
     - csharp
 
+- name: Install Python 2 if necessary
+  include_tasks: install_python2.yml
+  when:
+    - python2
+
 - name: Create a Python virtualenv if necessary
   include_tasks: create_python_venv.yml
   when:
