@@ -1,0 +1,20 @@
+---
+# These tools are used by the ansible.builtin.unarchive module below
+- name: Install tar and zip
+  ansible.builtin.package:
+    name:
+      - tar
+      - unzip
+      - zip
+
+- name: Install the tool from {{ archive_src }}
+  # ansible-lint E208 gives an error if we don't specify the mode, but
+  # we definitely don't want to do that here since it will override
+  # the permissions on the files in the archive.
+  ansible.builtin.unarchive: # noqa 208
+    dest: "{{ install_dir }}"
+    extra_opts:
+      - "--strip-components=1"
+    group: "{{ group }}"
+    remote_src: yes
+    src: "{{ archive_src }}"

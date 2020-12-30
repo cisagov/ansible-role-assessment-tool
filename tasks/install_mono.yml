@@ -1,0 +1,5 @@
+---
+- name: Install mono if necessary
+  ansible.builtin.package:
+    name:
+      - mono-complete

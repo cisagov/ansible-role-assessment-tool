@@ -6,58 +6,27 @@
     path: "{{ install_dir }}"
     state: directory
 
-- name: Install the tool if necessary
-  block:
-    # These tools are used by the ansible.builtin.unarchive module
-    # below
-    - name: Install tar and zip
-      ansible.builtin.package:
-        name:
-          - tar
-          - unzip
-          - zip
+# TODO: All of the include_tasks below should really be
+# ansible.builtin.include_tasks, but when I do that ansible-lint
+# (which is called via a pre-commit hook) complains.  See this issue:
+# https://github.com/cisagov/ansible-role-assessment-tool/issues/4
 
-    - name: Install the tool from {{ archive_src }}
-      # ansible-lint E208 gives an error if we don't specify the mode,
-      # but we definitely don't want to do that here since it will
-      # override the permissions on the files in the archive.
-      ansible.builtin.unarchive: # noqa 208
-        dest: "{{ install_dir }}"
-        extra_opts:
-          - "--strip-components=1"
-        group: "{{ group }}"
-        remote_src: yes
-        src: "{{ archive_src }}"
+- name: Install the tool if necessary
+  include_tasks: install_tool.yml
   when:
     - archive_src is defined
 
 - name: Install mono if necessary
-  ansible.builtin.package:
-    name:
-      - mono-complete
+  include_tasks: install_mono.yml
   when:
     - csharp
 
 - name: Create a Python virtualenv if necessary
-  block:
-    # These tools are used by the ansible.builtin.pip module below
-    - name: Install virtualenv
-      ansible.builtin.package:
-        name:
-          - virtualenv
-
-    - name: Create the virtualenv
-      ansible.builtin.pip:
-        chdir: "{{ install_dir }}"
-        name: "{{ pip_packages | default(omit) }}"
-        requirements: "{{ pip_requirements_file | default(omit) }}"
-        virtualenv: "{{ virtualenv_dir | default((install_dir, '.venv') | path_join) }}"
+  include_tasks: create_python_venv.yml
   when:
     - pip_packages is defined or pip_requirements_file is defined
 
 - name: Install powershell if necessary
-  ansible.builtin.package:
-    name:
-      - powershell
+  include_tasks: install_powershell.yml
   when:
     - powershell
