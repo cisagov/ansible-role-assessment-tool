@@ -68,6 +68,11 @@ None.
   for Python 2; if it is then we will install the system package that
   provides the Python 2 interpreter and will create a Python 2 virtual
   environment.  Defaults to false.
+* `unarchive_extra_opts` - a list of extra options to be passed to the
+  ansible.builtin.unarchive Ansible module.  When installing a tarball
+  from a GitHub repository, for example, it is often useful to set
+  this value to "[--strip-components=1]".  The default behavior is to
+  pass no extra options.
 * `virtualenv_dir` - the directory where the Python virtualenv should
   be created.  Defaults to install_dir/.venv.  Only read if python is
   true.
@@ -92,6 +97,8 @@ Here's how to use it in a playbook to install a C# tool:
         archive_src: https://github.com/eladshamir/Internal-Monologue/tarball/master
         install_dir: /tools/Internal-Monologue
         csharp: yes
+        unarchive_extra_opts:
+          - --strip-components=1
 ```
 
 ### Installing a PowerShell Tool ###
@@ -108,6 +115,8 @@ Here's how to use it in a playbook to install a PowerShell tool:
         archive_src: https://github.com/NetSPI/PowerUpSQL/tarball/master
         install_dir: /tools/PowerUpSQL
         powershell: yes
+        unarchive_extra_opts:
+          - --strip-components=1
 ```
 
 ### Installing a Python Tool ###
@@ -127,6 +136,8 @@ Here's how to use it in a playbook to install a Python tool using a
         archive_src: https://github.com/maurosoria/dirsearch/tarball/master
         install_dir: /tools/dirsearch
         pip_requirements_file: requirements.txt
+        unarchive_extra_opts:
+          - --strip-components=1
 ```
 
 #### With Dependencies Listed in a `setup.py` File ####
@@ -145,6 +156,8 @@ Here's how to use it in a playbook to install a Python tool using a
         install_dir: /tools/Hasher
         pip_packages:
           - '.'
+        unarchive_extra_opts:
+          - --strip-components=1
 ```
 
 #### Using a List of `pip` Packages ####
@@ -163,6 +176,8 @@ list of `pip` packages:
         install_dir: /tools/sshenum
         pip_packages:
           - paramiko
+        unarchive_extra_opts:
+          - --strip-components=1
 ```
 
 #### Simply Creating a Virtual Environment ####
@@ -180,6 +195,8 @@ environment:
         install_dir: /tools/mitm6
         pip_packages:
           - mitm6
+        unarchive_extra_opts:
+          - --strip-components=1
 ```
 
 ### Installing a Tool That Is Not Based on C#, PowerShell, or Python ###
@@ -196,6 +213,8 @@ this case) tool:
       vars:
         archive_src: https://github.com/bovine/datapipe/tarball/master
         install_dir: /tools/datapipe
+        unarchive_extra_opts:
+          - --strip-components=1
 ```
 
 ## Contributing ##

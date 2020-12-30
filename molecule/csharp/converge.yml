@@ -7,3 +7,5 @@
         archive_src: https://github.com/eladshamir/Internal-Monologue/tarball/master/
         csharp: yes
         install_dir: /tools/Internal-Monologue
+        unarchive_extra_opts:
+          - --strip-components=1

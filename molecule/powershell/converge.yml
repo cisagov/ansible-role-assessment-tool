@@ -7,3 +7,5 @@
         archive_src: https://github.com/NetSPI/PowerUpSQL/tarball/master
         install_dir: /tools/PowerUpSQL
         powershell: yes
+        unarchive_extra_opts:
+          - --strip-components=1
