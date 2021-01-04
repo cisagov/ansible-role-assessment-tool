@@ -6,32 +6,27 @@
     path: "{{ install_dir }}"
     state: directory
 
-# TODO: All of the include_tasks below should really be
-# ansible.builtin.include_tasks, but when I do that ansible-lint
-# (which is called via a pre-commit hook) complains.  See this issue:
-# https://github.com/cisagov/ansible-role-assessment-tool/issues/4
-
 - name: Install the tool if necessary
-  include_tasks: install_tool.yml
+  ansible.builtin.include_tasks: install_tool.yml
   when:
     - archive_src is defined
 
 - name: Install mono if necessary
-  include_tasks: install_mono.yml
+  ansible.builtin.include_tasks: install_mono.yml
   when:
     - csharp
 
 - name: Install Python 2 if necessary
-  include_tasks: install_python2.yml
+  ansible.builtin.include_tasks: install_python2.yml
   when:
     - python2
 
 - name: Create a Python virtualenv if necessary
-  include_tasks: create_python_venv.yml
+  ansible.builtin.include_tasks: create_python_venv.yml
   when:
     - pip_packages is defined or pip_requirements_file is defined
 
 - name: Install powershell if necessary
-  include_tasks: install_powershell.yml
+  ansible.builtin.include_tasks: install_powershell.yml
   when:
     - powershell
