@@ -22,11 +22,6 @@ provisioner:
   name: ansible
   config_options:
     defaults:
-      # The OS family and distribution for Kali is "Kali GNU/Linux",
-      # which is not an allowable group name in Ansible due to the
-      # space and the slash.  This option converts those characters to
-      # underscores when creating the group name.
-      force_valid_group_names: always
       # By default, when using vars: within the roles: section of a
       # playbook, the variables are added to the play variables.  This
       # is normally not a problem, but it definitely can be if you are
