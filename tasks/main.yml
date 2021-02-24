@@ -1,4 +1,15 @@
 ---
+- name: Load var file with package names based on the OS type
+  ansible.builtin.include_vars: "{{ lookup('first_found', params) }}"
+  vars:
+    params:
+      files:
+        - "{{ ansible_distribution }}_{{ ansible_distribution_release }}.yml"
+        - "{{ ansible_distribution }}.yml"
+        - "{{ ansible_os_family }}.yml"
+      paths:
+        - "{{ role_path }}/vars"
+
 - name: Create the directory {{ install_dir }}
   ansible.builtin.file:
     group: "{{ group }}"
@@ -27,6 +38,14 @@
     - pip_packages is defined or pip_requirements_file is defined
 
 - name: Install powershell if necessary
-  ansible.builtin.include_tasks: install_powershell.yml
+  ansible.builtin.include_tasks: "{{ lookup('first_found', params) }}"
+  vars:
+    params:
+      files:
+        - install_powershell_{{ ansible_distribution }}_{{ ansible_distribution_release }}.yml
+        - install_powershell_{{ ansible_distribution }}.yml
+        - install_powershell_{{ ansible_os_family }}.yml
+      paths:
+        - "{{ role_path }}/tasks"
   when:
     - powershell

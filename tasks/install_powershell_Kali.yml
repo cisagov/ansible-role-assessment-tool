@@ -2,4 +2,4 @@
 - name: Install powershell if necessary
   ansible.builtin.package:
     name:
-      - powershell
+      - "{{ powershell_package_name }}"
