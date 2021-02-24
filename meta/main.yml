@@ -18,10 +18,21 @@ galaxy_info:
   platforms:
     - name: Debian
       versions:
+        - buster
         # Kali linux isn't an option here, but it is based on
         # Debian Testing:
         # https://www.kali.org/docs/policy/kali-linux-relationship-with-debian
-        - bullseye
+        #
+        # Unfortunately, the Debian Bullseye deb packages available at
+        # https://github.com/PowerShell/PowerShell do not install on a
+        # recent Debian Bullseye instance due to broken dependencies.
+        # Kali Linux provides its own package, so it still works, but
+        # we cannot support Debian Bullseye right now.
+        # - bullseye
+    - name: Ubuntu
+      versions:
+        - bionic
+        - focal
   role_name: assessment_tool
 
 dependencies: []

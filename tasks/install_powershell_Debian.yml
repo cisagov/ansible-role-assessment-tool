@@ -1,0 +1,4 @@
+---
+- name: Install PowerShell if necessary
+  ansible.builtin.apt:
+    deb: "{{ powershell_package_name }}"

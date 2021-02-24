@@ -4,9 +4,9 @@
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/cisagov/ansible-role-assessment-tool.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cisagov/ansible-role-assessment-tool/alerts/)
 [![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/cisagov/ansible-role-assessment-tool.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cisagov/ansible-role-assessment-tool/context:python)
 
-This Ansible role is used to install assessment tools to Kali Linux.
-This role can also be configured to provide some language-specific
-extras:
+This Ansible role is used to install assessment tools to Debian,
+Ubuntu, or Kali Linux.  This role can also be configured to provide
+some language-specific extras:
 
 * C# - The `csharp` role variable can be set to `yes` to install the
   [Mono Project](https://www.mono-project.com/) tools for C#

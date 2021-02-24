@@ -16,8 +16,14 @@ lint: |
   ansible-lint
   flake8
 platforms:
+  - name: debian10
+    image: debian:buster-slim
   - name: kali
     image: kalilinux/kali-rolling
+  - name: ubuntu18
+    image: ubuntu:bionic
+  - name: ubuntu20
+    image: ubuntu:focal
 provisioner:
   name: ansible
   config_options:
