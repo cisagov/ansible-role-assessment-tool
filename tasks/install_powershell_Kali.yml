@@ -1,5 +1,5 @@
 ---
-- name: Install powershell if necessary
+- name: Install PowerShell if necessary
   ansible.builtin.package:
     name:
       - "{{ powershell_package_name }}"

@@ -37,7 +37,7 @@
   when:
     - pip_packages is defined or pip_requirements_file is defined
 
-- name: Install powershell if necessary
+- name: Install PowerShell if necessary
   ansible.builtin.include_tasks: "{{ lookup('first_found', params) }}"
   vars:
     params:
