@@ -57,8 +57,6 @@ def test_venvs(host, d, pkgs):
     assert directory.exists
     assert directory.is_directory
     # Make sure that the virtualenv contains the expected packages
-    installed_pkgs = host.pip_package.get_packages(
-        pip_path=os.path.join(d, "bin", "pip")
-    )
+    installed_pkgs = host.pip.get_packages(pip_path=os.path.join(d, "bin", "pip"))
     for pkg in pkgs:
         assert pkg in installed_pkgs
