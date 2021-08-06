@@ -8,12 +8,12 @@ This Ansible role is used to install assessment tools to Debian,
 Ubuntu, or Kali Linux.  This role can also be configured to provide
 some language-specific extras:
 
-* C# - The `csharp` role variable can be set to `yes` to install the
+- C# - The `csharp` role variable can be set to `yes` to install the
   [Mono Project](https://www.mono-project.com/) tools for C#
   development on Linux.
-* PowerShell - The `powershell` role variable can be set to `yes` to
+- PowerShell - The `powershell` role variable can be set to `yes` to
   install [PowerShell](https://en.wikipedia.org/wiki/PowerShell).
-* Python - The `python` role variable can be set to `yes` and used in
+- Python - The `python` role variable can be set to `yes` and used in
   conjunction with the role variables `pip_packages` or
   `pip_requirements_file` to install a [Python virtual
   environment](https://docs.python.org/3/glossary.html#term-virtual-environment)
@@ -44,36 +44,36 @@ None.
 
 ## Role Variables ##
 
-* `archive_src` - a URL or a file path on the remote host pointing to
+- `archive_src` - a URL or a file path on the remote host pointing to
   an archive (tar or zip) containing the tool.  If left undefined then
   no archive will be installed, but the install directory will still
   be created and language-specific tooling will still be installed.
-* `csharp` - a Boolean indicating whether or not the tool is written
+- `csharp` - a Boolean indicating whether or not the tool is written
   in C#; if it is then we will install the mono C# toolchain.
   Defaults to false.
-* `group` - the group that will own the directory where this tool is
+- `group` - the group that will own the directory where this tool is
   installed.  Defaults to root.
-* `install_dir` - the directory on the remote host where the tool
+- `install_dir` - the directory on the remote host where the tool
   should be installed.  Required.
-* `mode` - the mode to assign the directory where this tool is
+- `mode` - the mode to assign the directory where this tool is
   installed.  Defaults to 0775.
-* `pip_packages` - a list of pip packages to install into the Python
+- `pip_packages` - a list of pip packages to install into the Python
   virtualenv.
-* `pip_requirements_file` - path to a pip requirements file listing
+- `pip_requirements_file` - path to a pip requirements file listing
   dependencies to install into the Python virtualenv.
-* `powershell` - a Boolean indicating whether or not the tool is
+- `powershell` - a Boolean indicating whether or not the tool is
   written in PowerShell; if it is then we will install the powershell
   system package.  Defaults to false.
-* `python2` - a Boolean indicating whether or not the tool is strictly
+- `python2` - a Boolean indicating whether or not the tool is strictly
   for Python 2; if it is then we will install the system package that
   provides the Python 2 interpreter and will create a Python 2 virtual
   environment.  Defaults to false.
-* `unarchive_extra_opts` - a list of extra options to be passed to the
+- `unarchive_extra_opts` - a list of extra options to be passed to the
   ansible.builtin.unarchive Ansible module.  When installing a tarball
   from a GitHub repository, for example, it is often useful to set
   this value to "[--strip-components=1]".  The default behavior is to
   pass no extra options.
-* `virtualenv_dir` - the directory where the Python virtualenv should
+- `virtualenv_dir` - the directory where the Python virtualenv should
   be created.  Defaults to install_dir/.venv.  Only read if python is
   true.
 
