@@ -195,8 +195,6 @@ environment:
         install_dir: /tools/mitm6
         pip_packages:
           - mitm6
-        unarchive_extra_opts:
-          - --strip-components=1
 ```
 
 ### Installing a Tool That Is Not Based on C#, PowerShell, or Python ###
