@@ -14,6 +14,7 @@
   ansible.builtin.file:
     group: "{{ group }}"
     mode: "{{ mode }}"
+    owner: "{{ owner }}"
     path: "{{ install_dir }}"
     state: directory
 
@@ -49,3 +50,13 @@
         - "{{ role_path }}/tasks"
   when:
     - powershell
+
+- name: >-
+    Ensure that the contents of the install directory have the correct
+    user and group ownership
+  ansible.builtin.file:
+    group: "{{ group }}"
+    owner: "{{ owner }}"
+    path: "{{ install_dir }}"
+    recurse: yes
+    state: directory

@@ -57,6 +57,8 @@ None.
   should be installed.  Required.
 - `mode` - the mode to assign the directory where this tool is
   installed.  Defaults to 0775.
+- `owner` - the user that will own the directory where this tool is
+  installed.  Defaults to root.
 - `pip_packages` - a list of pip packages to install into the Python
   virtualenv.
 - `pip_requirements_file` - path to a pip requirements file listing
