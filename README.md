@@ -79,6 +79,13 @@ None.
   be created.  Defaults to install_dir/.venv.  Only read if python is
   true.
 
+<!--
+| Variable | Description | Default | Required |
+|----------|-------------|---------|----------|
+| optional_variable | Describe its purpose. | `default_value` | No |
+| required_variable | Describe its purpose. | n/a | Yes |
+-->
+
 ## Dependencies ##
 
 None.
