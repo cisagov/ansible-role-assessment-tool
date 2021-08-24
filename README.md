@@ -44,40 +44,20 @@ None.
 
 ## Role Variables ##
 
-- `archive_src` - a URL or a file path on the remote host pointing to
-  an archive (tar or zip) containing the tool.  If left undefined then
-  no archive will be installed, but the install directory will still
-  be created and language-specific tooling will still be installed.
-- `csharp` - a Boolean indicating whether or not the tool is written
-  in C#; if it is then we will install the mono C# toolchain.
-  Defaults to false.
-- `group` - the group that will own the directory where this tool is
-  installed.  Defaults to root.
-- `install_dir` - the directory on the remote host where the tool
-  should be installed.  Required.
-- `mode` - the mode to assign the directory where this tool is
-  installed.  Defaults to 0775.
-- `owner` - the user that will own the directory where this tool is
-  installed.  Defaults to root.
-- `pip_packages` - a list of pip packages to install into the Python
-  virtualenv.
-- `pip_requirements_file` - path to a pip requirements file listing
-  dependencies to install into the Python virtualenv.
-- `powershell` - a Boolean indicating whether or not the tool is
-  written in PowerShell; if it is then we will install the powershell
-  system package.  Defaults to false.
-- `python2` - a Boolean indicating whether or not the tool is strictly
-  for Python 2; if it is then we will install the system package that
-  provides the Python 2 interpreter and will create a Python 2 virtual
-  environment.  Defaults to false.
-- `unarchive_extra_opts` - a list of extra options to be passed to the
-  ansible.builtin.unarchive Ansible module.  When installing a tarball
-  from a GitHub repository, for example, it is often useful to set
-  this value to "[--strip-components=1]".  The default behavior is to
-  pass no extra options.
-- `virtualenv_dir` - the directory where the Python virtualenv should
-  be created.  Defaults to install_dir/.venv.  Only read if python is
-  true.
+| Variable | Description | Default | Required |
+|----------|-------------|---------|----------|
+| archive_src | A URL or a file path on the remote host pointing to an archive (tar or zip) containing the tool.  If left undefined then no archive will be installed, but the install directory will still be created and language-specific tooling will still be installed. | n/a | No |
+| csharp | A Boolean indicating whether or not the tool is written in C#; if it is then we will install the mono C# toolchain. | `false` | No |
+| group | The group that will own the directory where this tool is installed. | `root` | No |
+| install_dir | The directory on the remote host where the tool should be installed. | n/a | Yes |
+| mode | The mode to assign the directory where this tool is installed. | `0775` | No |
+| owner | The user that will own the directory where this tool is installed. | `root` | No |
+| pip_packages | A list of pip packages to install into the Python virtualenv. | [Omitted](https://docs.ansible.com/ansible/latest/user_guide/playbooks_filters.html#making-variables-optional) | No |
+| pip_requirements_file | The path to a pip requirements file listing dependencies to install into the Python virtualenv. | [Omitted](https://docs.ansible.com/ansible/latest/user_guide/playbooks_filters.html#making-variables-optional) | No |
+| powershell | A Boolean indicating whether or not the tool is written in PowerShell; if it is then we will install the powershell system package. | `false` | No |
+| python2 | A Boolean indicating whether or not the tool is strictly for Python 2; if it is then we will install the system package that provides the Python 2 interpreter and will create a Python 2 virtual environment. | `false` | No |
+| unarchive_extra_opts | A list of extra options to be passed to the ansible.builtin.unarchive Ansible module.  When installing a tarball from a GitHub repository, for example, it is often useful to set this value to "[--strip-components=1]". | [Omitted](https://docs.ansible.com/ansible/latest/user_guide/playbooks_filters.html#making-variables-optional) | No |
+| virtualenv_dir | The directory where the Python virtualenv should be created.  Only read if at least one of `pip_packages` or `pip_requirements_file` is present. | `install_dir/.venv` | No |
 
 ## Dependencies ##
 
