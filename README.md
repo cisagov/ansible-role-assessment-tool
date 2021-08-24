@@ -57,7 +57,7 @@ None.
 | powershell | A Boolean indicating whether or not the tool is written in PowerShell; if it is then we will install the powershell system package. | `false` | No |
 | python2 | A Boolean indicating whether or not the tool is strictly for Python 2; if it is then we will install the system package that provides the Python 2 interpreter and will create a Python 2 virtual environment. | `false` | No |
 | unarchive_extra_opts | A list of extra options to be passed to the ansible.builtin.unarchive Ansible module.  When installing a tarball from a GitHub repository, for example, it is often useful to set this value to "[--strip-components=1]". | [Omitted](https://docs.ansible.com/ansible/latest/user_guide/playbooks_filters.html#making-variables-optional) | No |
-| virtualenv_dir | The directory where the Python virtualenv should be created.  Only read if `python` is `true`. | `install_dir/.venv` | No |
+| virtualenv_dir | The directory where the Python virtualenv should be created.  Only read if at least one of `pip_packages` or `pip_requirements_file` is present. | `install_dir/.venv` | No |
 
 ## Dependencies ##
 
