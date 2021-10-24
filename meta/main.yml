@@ -20,16 +20,13 @@ galaxy_info:
     - name: Debian
       versions:
         - buster
+        - bullseye
         # Kali linux isn't an option here, but it is based on
         # Debian Testing:
         # https://www.kali.org/docs/policy/kali-linux-relationship-with-debian
-        #
-        # Unfortunately, the Debian Bullseye deb packages available at
-        # https://github.com/PowerShell/PowerShell do not install on a
-        # recent Debian Bullseye instance due to broken dependencies.
-        # Kali Linux provides its own package, so it still works, but
-        # we cannot support Debian Bullseye right now.
-        # - bullseye
+        # We do not currently have a Debian Bookworm (current Debian Testing)
+        # Docker image, so this remains disabled.
+        # - bookworm
     - name: Ubuntu
       versions:
         - bionic
