@@ -1,8 +1,10 @@
 ---
 - name: Converge
   hosts: all
-  roles:
-    - role: ansible-role-assessment-tool
+  tasks:
+    - name: Install Internal Monologue and the C# toolchain
+      ansible.builtin.include_role:
+        name: ansible-role-assessment-tool
       vars:
         archive_src: https://github.com/eladshamir/Internal-Monologue/tarball/master/
         csharp: yes
