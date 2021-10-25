@@ -18,6 +18,8 @@ lint: |
 platforms:
   - name: debian10
     image: debian:buster-slim
+  - name: debian11
+    image: debian:bullseye-slim
   - name: kali
     image: kalilinux/kali-rolling
   - name: ubuntu18

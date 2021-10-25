@@ -1,8 +1,10 @@
 ---
 - name: Converge
   hosts: all
-  roles:
-    - role: ansible-role-assessment-tool
+  tasks:
+    - name: Install sshenum and a pip package in a venv
+      ansible.builtin.include_role:
+        name: ansible-role-assessment-tool
       vars:
         archive_src: https://github.com/MacR6/sshenum/tarball/master
         install_dir: /tools/sshenum
@@ -12,20 +14,26 @@
           - --strip-components=1
     # It would be nice to test this case, but pip install . is not
     # idempotent.
-    # - role: ansible-role-assessment-tool
+    # - name: Install Hasher in a venv
+    #   ansible.builtin.include_role:
+    #     name: ansible-role-assessment-tool
     #   vars:
     #     archive_src: https://github.com/FortyNorthSecurity/Hasher/tarball/master
     #     install_dir: /tools/Hasher
     #     pip_packages:
     #       - '.'
-    - role: ansible-role-assessment-tool
+    - name: Install dirsearch and a requirements file in a venv
+      ansible.builtin.include_role:
+        name: ansible-role-assessment-tool
       vars:
         archive_src: https://github.com/maurosoria/dirsearch/tarball/master
         install_dir: /tools/dirsearch
         pip_requirements_file: requirements.txt
         unarchive_extra_opts:
           - --strip-components=1
-    - role: ansible-role-assessment-tool
+    - name: Install the mitm6 package in a venv
+      ansible.builtin.include_role:
+        name: ansible-role-assessment-tool
       vars:
         install_dir: /tools/mitm6
         pip_packages:
