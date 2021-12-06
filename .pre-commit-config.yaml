@@ -79,7 +79,7 @@ repos:
     hooks:
       - id: bandit
         # Bandit complains about the use of assert() in tests
-        exclude: molecule/(csharp|default|powershell|python)/tests
+        exclude: molecule/(csharp|default|go|powershell|python)/tests
         args:
           - --config=.bandit.yml
   - repo: https://github.com/psf/black

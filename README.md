@@ -11,6 +11,8 @@ some language-specific extras:
 - C# - The `csharp` role variable can be set to `yes` to install the
   [Mono Project](https://www.mono-project.com/) tools for C#
   development on Linux.
+- Go - The `go` role variable can be set to `yes` to install the
+  [Go](https://go.dev/) development tools.
 - PowerShell - The `powershell` role variable can be set to `yes` to
   install [PowerShell](https://en.wikipedia.org/wiki/PowerShell).
 - Python - The `python` role variable can be set to `yes` and used in
@@ -48,6 +50,7 @@ None.
 |----------|-------------|---------|----------|
 | archive_src | A URL or a file path on the remote host pointing to an archive (tar or zip) containing the tool.  If left undefined then no archive will be installed, but the install directory will still be created and language-specific tooling will still be installed. | n/a | No |
 | csharp | A Boolean indicating whether or not the tool is written in C#; if it is then we will install the mono C# toolchain. | `false` | No |
+| go | A Boolean indicating whether or not the tool is written in Go; if it is then we will install the Go development toolchain. | `false` | No |
 | group | The group that will own the directory where this tool is installed. | `root` | No |
 | install_dir | The directory on the remote host where the tool should be installed. | n/a | Yes |
 | mode | The mode to assign the directory where this tool is installed. | `0775` | No |
@@ -79,6 +82,24 @@ Here's how to use it in a playbook to install a C# tool:
         archive_src: https://github.com/eladshamir/Internal-Monologue/tarball/master
         install_dir: /tools/Internal-Monologue
         csharp: yes
+        unarchive_extra_opts:
+          - --strip-components=1
+```
+
+### Installing a Go Tool ###
+
+Here's how to use it in a playbook to install a Go tool:
+
+```yaml
+- hosts: all
+  become: yes
+  become_method: sudo
+  roles:
+    - role: assessment_tool
+      vars:
+        archive_src: https://github.com/optiv/ScareCrow/tarball/main
+        install_dir: /tools/ScareCrow
+        go: yes
         unarchive_extra_opts:
           - --strip-components=1
 ```

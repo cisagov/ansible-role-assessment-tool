@@ -1,0 +1,13 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: Install ScareCrow
+      ansible.builtin.include_role:
+        name: ansible-role-assessment-tool
+      vars:
+        archive_src: https://github.com/optiv/ScareCrow/tarball/main
+        install_dir: /tools/ScareCrow
+        go: yes
+        unarchive_extra_opts:
+          - --strip-components=1

@@ -6,6 +6,8 @@ galaxy_info:
   galaxy_tags:
     - assessment
     - archive
+    - go
+    - csharp
     - mono
     - python
   license: CC0

@@ -1,0 +1,7 @@
+---
+- name: Install Go toolchain and Git
+  ansible.builtin.package:
+    name:
+      # Third-party Go packages are often installed via git
+      - git
+      - golang

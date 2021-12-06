@@ -23,6 +23,11 @@
   when:
     - archive_src is defined
 
+- name: Install Go toolchain if necessary
+  ansible.builtin.include_tasks: install_go.yml
+  when:
+    - go
+
 - name: Install mono if necessary
   ansible.builtin.include_tasks: install_mono.yml
   when:
