@@ -3,6 +3,10 @@
 # to compile C# code
 csharp: no
 
+# If this is a Go project then we will install the Go development
+# toolchain required to compile Go code
+go: no
+
 # Group ownership for the install directory
 group: root
 
