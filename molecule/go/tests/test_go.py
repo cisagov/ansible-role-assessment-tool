@@ -30,6 +30,7 @@ def test_directories(host, d):
 @pytest.mark.parametrize(
     "pkg",
     [
+        "git",
         "golang",
     ],
 )

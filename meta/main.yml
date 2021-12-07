@@ -4,10 +4,10 @@ galaxy_info:
   description: An Ansible role for installing an assessment tool from a remote archive
   company: CISA Cyber Assessments
   galaxy_tags:
-    - assessment
     - archive
-    - go
+    - assessment
     - csharp
+    - go
     - mono
     - python
   license: CC0
