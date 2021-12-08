@@ -2,6 +2,7 @@
 
 # Standard Python Libraries
 import os
+import stat
 
 # Third-Party Libraries
 import pytest
@@ -37,3 +38,17 @@ def test_directories(host, d):
 def test_packages(host, pkg):
     """Test that appropriate packages were installed."""
     assert host.package(pkg).is_installed
+
+
+@pytest.mark.parametrize(
+    "f",
+    [
+        "/tools/ScareCrow/ScareCrow",
+    ],
+)
+def test_build_products(host, f):
+    """Test that appropriate build products were created."""
+    ff = host.file(f)
+    assert ff.exists
+    assert ff.is_file
+    assert ff.mode & stat.S_IXUSR == stat.S_IXUSR

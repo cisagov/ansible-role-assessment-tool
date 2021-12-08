@@ -7,6 +7,10 @@ csharp: no
 # toolchain required to compile Go code
 go: no
 
+# If yes then the Go project will be built via running go build from
+# the project's root directory
+go_build: yes
+
 # Group ownership for the install directory
 group: root
 
