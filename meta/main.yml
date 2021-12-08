@@ -35,4 +35,6 @@ galaxy_info:
         - focal
   role_name: assessment_tool
 
-dependencies: []
+dependencies:
+  - src: https://github.com/cisagov/ansible-role-backports
+    name: backports

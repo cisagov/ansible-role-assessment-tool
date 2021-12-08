@@ -65,7 +65,10 @@ None.
 
 ## Dependencies ##
 
-None.
+This Ansible role depends on
+[cisagov/ansible-role-backports](https://github.com/cisagov/ansible-role-backports),
+since on Debian Buster we need a newer version of the `golang` package
+in order to build Go-based projects.
 
 ## Example Playbook ##
 
