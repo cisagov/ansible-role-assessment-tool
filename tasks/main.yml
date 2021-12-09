@@ -28,6 +28,12 @@
   when:
     - go
 
+- name: Build Go project if necessary
+  ansible.builtin.include_tasks: build_go_tool.yml
+  when:
+    - go
+    - go_build
+
 - name: Install mono if necessary
   ansible.builtin.include_tasks: install_mono.yml
   when:

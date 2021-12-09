@@ -1,7 +1,22 @@
 ---
-- name: Install Go toolchain and Git
-  ansible.builtin.package:
-    name:
-      # Third-party Go packages are often installed via git
-      - git
-      - golang
+- name: Install Go toolchain
+  block:
+    - name: Install Go toolchain and Git (Debian Buster)
+      ansible.builtin.package:
+        name:
+          # Third-party Go packages are often installed via git
+          - git
+          - golang
+        default_release: "{{ ansible_distribution_release }}-backports"
+      when:
+        - ansible_distribution == "Debian"
+        - ansible_distribution_release == "buster"
+
+    - name: Install Go toolchain and Git (not Debian Buster)
+      ansible.builtin.package:
+        name:
+          # Third-party Go packages are often installed via git
+          - git
+          - golang
+      when:
+        - not (ansible_distribution == "Debian" and ansible_distribution_release == "buster")

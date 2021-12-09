@@ -1,0 +1,6 @@
+---
+- name: Build Go tool
+  ansible.builtin.command:
+    chdir: "{{ install_dir }}"
+    cmd: /usr/bin/go build
+    creates: "{{ install_dir | basename }}"

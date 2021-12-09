@@ -14,3 +14,9 @@
     group: "{{ group }}"
     remote_src: yes
     src: "{{ archive_src }}"
+  tags:
+    # The Ubuntu Focal version of the golang package is pretty old,
+    # and there is no newer version in backports.  When we build a
+    # project via go build, that version modifies or adds some files
+    # that cause this task to fail when idempotence runs.
+    - molecule-idempotence-notest
