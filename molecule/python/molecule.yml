@@ -22,8 +22,11 @@ platforms:
     image: debian:bullseye-slim
   - name: kali
     image: kalilinux/kali-rolling
-  - name: ubuntu18
-    image: ubuntu:bionic
+  # Bionic does not have a new enough version of the golang package to
+  # support building of Go tools via a simple go build, even in the
+  # backports repository.
+  # - name: ubuntu18
+  #   image: ubuntu:bionic
   - name: ubuntu20
     image: ubuntu:focal
 provisioner:

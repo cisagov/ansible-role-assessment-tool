@@ -31,7 +31,10 @@ galaxy_info:
         # - bookworm
     - name: Ubuntu
       versions:
-        - bionic
+        # Bionic does not have a new enough version of the golang
+        # package to support building of Go tools via a simple go
+        # build, even in the backports repository.
+        # - bionic
         - focal
   role_name: assessment_tool
 
