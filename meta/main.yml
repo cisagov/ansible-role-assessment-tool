@@ -26,9 +26,7 @@ galaxy_info:
         # Kali linux isn't an option here, but it is based on
         # Debian Testing:
         # https://www.kali.org/docs/policy/kali-linux-relationship-with-debian
-        # We do not currently have a Debian Bookworm (current Debian Testing)
-        # Docker image, so this remains disabled.
-        # - bookworm
+        - bookworm
     - name: Ubuntu
       versions:
         # Bionic does not have a new enough version of the golang

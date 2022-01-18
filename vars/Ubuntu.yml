@@ -1,3 +1,1 @@
----
-# The name of the package to install for PowerShell
-powershell_package_name: https://github.com/PowerShell/PowerShell/releases/download/v7.1.2/powershell_7.1.2-1.{{ ansible_distribution | lower }}.{{ ansible_distribution_version }}_amd64.deb
+Debian.yml
