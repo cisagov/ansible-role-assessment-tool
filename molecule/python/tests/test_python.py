@@ -46,7 +46,7 @@ def test_packages(host, pkg):
         ("/tools/sshenum/.venv", ["paramiko"]),
         (
             "/tools/dirsearch/.venv",
-            ["certifi", "chardet", "urllib3", "cryptography", "PySocks"],
+            ["certifi", "urllib3", "cryptography", "cffi", "MarkupSafe"],
         ),
         ("/tools/mitm6/.venv", ["mitm6"]),
     ],
