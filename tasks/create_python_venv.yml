@@ -8,6 +8,7 @@
 - name: Create the virtualenv
   ansible.builtin.pip:
     chdir: "{{ install_dir }}"
+    extra_args: "{{ pip_extra_args | default(omit) }}"
     name: "{{ pip_packages | default(omit) }}"
     requirements: "{{ pip_requirements_file | default(omit) }}"
     virtualenv: "{{ virtualenv_dir | default((install_dir, '.venv') | path_join) }}"
