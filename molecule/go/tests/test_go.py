@@ -25,7 +25,7 @@ def test_directories(host, d):
     assert directory.exists
     assert directory.is_directory
     # Make sure that the directory is not empty
-    assert host.run_expect([0], f'[ -n "$(ls -A {d})" ]')
+    assert host.run_expect([0], f'[ -n "$(ls --almost-all {d})" ]')
 
 
 @pytest.mark.parametrize(
