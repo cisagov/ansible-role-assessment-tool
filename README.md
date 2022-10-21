@@ -40,6 +40,15 @@ link](https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.h
 and [this
 link](https://docs.ansible.com/ansible/latest/reference_appendices/config.html#default-private-role-vars).
 
+As an alternative, you might also consider using the
+[`ansible.builtin.include_role`](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/include_role_module.html)
+and/or
+[`ansible.builtin.import_role`](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/import_role_module.html)
+Ansible modules instead of including roles via the `roles:` section of
+the playbook.  Including Ansible roles using these modules does not
+result in their variables being added to the play variables and
+therefore avoids this issue altogether.
+
 ## Requirements ##
 
 None.
