@@ -42,8 +42,8 @@
 # There are Python tools that require a Rust compiler to build the
 # compiled portion of the tool, so it makes sense to install cargo and
 # a Rust compiler before installing the Python tool.
-- name: Install cargo if necessary
-  ansible.builtin.include_tasks: install_cargo.yml
+- name: Install Rust toolchain if necessary
+  ansible.builtin.include_tasks: install_rust.yml
   when:
     - rust or cargo_packages is defined
 
