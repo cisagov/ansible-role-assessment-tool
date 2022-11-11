@@ -27,3 +27,7 @@ powershell: no
 # If this is a Python 2 project then we will install a Python 2
 # interpreter and will create a Python 2 virtualenv
 python2: no
+
+# If this is a Rust project then we will install the cargo system
+# package
+rust: no

@@ -10,6 +10,7 @@ galaxy_info:
     - go
     - mono
     - python
+    - rust
   license: CC0
   # With the release of version 2.10, Ansible finally correctly
   # identifies Kali Linux as being the Kali distribution of the Debian

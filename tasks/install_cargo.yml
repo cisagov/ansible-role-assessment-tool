@@ -1,0 +1,13 @@
+---
+- name: Install cargo and rustc
+  ansible.builtin.package:
+    name:
+      - cargo
+      - rustc
+
+- name: Install cargo packages
+  community.general.cargo:
+    name: "{{ cargo_packages }}"
+    path: "{{ cargo_install_dir | default(install_dir) }}"
+  when:
+    - cargo_packages is defined
