@@ -16,10 +16,18 @@ lint: |
   ansible-lint
   flake8
 platforms:
-  - name: debian10
-    image: debian:buster-slim
-  - name: debian11
-    image: debian:bullseye-slim
+  # Debian Buster does not have a new enough version of cargo to
+  # support the aardwolf dependency of CrackMapExec, even in
+  # backports.
+  # - name: debian10
+  #   image: debian:buster-slim
+  # Debian Bullseye does not have a new enough version of cargo to
+  # support the aardwolf dependency of CrackMapExec, even in
+  # backports.
+  # - name: debian10
+  #   image: debian:buster-slim
+  # - name: debian11
+  #   image: debian:bullseye-slim
   - name: debian12
     image: debian:bookworm-slim
   - name: kali
