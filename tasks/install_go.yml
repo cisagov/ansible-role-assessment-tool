@@ -3,11 +3,11 @@
   block:
     - name: Install Go toolchain and Git (Debian Buster)
       ansible.builtin.package:
+        default_release: "{{ ansible_distribution_release }}-backports"
         name:
           # Third-party Go packages are often installed via git
           - git
           - golang
-        default_release: "{{ ansible_distribution_release }}-backports"
       when:
         - ansible_distribution == "Debian"
         - ansible_distribution_release == "buster"
