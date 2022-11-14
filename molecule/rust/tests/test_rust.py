@@ -2,6 +2,7 @@
 
 # Standard Python Libraries
 import os
+import stat
 
 # Third-Party Libraries
 import pytest
@@ -15,7 +16,7 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
 @pytest.mark.parametrize(
     "d",
     [
-        "/tools/CrackMapExec",
+        "/tools/rustscan",
     ],
 )
 def test_directories(host, d):
@@ -39,17 +40,14 @@ def test_packages(host, pkg):
 
 
 @pytest.mark.parametrize(
-    "d,pkgs",
+    "path",
     [
-        ("/tools/CrackMapExec/.venv", ["aardwolf"]),
+        "/tools/rustscan/target/release/rustscan",
     ],
 )
-def test_venvs(host, d, pkgs):
-    """Test that appropriate Python virtualenvs were created."""
-    directory = host.file(d)
-    assert directory.exists
-    assert directory.is_directory
-    # Make sure that the virtualenv contains the expected packages
-    installed_pkgs = host.pip.get_packages(pip_path=os.path.join(d, "bin", "pip"))
-    for pkg in pkgs:
-        assert pkg in installed_pkgs
+def test_build_product(host, path):
+    """Test that the build product exists."""
+    product = host.file(path)
+    assert product.exists
+    assert product.is_file
+    assert product.mode | stat.S_IXUSR

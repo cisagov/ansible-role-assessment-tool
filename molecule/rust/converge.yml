@@ -2,27 +2,16 @@
 - name: Converge
   hosts: all
   tasks:
-    # This is a Python tool, but its aardwolf dependency requires a
-    # Rust extension to be built and does not provide a wheel.  If the
-    # Python tool installs successfully then we know that a Rust
-    # compiler was installed.  (Installing cargo will pull in the Rust
-    # compiler as a dependency.)
-    - name: Install CrackMapExec
-      block:
-        - name: Install CrackMapExec dependencies
-          ansible.builtin.package:
-            name:
-              - git
-              - libkrb5-dev
-        - name: Install CrackMapExec
-          ansible.builtin.include_role:
-            name: ansible-role-assessment-tool
-          vars:
-            archive_src: >
-              https://github.com/Porchetta-Industries/CrackMapExec/tarball/master
-            install_dir: /tools/CrackMapExec
-            pip_packages:
-              - .
-            rust: yes
-            unarchive_extra_opts:
-              - --strip-components=1
+    - name: Install RustScan
+      ansible.builtin.include_role:
+        name: ansible-role-assessment-tool
+      vars:
+        archive_src: https://github.com/RustScan/RustScan/tarball/master
+        # We lowercase the install directory name so it matches the
+        # name in the cargo toml file, which is in turn used to
+        # determine the name of the build product in
+        # tasks/install_rust.yml.
+        install_dir: /tools/rustscan
+        rust: yes
+        unarchive_extra_opts:
+          - --strip-components=1
