@@ -1,4 +1,11 @@
 ---
+# If yes then the Rust project will be built via running cargo build
+# from the project's root directory
+cargo_build: yes
+
+# The profile to use when building via cargo
+cargo_profile: release
+
 # If this is a C# project then we will install the mono tools required
 # to compile C# code
 csharp: no

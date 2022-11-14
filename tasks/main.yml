@@ -40,8 +40,9 @@
     - csharp
 
 # There are Python tools that require a Rust compiler to build the
-# compiled portion of the tool, so it makes sense to install cargo and
-# a Rust compiler before installing the Python tool.
+# compiled portion of the tool, so it makes sense to install cargo
+# (which has a Rust compiler as a dependency) before installing the
+# Python tool.
 - name: Install Rust toolchain if necessary
   ansible.builtin.include_tasks: install_rust.yml
   when:

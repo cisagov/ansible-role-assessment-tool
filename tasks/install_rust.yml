@@ -1,9 +1,8 @@
 ---
-- name: Install cargo and rustc
+- name: Install cargo
   ansible.builtin.package:
     name:
       - cargo
-      - rustc
 
 - name: Install cargo packages
   community.general.cargo:
@@ -11,3 +10,15 @@
     path: "{{ cargo_install_dir | default(install_dir) }}"
   when:
     - cargo_packages is defined
+
+- name: Build cargo tool
+  ansible.builtin.command:
+    chdir: "{{ install_dir }}"
+    # The version of cargo on Kali and Debian 12 (Bookworm) does not
+    # support the --profile option without -Z unstable-options;
+    # furthermore, there is no long option equivalent for -Z.
+    cmd: >
+      /usr/bin/cargo build -Z unstable-options --profile={{ cargo_profile }}
+    creates: "{{ install_dir }}/target/{{ cargo_profile }}/{{ install_dir | basename }}"
+  when:
+    - cargo_build

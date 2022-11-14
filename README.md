@@ -25,7 +25,7 @@ some language-specific extras:
   tool, simply `deactivate`.
 - Rust - The `rust` role variable can be set to `yes` and used in
   conjunction with the role variable `cargo_packages` to install
-  `cargo`, a Rust compiler, and the desired packages.
+  `cargo` and the desired packages.
 
 ## Nota Bene ##
 
@@ -61,8 +61,10 @@ None.
 | Variable | Description | Default | Required |
 |----------|-------------|---------|----------|
 | archive_src | A URL or a file path on the remote host pointing to an archive (tar or zip) containing the tool.  If left undefined then no archive will be installed, but the install directory will still be created and language-specific tooling will still be installed. | n/a | No |
+| cargo_build | A Boolean indicating whether or not the Rust tool should be built using `cargo`; if so then we will run `cargo build` from the project's root directory. | `true` | No |
 | cargo_install_dir | The directory where the `cargo` packages should be installed.  Only read if  `cargo_packages` is present. | `install_dir` | No |
 | cargo_packages | A list of `cargo` packages to install. | [Omitted](https://docs.ansible.com/ansible/latest/user_guide/playbooks_filters.html#making-variables-optional) | No |
+| cargo_profile | The `cargo` profile to use when building the project. | `release` | No |
 | csharp | A Boolean indicating whether or not the tool is written in C#; if it is then we will install the mono C# toolchain. | `false` | No |
 | go | A Boolean indicating whether or not the tool is written in Go; if it is then we will install the Go development toolchain. | `false` | No |
 | go_build | A Boolean indicating whether or not the Go tool should be built; if so then we will run `go build` from the project's root directory. | `true` | No |
@@ -75,7 +77,7 @@ None.
 | pip_requirements_file | The path to a `pip` requirements file listing dependencies to install into the Python virtualenv. | [Omitted](https://docs.ansible.com/ansible/latest/user_guide/playbooks_filters.html#making-variables-optional) | No |
 | powershell | A Boolean indicating whether or not the tool is written in PowerShell; if it is then we will install the powershell system package. | `false` | No |
 | python2 | A Boolean indicating whether or not the tool is strictly for Python 2; if it is then we will install the system package that provides the Python 2 interpreter and will create a Python 2 virtual environment. | `false` | No |
-| rust | A Boolean indicating whether or not the tool is written in Rust; if it is then we will install the system packages that provide `cargo` and the Rust compiler. | `false` | No |
+| rust | A Boolean indicating whether or not the tool is written in Rust; if it is then we will install the system packages that provide `cargo`. | `false` | No |
 | unarchive_extra_opts | A list of extra options to be passed to the ansible.builtin.unarchive Ansible module.  When installing a tarball from a GitHub repository, for example, it is often useful to set this value to "[--strip-components=1]". | [Omitted](https://docs.ansible.com/ansible/latest/user_guide/playbooks_filters.html#making-variables-optional) | No |
 | virtualenv_dir | The directory where the Python virtualenv should be created.  Only read if at least one of `pip_packages` or `pip_requirements_file` is present. | `install_dir/.venv` | No |
 
