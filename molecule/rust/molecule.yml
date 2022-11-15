@@ -16,24 +16,22 @@ lint: |
   ansible-lint
   flake8
 platforms:
-  # Debian Buster does not have a new enough version of cargo to
-  # support the aardwolf dependency of CrackMapExec, even in
+  # Debian Buster does not have a new enough version of cargo to parse
+  # the cargo.toml file for RustScan.  There is no newer version in
   # backports.
   # - name: debian10
   #   image: debian:buster-slim
-  # Debian Bullseye does not have a new enough version of cargo to
-  # support the aardwolf dependency of CrackMapExec, even in
-  # backports.
+  # Debian Bullseye has an older version of cargo, which gives a
+  # "feature `resolver` is required" error when installing RustScan.
+  # There is no newer version in backports.
   # - name: debian11
   #   image: debian:bullseye-slim
   - name: debian12
     image: debian:bookworm-slim
   - name: kali
     image: kalilinux/kali-rolling
-  # Bionic does not have a new enough version of Python 3 to support
-  # the dependencies of the CrackMapExec tool.
-  # - name: ubuntu18
-  #   image: ubuntu:bionic
+  - name: ubuntu18
+    image: ubuntu:bionic
   - name: ubuntu20
     image: ubuntu:focal
 provisioner:
