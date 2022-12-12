@@ -238,26 +238,6 @@ environment:
           - mitm6
 ```
 
-### Installing a Tool That Is Not Based on C#, PowerShell, Python, or Rust ###
-
-Here's how to use it in a playbook to install a generic (C-based, in
-this case) tool:
-
-```yaml
-- hosts: all
-  become: yes
-  become_method: sudo
-  tasks:
-    - name: Install datapipe
-      ansible.builtin.include_role:
-        name: assessment_tool
-      vars:
-        archive_src: https://github.com/bovine/datapipe/tarball/master
-        install_dir: /tools/datapipe
-        unarchive_extra_opts:
-          - --strip-components=1
-```
-
 ### Installing a Rust Tool ###
 
 Here's how to use it in a playbook to install a tool that requires a
@@ -275,6 +255,26 @@ Rust compiler:
         archive_src: https://github.com/Porchetta-Industries/CrackMapExec/tarball/master
         install_dir: /tools/CrackMapExec
         rust: yes
+        unarchive_extra_opts:
+          - --strip-components=1
+```
+
+### Installing a Tool That Is Not Based on C#, PowerShell, Python, or Rust ###
+
+Here's how to use it in a playbook to install a generic (C-based, in
+this case) tool:
+
+```yaml
+- hosts: all
+  become: yes
+  become_method: sudo
+  tasks:
+    - name: Install datapipe
+      ansible.builtin.include_role:
+        name: assessment_tool
+      vars:
+        archive_src: https://github.com/bovine/datapipe/tarball/master
+        install_dir: /tools/datapipe
         unarchive_extra_opts:
           - --strip-components=1
 ```
