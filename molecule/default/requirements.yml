@@ -1,9 +1,9 @@
 ---
 - name: backports
   src: https://github.com/cisagov/ansible-role-backports
-- name: python
-  src: https://github.com/cisagov/ansible-role-pip
 - name: pip
+  src: https://github.com/cisagov/ansible-role-pip
+- name: python
   src: https://github.com/cisagov/ansible-role-python
 - name: upgrade
   src: https://github.com/cisagov/ansible-role-upgrade
