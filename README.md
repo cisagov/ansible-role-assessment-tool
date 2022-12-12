@@ -1,8 +1,7 @@
 # ansible-role-assessment-tool #
 
 [![GitHub Build Status](https://github.com/cisagov/ansible-role-assessment-tool/workflows/build/badge.svg)](https://github.com/cisagov/ansible-role-assessment-tool/actions)
-[![Total alerts](https://img.shields.io/lgtm/alerts/g/cisagov/ansible-role-assessment-tool.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cisagov/ansible-role-assessment-tool/alerts/)
-[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/cisagov/ansible-role-assessment-tool.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cisagov/ansible-role-assessment-tool/context:python)
+[![CodeQL](https://github.com/cisagov/ansible-role-assessment-tool/workflows/CodeQL/badge.svg)](https://github.com/cisagov/ansible-role-assessment-tool/actions/workflows/codeql-analysis.yml)
 
 This Ansible role is used to install assessment tools to Debian,
 Ubuntu, or Kali Linux.  This role can also be configured to provide
@@ -86,6 +85,10 @@ None.
 - [cisagov/ansible-role-backports](https://github.com/cisagov/ansible-role-backports):
   On Debian Buster we need a newer version of the `golang` package in order to
   build Go-based projects.
+- [cisagov/ansible-role-pip](https://github.com/cisagov/ansible-role-pip):
+  Pip is required to create a virtual environment for Python-based projects.
+- [cisagov/ansible-role-python](https://github.com/cisagov/ansible-role-python):
+  Python is required to create a virtual environment for Python-based projects.
 
 ## Example Playbook ##
 
@@ -97,8 +100,10 @@ Here's how to use it in a playbook to install a C# tool:
 - hosts: all
   become: yes
   become_method: sudo
-  roles:
-    - role: assessment_tool
+  tasks:
+    - name: Install Internal-Monologue
+      ansible.builtin.include_role:
+        name: assessment_tool
       vars:
         archive_src: https://github.com/eladshamir/Internal-Monologue/tarball/master
         install_dir: /tools/Internal-Monologue
@@ -115,8 +120,10 @@ Here's how to use it in a playbook to install a Go tool:
 - hosts: all
   become: yes
   become_method: sudo
-  roles:
-    - role: assessment_tool
+  tasks:
+    - name: Install ScareCrow
+      ansible.builtin.include_role:
+        name: assessment_tool
       vars:
         archive_src: https://github.com/optiv/ScareCrow/tarball/main
         install_dir: /tools/ScareCrow
@@ -133,8 +140,10 @@ Here's how to use it in a playbook to install a PowerShell tool:
 - hosts: all
   become: yes
   become_method: sudo
-  roles:
-    - role: assessment_tool
+  tasks:
+    - name: Install PowerUpSQL
+      ansible.builtin.include_role:
+        name: assessment_tool
       vars:
         archive_src: https://github.com/NetSPI/PowerUpSQL/tarball/master
         install_dir: /tools/PowerUpSQL
@@ -154,8 +163,10 @@ Here's how to use it in a playbook to install a Python tool using a
 - hosts: all
   become: yes
   become_method: sudo
-  roles:
-    - role: assessment_tool
+  tasks:
+    - name: Install dirsearch
+      ansible.builtin.include_role:
+        name: assessment_tool
       vars:
         archive_src: https://github.com/maurosoria/dirsearch/tarball/master
         install_dir: /tools/dirsearch
@@ -173,8 +184,10 @@ Here's how to use it in a playbook to install a Python tool using a
 - hosts: all
   become: yes
   become_method: sudo
-  roles:
-    - role: assessment_tool
+  tasks:
+    - name: Install Hasher
+      ansible.builtin.include_role:
+        name: assessment_tool
       vars:
         archive_src: https://github.com/FortyNorthSecurity/Hasher/tarball/master
         install_dir: /tools/Hasher
@@ -193,8 +206,10 @@ list of `pip` packages:
 - hosts: all
   become: yes
   become_method: sudo
-  roles:
-    - role: assessment_tool
+  tasks:
+    - name: Install sshenum
+      ansible.builtin.include_role:
+        name: assessment_tool
       vars:
         archive_src: https://github.com/MacR6/sshenum/tarball/master
         install_dir: /tools/sshenum
@@ -206,22 +221,24 @@ list of `pip` packages:
 
 #### Simply Creating a Virtual Environment ####
 
-Here's how to use it in a playbook to simply create a virtual
+Here's how to use it in a playbook to simply create a Python virtual
 environment:
 
 ```yaml
 - hosts: all
   become: yes
   become_method: sudo
-  roles:
-    - role: assessment_tool
+  tasks:
+    - name: Install mitm6
+      ansible.builtin.include_role:
+        name: assessment_tool
       vars:
         install_dir: /tools/mitm6
         pip_packages:
           - mitm6
 ```
 
-### Installing a Tool That Is Not Based on C#, PowerShell, or Python ###
+### Installing a Tool That Is Not Based on C#, PowerShell, Python, or Rust ###
 
 Here's how to use it in a playbook to install a generic (C-based, in
 this case) tool:
@@ -230,8 +247,10 @@ this case) tool:
 - hosts: all
   become: yes
   become_method: sudo
-  roles:
-    - role: assessment_tool
+  tasks:
+    - name: Install datapipe
+      ansible.builtin.include_role:
+        name: assessment_tool
       vars:
         archive_src: https://github.com/bovine/datapipe/tarball/master
         install_dir: /tools/datapipe
@@ -248,8 +267,10 @@ Rust compiler:
 - hosts: all
   become: yes
   become_method: sudo
-  roles:
-    - role: assessment_tool
+  tasks:
+    - name: Install CrackMapExec
+      ansible.builtin.include_role:
+        name: assessment_tool
       vars:
         archive_src: https://github.com/Porchetta-Industries/CrackMapExec/tarball/master
         install_dir: /tools/CrackMapExec
