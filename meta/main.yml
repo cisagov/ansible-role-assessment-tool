@@ -1,8 +1,15 @@
 ---
+dependencies:
+  - name: backports
+    src: https://github.com/cisagov/ansible-role-backports
+  - name: pip
+    src: https://github.com/cisagov/ansible-role-pip
+  - name: python
+    src: https://github.com/cisagov/ansible-role-python
 galaxy_info:
   author: Shane Frasier
-  description: An Ansible role for installing an assessment tool from a remote archive
   company: CISA Cyber Assessments
+  description: An Ansible role for installing an assessment tool from a remote archive
   galaxy_tags:
     - archive
     - assessment
@@ -37,11 +44,3 @@ galaxy_info:
         - focal
         - jammy
   role_name: assessment_tool
-
-dependencies:
-  - name: backports
-    src: https://github.com/cisagov/ansible-role-backports
-  - name: pip
-    src: https://github.com/cisagov/ansible-role-pip
-  - name: python
-    src: https://github.com/cisagov/ansible-role-python
