@@ -20,9 +20,11 @@ platforms:
   # - image: amazonlinux:2023
   #   name: amazonlinux2023
   #   platform: amd64
-  - image: debian:buster-slim
-    name: debian10
-    platform: amd64
+  # Buster does not have a new enough version of the golang package to
+  # build any go projects of recent vintage.
+  # - image: debian:buster-slim
+  #   name: debian10
+  #   platform: amd64
   - image: debian:bullseye-slim
     name: debian11
     platform: amd64
