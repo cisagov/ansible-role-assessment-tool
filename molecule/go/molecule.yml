@@ -55,21 +55,6 @@ platforms:
   - image: ubuntu:jammy
     name: ubuntu22
     platform: amd64
-provisioner:
-  config_options:
-    defaults:
-      # By default, when using vars: within the roles: section of a
-      # playbook, the variables are added to the play variables.  This
-      # is normally not a problem, but it definitely can be if you are
-      # running the same role more than once with a different set of
-      # vars.  Fortunately, Ansible provides a configuration setting
-      # to enable private role variables, so we use it here.
-      #
-      # See:
-      # * https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html#using-roles-at-the-play-level
-      # * https://docs.ansible.com/ansible/latest/reference_appendices/config.html#default-private-role-vars
-      private_role_vars: true
-  name: ansible
 scenario:
   name: go
 verifier:
