@@ -33,17 +33,11 @@ platforms:
     name: kali
     platform: amd64
   # This Ansible role only supports Debian-based platforms for now.
-  # - image: fedora:36
-  #   name: fedora36
-  #   platform: amd64
   # - image: fedora:37
   #   name: fedora37
   #   platform: amd64
-  # Bionic does not have a new enough version of the golang package to
-  # support building of Go tools via a simple go build, even in the
-  # backports repository.
-  # - image: ubuntu:bionic
-  #   name: ubuntu18
+  # - image: fedora:38
+  #   name: fedora38
   #   platform: amd64
   - image: ubuntu:focal
     name: ubuntu20
