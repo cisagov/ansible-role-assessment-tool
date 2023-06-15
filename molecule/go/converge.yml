@@ -3,11 +3,14 @@
   hosts: all
   tasks:
     - name: Install ScareCrow
-      ansible.builtin.include_role:
+      # We do prepend the name of the role to the role variables, but
+      # Molecule does its own role discovery with inconsistent naming.
+      # This is the reason for the noqa below.
+      ansible.builtin.include_role: # noqa var-naming[no-role-prefix]
         name: ansible-role-assessment-tool
       vars:
-        archive_src: https://github.com/optiv/ScareCrow/tarball/main
-        install_dir: /tools/ScareCrow
-        go: yes
-        unarchive_extra_opts:
+        assessment_tool_archive_src: https://github.com/optiv/ScareCrow/tarball/main
+        assessment_tool_install_dir: /tools/ScareCrow
+        assessment_tool_go: yes
+        assessment_tool_unarchive_extra_opts:
           - --strip-components=1

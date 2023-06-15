@@ -12,32 +12,32 @@
 
 - name: Create the directory {{ install_dir }}
   ansible.builtin.file:
-    group: "{{ group }}"
-    mode: "{{ mode }}"
-    owner: "{{ owner }}"
-    path: "{{ install_dir }}"
+    group: "{{ assessment_tool_group }}"
+    mode: "{{ assessment_tool_mode }}"
+    owner: "{{ assessment_tool_owner }}"
+    path: "{{ assessment_tool_install_dir }}"
     state: directory
 
 - name: Install the tool if necessary
   ansible.builtin.include_tasks: install_tool.yml
   when:
-    - archive_src is defined
+    - assessment_tool_archive_src is defined
 
 - name: Install Go toolchain if necessary
   ansible.builtin.include_tasks: install_go.yml
   when:
-    - go
+    - assessment_tool_go
 
 - name: Build Go project if necessary
   ansible.builtin.include_tasks: build_go_tool.yml
   when:
-    - go
-    - go_build
+    - assessment_tool_go
+    - assessment_tool_go_build
 
 - name: Install mono if necessary
   ansible.builtin.include_tasks: install_mono.yml
   when:
-    - csharp
+    - assessment_tool_csharp
 
 # There are Python tools that require a Rust compiler to build the
 # compiled portion of the tool, so it makes sense to install cargo
@@ -46,17 +46,17 @@
 - name: Install Rust toolchain if necessary
   ansible.builtin.include_tasks: install_rust.yml
   when:
-    - rust or cargo_packages is defined
+    - assessment_tool_rust or assessment_tool_cargo_packages is defined
 
 - name: Install Python 2 if necessary
   ansible.builtin.include_tasks: install_python2.yml
   when:
-    - python2
+    - assessment_tool_python2
 
 - name: Create a Python virtualenv if necessary
   ansible.builtin.include_tasks: create_python_venv.yml
   when:
-    - pip_packages is defined or pip_requirements_file is defined
+    - assessment_tool_pip_packages is defined or assessment_tool_pip_requirements_file is defined
 
 - name: Install PowerShell if necessary
   ansible.builtin.include_tasks: "{{ lookup('first_found', params) }}"
@@ -69,14 +69,14 @@
       paths:
         - "{{ role_path }}/tasks"
   when:
-    - powershell
+    - assessment_tool_powershell
 
 - name: >-
     Ensure that the contents of the install directory have the correct
     user and group ownership
   ansible.builtin.file:
-    group: "{{ group }}"
-    owner: "{{ owner }}"
-    path: "{{ install_dir }}"
+    group: "{{ assessment_tool_group }}"
+    owner: "{{ assessment_tool_owner }}"
+    path: "{{ assessment_tool_install_dir }}"
     recurse: yes
     state: directory
