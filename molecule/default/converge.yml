@@ -3,17 +3,23 @@
   hosts: all
   tasks:
     - name: Install Aquatone
-      ansible.builtin.include_role:
+      # We do prepend the name of the role to the role variables, but
+      # Molecule does its own role discovery with inconsistent naming.
+      # This is the reason for the noqa below.
+      ansible.builtin.include_role: # noqa var-naming[no-role-prefix]
         name: ansible-role-assessment-tool
       vars:
-        archive_src: "https://github.com/michenriksen/aquatone/\
+        assessment_tool_archive_src: "https://github.com/michenriksen/aquatone/\
         releases/download/v1.7.0/aquatone_linux_amd64_1.7.0.zip"
-        install_dir: /tools/aquatone
+        assessment_tool_install_dir: /tools/aquatone
     - name: Install datapipe
-      ansible.builtin.include_role:
+      # We do prepend the name of the role to the role variables, but
+      # Molecule does its own role discovery with inconsistent naming.
+      # This is the reason for the noqa below.
+      ansible.builtin.include_role: # noqa var-naming[no-role-prefix]
         name: ansible-role-assessment-tool
       vars:
-        archive_src: https://github.com/bovine/datapipe/tarball/master
-        install_dir: /tools/datapipe
-        unarchive_extra_opts:
+        assessment_tool_archive_src: https://github.com/bovine/datapipe/tarball/master
+        assessment_tool_install_dir: /tools/datapipe
+        assessment_tool_unarchive_extra_opts:
           - --strip-components=1

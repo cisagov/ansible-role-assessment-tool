@@ -7,13 +7,13 @@
       - unzip
       - zip
 
-- name: Install the tool from {{ archive_src }}
+- name: Install the tool from {{ assessment_tool_archive_src }}
   ansible.builtin.unarchive:
-    dest: "{{ install_dir }}"
-    extra_opts: "{{ unarchive_extra_opts | default(omit) }}"
-    group: "{{ group }}"
+    dest: "{{ assessment_tool_install_dir }}"
+    extra_opts: "{{ assessment_tool_unarchive_extra_opts | default(omit) }}"
+    group: "{{ assessment_tool_group }}"
     remote_src: yes
-    src: "{{ archive_src }}"
+    src: "{{ assessment_tool_archive_src }}"
   tags:
     # The Ubuntu Focal version of the golang package is pretty old,
     # and there is no newer version in backports.  When we build a

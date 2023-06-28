@@ -1,40 +1,40 @@
 ---
 # If yes then the Rust project will be built via running cargo build
 # from the project's root directory
-cargo_build: yes
+assessment_tool_cargo_build: yes
 
 # The profile to use when building via cargo
-cargo_profile: release
+assessment_tool_cargo_profile: release
 
 # If this is a C# project then we will install the mono tools required
 # to compile C# code
-csharp: no
+assessment_tool_csharp: no
 
 # If this is a Go project then we will install the Go development
 # toolchain required to compile Go code
-go: no
+assessment_tool_go: no
 
 # If yes then the Go project will be built via running go build from
 # the project's root directory
-go_build: yes
+assessment_tool_go_build: yes
 
 # Group ownership for the install directory
-group: root
+assessment_tool_group: root
 
 # Mode for the install directory
-mode: 0775
+assessment_tool_mode: 0775
 
 # User ownership for the install directory
-owner: root
+assessment_tool_owner: root
 
 # If this is a PowerShell project then we will install the powershell
 # system package
-powershell: no
+assessment_tool_powershell: no
 
 # If this is a Python 2 project then we will install a Python 2
 # interpreter and will create a Python 2 virtualenv
-python2: no
+assessment_tool_python2: no
 
 # If this is a Rust project then we will install the cargo system
 # package
-rust: no
+assessment_tool_rust: no

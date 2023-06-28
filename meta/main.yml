@@ -28,9 +28,9 @@ galaxy_info:
   namespace: cisagov
   platforms:
     # This Ansible role only supports Debian-based platforms for now.
-    # - name: Amazon Linux 2023
+    # - name: Amazon Linux
     #   versions:
-    #     - any
+    #     - "2023"
     - name: Debian
       versions:
         - buster
@@ -39,17 +39,13 @@ galaxy_info:
     # This Ansible role only supports Debian-based platforms for now.
     # - name: Fedora
     #   versions:
-    #     - "36"
     #     - "37"
+    #     - "38"
     - name: Kali
       versions:
         - "2023"
     - name: Ubuntu
       versions:
-        # Bionic does not have a new enough version of the golang
-        # package to support building of Go tools via a simple go
-        # build, even in the backports repository.
-        # - bionic
         - focal
         - jammy
   role_name: assessment_tool

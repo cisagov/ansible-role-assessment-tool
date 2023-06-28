@@ -7,24 +7,27 @@ This Ansible role is used to install assessment tools to Debian,
 Ubuntu, or Kali Linux.  This role can also be configured to provide
 some language-specific extras:
 
-- C# - The `csharp` role variable can be set to `yes` to install the
-  [Mono Project](https://www.mono-project.com/) tools for C#
-  development on Linux.
-- Go - The `go` role variable can be set to `yes` to install the
-  [Go](https://go.dev/) development tools.
-- PowerShell - The `powershell` role variable can be set to `yes` to
-  install [PowerShell](https://en.wikipedia.org/wiki/PowerShell).
-- Python - The `python` role variable can be set to `yes` and used in
-  conjunction with the role variables `pip_packages` or
-  `pip_requirements_file` to install a [Python virtual
+- C# - The `assessment_tool_csharp` role variable can be set to `yes`
+  to install the [Mono Project](https://www.mono-project.com/) tools
+  for C# development on Linux.
+- Go - The `assessment_tool_go` role variable can be set to `yes` to
+  install the [Go](https://go.dev/) development tools.
+- PowerShell - The `assessment_tool_powershell` role variable can be
+  set to `yes` to install
+  [PowerShell](https://en.wikipedia.org/wiki/PowerShell).
+- Python - The `assessment_tool_python` role variable can be set to
+  `yes` and used in conjunction with the role variables
+  `assessment_tool_pip_packages` or
+  `assessment_tool_pip_requirements_file` to install a [Python virtual
   environment](https://docs.python.org/3/glossary.html#term-virtual-environment)
   with the tool's dependencies pre-installed.  To activate the virtual
   environment, simply use the command `source
   /path/to/tool/.venv/bin/activate`.  When you are done using the
   tool, simply `deactivate`.
-- Rust - The `rust` role variable can be set to `yes` and used in
-  conjunction with the role variable `cargo_packages` to install
-  `cargo` and the desired packages.
+- Rust - The `assessment_tool_rust` role variable can be set to `yes`
+  and used in conjunction with the role variable
+  `assessment_tool_cargo_packages` to install `assessment_tool_cargo`
+  and the desired packages.
 
 ## Nota Bene ##
 
@@ -59,26 +62,26 @@ None.
 
 | Variable | Description | Default | Required |
 |----------|-------------|---------|----------|
-| archive_src | A URL or a file path on the remote host pointing to an archive (tar or zip) containing the tool.  If left undefined then no archive will be installed, but the install directory will still be created and language-specific tooling will still be installed. | n/a | No |
-| cargo_build | A Boolean indicating whether or not the Rust tool should be built using `cargo`; if so then we will run `cargo build` from the project's root directory. | `true` | No |
-| cargo_install_dir | The directory where the `cargo` packages should be installed.  Only read if  `cargo_packages` is present. | `install_dir` | No |
-| cargo_packages | A list of `cargo` packages to install. | [Omitted](https://docs.ansible.com/ansible/latest/user_guide/playbooks_filters.html#making-variables-optional) | No |
-| cargo_profile | The `cargo` profile to use when building the project. | `release` | No |
-| csharp | A Boolean indicating whether or not the tool is written in C#; if it is then we will install the mono C# toolchain. | `false` | No |
-| go | A Boolean indicating whether or not the tool is written in Go; if it is then we will install the Go development toolchain. | `false` | No |
-| go_build | A Boolean indicating whether or not the Go tool should be built; if so then we will run `go build` from the project's root directory. | `true` | No |
-| group | The group that will own the directory where this tool is installed. | `root` | No |
-| install_dir | The directory on the remote host where the tool should be installed. | n/a | Yes |
-| mode | The mode to assign the directory where this tool is installed. | `0775` | No |
-| owner | The user that will own the directory where this tool is installed. | `root` | No |
-| pip_extra_args | Extra arguments to give to `pip` when installing packages into the Python virtualenv. | [Omitted](https://docs.ansible.com/ansible/latest/user_guide/playbooks_filters.html#making-variables-optional) | No |
-| pip_packages | A list of `pip` packages to install into the Python virtualenv. | [Omitted](https://docs.ansible.com/ansible/latest/user_guide/playbooks_filters.html#making-variables-optional) | No |
-| pip_requirements_file | The path to a `pip` requirements file listing dependencies to install into the Python virtualenv. | [Omitted](https://docs.ansible.com/ansible/latest/user_guide/playbooks_filters.html#making-variables-optional) | No |
-| powershell | A Boolean indicating whether or not the tool is written in PowerShell; if it is then we will install the powershell system package. | `false` | No |
-| python2 | A Boolean indicating whether or not the tool is strictly for Python 2; if it is then we will install the system package that provides the Python 2 interpreter and will create a Python 2 virtual environment. | `false` | No |
-| rust | A Boolean indicating whether or not the tool is written in Rust; if it is then we will install the system packages that provide `cargo`. | `false` | No |
-| unarchive_extra_opts | A list of extra options to be passed to the ansible.builtin.unarchive Ansible module.  When installing a tarball from a GitHub repository, for example, it is often useful to set this value to "[--strip-components=1]". | [Omitted](https://docs.ansible.com/ansible/latest/user_guide/playbooks_filters.html#making-variables-optional) | No |
-| virtualenv_dir | The directory where the Python virtualenv should be created.  Only read if at least one of `pip_packages` or `pip_requirements_file` is present. | `install_dir/.venv` | No |
+| assessment_tool_archive_src | A URL or a file path on the remote host pointing to an archive (tar or zip) containing the tool.  If left undefined then no archive will be installed, but the install directory will still be created and language-specific tooling will still be installed. | n/a | No |
+| assessment_tool_cargo_build | A Boolean indicating whether or not the Rust tool should be built using `cargo`; if so then we will run `cargo build` from the project's root directory. | `true` | No |
+| assessment_tool_cargo_install_dir | The directory where the `cargo` packages should be installed.  Only read if  `assessment_tool_cargo_packages` is present. | `install_dir` | No |
+| assessment_tool_cargo_packages | A list of `cargo` packages to install. | [Omitted](https://docs.ansible.com/ansible/latest/user_guide/playbooks_filters.html#making-variables-optional) | No |
+| assessment_tool_cargo_profile | The `cargo` profile to use when building the project. | `release` | No |
+| assessment_tool_csharp | A Boolean indicating whether or not the tool is written in C#; if it is then we will install the mono C# toolchain. | `false` | No |
+| assessment_tool_go | A Boolean indicating whether or not the tool is written in Go; if it is then we will install the Go development toolchain. | `false` | No |
+| assessment_tool_go_build | A Boolean indicating whether or not the Go tool should be built; if so then we will run `go build` from the project's root directory. | `true` | No |
+| assessment_tool_group | The group that will own the directory where this tool is installed. | `root` | No |
+| assessment_tool_install_dir | The directory on the remote host where the tool should be installed. | n/a | Yes |
+| assessment_tool_mode | The mode to assign the directory where this tool is installed. | `0775` | No |
+| assessment_tool_owner | The user that will own the directory where this tool is installed. | `root` | No |
+| assessment_tool_pip_extra_args | Extra arguments to give to `pip` when installing packages into the Python virtualenv. | [Omitted](https://docs.ansible.com/ansible/latest/user_guide/playbooks_filters.html#making-variables-optional) | No |
+| assessment_tool_pip_packages | A list of `pip` packages to install into the Python virtualenv. | [Omitted](https://docs.ansible.com/ansible/latest/user_guide/playbooks_filters.html#making-variables-optional) | No |
+| assessment_tool_pip_requirements_file | The path to a `pip` requirements file listing dependencies to install into the Python virtualenv. | [Omitted](https://docs.ansible.com/ansible/latest/user_guide/playbooks_filters.html#making-variables-optional) | No |
+| assessment_tool_powershell | A Boolean indicating whether or not the tool is written in PowerShell; if it is then we will install the powershell system package. | `false` | No |
+| assessment_tool_python2 | A Boolean indicating whether or not the tool is strictly for Python 2; if it is then we will install the system package that provides the Python 2 interpreter and will create a Python 2 virtual environment. | `false` | No |
+| assessment_tool_rust | A Boolean indicating whether or not the tool is written in Rust; if it is then we will install the system packages that provide `cargo`. | `false` | No |
+| assessment_tool_unarchive_extra_opts | A list of extra options to be passed to the ansible.builtin.unarchive Ansible module.  When installing a tarball from a GitHub repository, for example, it is often useful to set this value to "[--strip-components=1]". | [Omitted](https://docs.ansible.com/ansible/latest/user_guide/playbooks_filters.html#making-variables-optional) | No |
+| assessment_tool_virtualenv_dir | The directory where the Python virtualenv should be created.  Only read if at least one of `assessment_tool_pip_packages` or `assessment_tool_pip_requirements_file` is present. | `install_dir/.venv` | No |
 
 ## Dependencies ##
 
@@ -105,10 +108,10 @@ Here's how to use it in a playbook to install a C# tool:
       ansible.builtin.include_role:
         name: assessment_tool
       vars:
-        archive_src: https://github.com/eladshamir/Internal-Monologue/tarball/master
-        install_dir: /tools/Internal-Monologue
-        csharp: yes
-        unarchive_extra_opts:
+        assessment_tool_archive_src: https://github.com/eladshamir/Internal-Monologue/tarball/master
+        assessment_tool_install_dir: /tools/Internal-Monologue
+        assessment_tool_csharp: yes
+        assessment_tool_unarchive_extra_opts:
           - --strip-components=1
 ```
 
@@ -125,10 +128,10 @@ Here's how to use it in a playbook to install a Go tool:
       ansible.builtin.include_role:
         name: assessment_tool
       vars:
-        archive_src: https://github.com/optiv/ScareCrow/tarball/main
-        install_dir: /tools/ScareCrow
-        go: yes
-        unarchive_extra_opts:
+        assessment_tool_archive_src: https://github.com/optiv/ScareCrow/tarball/main
+        assessment_tool_install_dir: /tools/ScareCrow
+        assessment_tool_go: yes
+        assessment_tool_unarchive_extra_opts:
           - --strip-components=1
 ```
 
@@ -145,10 +148,10 @@ Here's how to use it in a playbook to install a PowerShell tool:
       ansible.builtin.include_role:
         name: assessment_tool
       vars:
-        archive_src: https://github.com/NetSPI/PowerUpSQL/tarball/master
-        install_dir: /tools/PowerUpSQL
-        powershell: yes
-        unarchive_extra_opts:
+        assessment_tool_archive_src: https://github.com/NetSPI/PowerUpSQL/tarball/master
+        assessment_tool_install_dir: /tools/PowerUpSQL
+        assessment_tool_powershell: yes
+        assessment_tool_unarchive_extra_opts:
           - --strip-components=1
 ```
 
@@ -168,10 +171,10 @@ Here's how to use it in a playbook to install a Python tool using a
       ansible.builtin.include_role:
         name: assessment_tool
       vars:
-        archive_src: https://github.com/maurosoria/dirsearch/tarball/master
-        install_dir: /tools/dirsearch
-        pip_requirements_file: requirements.txt
-        unarchive_extra_opts:
+        assessment_tool_archive_src: https://github.com/maurosoria/dirsearch/tarball/master
+        assessment_tool_install_dir: /tools/dirsearch
+        assessment_tool_pip_requirements_file: requirements.txt
+        assessment_tool_unarchive_extra_opts:
           - --strip-components=1
 ```
 
@@ -189,11 +192,11 @@ Here's how to use it in a playbook to install a Python tool using a
       ansible.builtin.include_role:
         name: assessment_tool
       vars:
-        archive_src: https://github.com/FortyNorthSecurity/Hasher/tarball/master
-        install_dir: /tools/Hasher
-        pip_packages:
+        assessment_tool_archive_src: https://github.com/FortyNorthSecurity/Hasher/tarball/master
+        assessment_tool_install_dir: /tools/Hasher
+        assessment_tool_pip_packages:
           - '.'
-        unarchive_extra_opts:
+        assessment_tool_unarchive_extra_opts:
           - --strip-components=1
 ```
 
@@ -211,11 +214,11 @@ list of `pip` packages:
       ansible.builtin.include_role:
         name: assessment_tool
       vars:
-        archive_src: https://github.com/MacR6/sshenum/tarball/master
-        install_dir: /tools/sshenum
-        pip_packages:
+        assessment_tool_archive_src: https://github.com/MacR6/sshenum/tarball/master
+        assessment_tool_install_dir: /tools/sshenum
+        assessment_tool_pip_packages:
           - paramiko
-        unarchive_extra_opts:
+        assessment_tool_unarchive_extra_opts:
           - --strip-components=1
 ```
 
@@ -233,8 +236,8 @@ environment:
       ansible.builtin.include_role:
         name: assessment_tool
       vars:
-        install_dir: /tools/mitm6
-        pip_packages:
+        assessment_tool_install_dir: /tools/mitm6
+        assessment_tool_pip_packages:
           - mitm6
 ```
 
@@ -252,10 +255,10 @@ Rust compiler:
       ansible.builtin.include_role:
         name: assessment_tool
       vars:
-        archive_src: https://github.com/Porchetta-Industries/CrackMapExec/tarball/master
-        install_dir: /tools/CrackMapExec
-        rust: yes
-        unarchive_extra_opts:
+        assessment_tool_archive_src: https://github.com/Porchetta-Industries/CrackMapExec/tarball/master
+        assessment_tool_install_dir: /tools/CrackMapExec
+        assessment_tool_rust: yes
+        assessment_tool_unarchive_extra_opts:
           - --strip-components=1
 ```
 
@@ -273,9 +276,9 @@ this case) tool:
       ansible.builtin.include_role:
         name: assessment_tool
       vars:
-        archive_src: https://github.com/bovine/datapipe/tarball/master
-        install_dir: /tools/datapipe
-        unarchive_extra_opts:
+        assessment_tool_archive_src: https://github.com/bovine/datapipe/tarball/master
+        assessment_tool_install_dir: /tools/datapipe
+        assessment_tool_unarchive_extra_opts:
           - --strip-components=1
 ```
 
@@ -299,4 +302,4 @@ with this waiver of copyright interest.
 
 ## Author Information ##
 
-Shane Frasier - <jeremy.frasier@trio.dhs.gov>
+Shane Frasier - <jeremy.frasier@gwe.cisa.dhs.gov>
