@@ -10,7 +10,7 @@
       paths:
         - "{{ role_path }}/vars"
 
-- name: Create the directory {{ install_dir }}
+- name: Create the directory {{ assessment_tool_install_dir }}
   ansible.builtin.file:
     group: "{{ assessment_tool_group }}"
     mode: "{{ assessment_tool_mode }}"
