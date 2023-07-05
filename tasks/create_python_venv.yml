@@ -1,9 +1,21 @@
 ---
 # These tools are used by the ansible.builtin.pip module below
 - name: Install virtualenv
-  ansible.builtin.package:
-    name:
-      - virtualenv
+  block:
+    - name: Install virtualenv via the package manager
+      ansible.builtin.package:
+        name:
+          - virtualenv
+      when: not assessment_tool_python2
+
+    - name: Install virtualenv via pip
+      ansible.builtin.pip:
+        name:
+          # virtualenv 20.22.0 removed support for creating Python 2
+          # venvs:
+          # https://virtualenv.pypa.io/en/latest/changelog.html#v20-22-0-2023-04-19
+          - virtualenv<20.22.0
+      when: assessment_tool_python2
 
 - name: Create the virtualenv
   ansible.builtin.pip:
