@@ -14,7 +14,11 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
 
 @pytest.mark.parametrize(
     "d",
-    ["/tools/ImpDump"],
+    [
+        "/tools/demiguise",
+        "/tools/ImpDump",
+        "/tools/morphHTA",
+    ],
 )
 def test_directories(host, d):
     """Test that appropriate directories were created."""
@@ -39,7 +43,11 @@ def test_pip_packages(host, pkg):
 @pytest.mark.parametrize(
     "d,pkgs",
     [
+        # No pip packages installed
+        # ("/tools/demiguise/.venv", []),
         ("/tools/ImpDump/.venv", ["impacket", "pycrypto"]),
+        # No pip packages installed
+        # ("/tools/morphHTA/.venv", []),
     ],
 )
 def test_venvs(host, d, pkgs):
