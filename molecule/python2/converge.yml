@@ -1,0 +1,19 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: Install the ImpDump package in a venv
+      # We do prepend the name of the role to the role variables, but
+      # Molecule does its own role discovery with inconsistent naming.
+      # This is the reason for the noqa below.
+      ansible.builtin.include_role: # noqa var-naming[no-role-prefix]
+        name: ansible-role-assessment-tool
+      vars:
+        assessment_tool_archive_src: https://github.com/HarmJ0y/ImpDump/tarball/master
+        assessment_tool_install_dir: /tools/ImpDump
+        assessment_tool_pip_packages:
+          - impacket
+          - pycrypto
+        assessment_tool_python2: yes
+        assessment_tool_unarchive_extra_opts:
+          - --strip-components=1

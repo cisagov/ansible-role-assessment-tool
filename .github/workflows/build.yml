@@ -111,6 +111,7 @@ jobs:
           - go
           - powershell
           - python
+          - python2
           - rust
     runs-on: ubuntu-latest
     steps:
