@@ -2,19 +2,15 @@
 - name: Converge
   hosts: all
   tasks:
-    - name: Install RustScan
+    - name: Install resyncgg/ripgen
       # We do prepend the name of the role to the role variables, but
       # Molecule does its own role discovery with inconsistent naming.
       # This is the reason for the noqa below.
       ansible.builtin.include_role: # noqa var-naming[no-role-prefix]
         name: ansible-role-assessment-tool
       vars:
-        assessment_tool_archive_src: https://github.com/RustScan/RustScan/tarball/master
-        # We lowercase the install directory name so it matches the
-        # name in the cargo toml file, which is in turn used to
-        # determine the name of the build product in
-        # tasks/install_rust.yml.
-        assessment_tool_install_dir: /tools/rustscan
+        assessment_tool_archive_src: https://github.com/resyncgg/ripgen/tarball/main
+        assessment_tool_install_dir: /tools/ripgen
         assessment_tool_rust: yes
         assessment_tool_unarchive_extra_opts:
           - --strip-components=1
