@@ -48,15 +48,15 @@
   when:
     - assessment_tool_rust or assessment_tool_cargo_packages is defined
 
-- name: Install Python 2 if necessary
-  ansible.builtin.include_tasks: install_python2.yml
-  when:
-    - assessment_tool_python2
-
-- name: Create a Python virtualenv if necessary
-  ansible.builtin.include_tasks: create_python_venv.yml
+- name: Install Python and create Python virtualenv
   when:
     - assessment_tool_pip_packages is defined or assessment_tool_pip_requirements_file is defined
+  block:
+    - name: Install Python if necessary
+      ansible.builtin.include_tasks: install_python.yml
+
+    - name: Create a Python virtualenv if necessary
+      ansible.builtin.include_tasks: create_python_venv.yml
 
 - name: Install PowerShell if necessary
   ansible.builtin.include_tasks: "{{ lookup('first_found', params) }}"
