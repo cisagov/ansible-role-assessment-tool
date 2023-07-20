@@ -35,6 +35,10 @@ assessment_tool_powershell: no
 # interpreter and will create a Python 2 virtualenv
 assessment_tool_python2: no
 
+# If yes then Python development dependencies will be installed.  This
+# is useful, e.g., if pip needs to build a wheel.
+assessment_tool_python_install_development_dependencies: no
+
 # If this is a Rust project then we will install the cargo system
 # package
 assessment_tool_rust: no
