@@ -5,3 +5,4 @@
   src: https://github.com/cisagov/ansible-role-pip
 - name: python
   src: https://github.com/cisagov/ansible-role-python
+  version: improvement/add-role-var-for-installing-dev-dependencies
