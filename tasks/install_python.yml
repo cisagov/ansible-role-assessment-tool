@@ -5,8 +5,8 @@
       ansible.builtin.include_role:
         name: python
       vars:
-        python_install_python2: "{{ assessment_tool_python2 }}"
         python_install_development_dependencies: "{{ assessment_tool_python_install_development_dependencies }}"
+        python_install_python2: "{{ assessment_tool_python2 }}"
     - name: Install Pip
       ansible.builtin.include_role:
         name: pip
