@@ -15,10 +15,10 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
 @pytest.mark.parametrize(
     "d",
     [
-        "/tools/sshenum",
         "/tools/dirsearch",
         "/tools/mitm6",
         "/tools/sqlmap",
+        "/tools/sshenum",
     ],
 )
 def test_directories(host, d):
