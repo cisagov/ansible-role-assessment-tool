@@ -18,6 +18,7 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
         "/tools/sshenum",
         "/tools/dirsearch",
         "/tools/mitm6",
+        "/tools/sqlmap",
     ],
 )
 def test_directories(host, d):
@@ -49,6 +50,8 @@ def test_packages(host, pkg):
             ["certifi", "urllib3", "cryptography", "cffi", "MarkupSafe"],
         ),
         ("/tools/mitm6/.venv", ["mitm6"]),
+        # There is no venv for sqlmap since it has no dependencies.
+        # ("/tools/sqlmap/.venv", []),
     ],
 )
 def test_venvs(host, d, pkgs):

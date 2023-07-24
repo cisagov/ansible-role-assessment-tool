@@ -50,13 +50,15 @@
 
 - name: Install Python and create Python virtualenv
   when:
-    - assessment_tool_pip_packages is defined or assessment_tool_pip_requirements_file is defined
+    - assessment_tool_python or assessment_tool_python2 or assessment_tool_python_install_development_dependencies or assessment_tool_pip_packages is defined or assessment_tool_pip_requirements_file is defined
   block:
     - name: Install Python if necessary
       ansible.builtin.include_tasks: install_python.yml
 
     - name: Create a Python virtualenv if necessary
       ansible.builtin.include_tasks: create_python_venv.yml
+      when:
+        - assessment_tool_pip_packages is defined or assessment_tool_pip_requirements_file is defined
 
 - name: Install PowerShell if necessary
   ansible.builtin.include_tasks: "{{ lookup('first_found', params) }}"
