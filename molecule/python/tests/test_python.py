@@ -44,14 +44,20 @@ def test_packages(host, pkg):
 @pytest.mark.parametrize(
     "d,pkgs",
     [
-        ("/tools/sshenum/.venv", ["paramiko"]),
         (
             "/tools/dirsearch/.venv",
-            ["certifi", "urllib3", "cryptography", "cffi", "MarkupSafe"],
+            [
+                "certifi",
+                "cffi",
+                "cryptography",
+                "MarkupSafe",
+                "urllib3",
+            ],
         ),
         ("/tools/mitm6/.venv", ["mitm6"]),
         # There is no venv for sqlmap since it has no dependencies.
         # ("/tools/sqlmap/.venv", []),
+        ("/tools/sshenum/.venv", ["paramiko"]),
     ],
 )
 def test_venvs(host, d, pkgs):
