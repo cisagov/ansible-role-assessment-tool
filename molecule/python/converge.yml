@@ -50,7 +50,7 @@
         assessment_tool_install_dir: /tools/mitm6
         assessment_tool_pip_packages:
           - mitm6
-    - name: Install the sqlmap package in a venv
+    - name: Install the sqlmap tool
       # We do prepend the name of the role to the role variables, but
       # Molecule does its own role discovery with inconsistent naming.
       # This is the reason for the noqa below.
