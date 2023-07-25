@@ -31,9 +31,23 @@ assessment_tool_owner: root
 # system package
 assessment_tool_powershell: no
 
+# A Boolean that can indicate that Python is to be installed and a
+# pristine Python virtual environment created.  If any of
+# assessment_tool_pip_packages or
+# assessment_tool_pip_requirements_file or assessment_tool_python2 is
+# defined then Python will be installed anyway and a Python virtual
+# environment created, but this variable is occasionally useful, e.g.,
+# when installing a tool that lacks any Python packaging and has no
+# dependencies.
+assessment_tool_python: no
+
 # If this is a Python 2 project then we will install a Python 2
 # interpreter and will create a Python 2 virtualenv
 assessment_tool_python2: no
+
+# If yes then Python development dependencies will be installed.  This
+# is useful, e.g., if pip needs to build a wheel.
+assessment_tool_python_install_development_dependencies: no
 
 # If this is a Rust project then we will install the cargo system
 # package

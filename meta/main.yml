@@ -1,11 +1,5 @@
 ---
-dependencies:
-  - name: backports
-    src: https://github.com/cisagov/ansible-role-backports
-  - name: pip
-    src: https://github.com/cisagov/ansible-role-pip
-  - name: python
-    src: https://github.com/cisagov/ansible-role-python
+dependencies: []
 galaxy_info:
   author: Shane Frasier
   company: CISA Cyber Assessments
