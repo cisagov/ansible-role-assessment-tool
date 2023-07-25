@@ -1,22 +1,22 @@
 ---
-# If yes then the Rust project will be built via running cargo build
+# If true then the Rust project will be built via running cargo build
 # from the project's root directory
-assessment_tool_cargo_build: yes
+assessment_tool_cargo_build: true
 
 # The profile to use when building via cargo
 assessment_tool_cargo_profile: release
 
 # If this is a C# project then we will install the mono tools required
 # to compile C# code
-assessment_tool_csharp: no
+assessment_tool_csharp: false
 
 # If this is a Go project then we will install the Go development
 # toolchain required to compile Go code
-assessment_tool_go: no
+assessment_tool_go: false
 
-# If yes then the Go project will be built via running go build from
+# If true then the Go project will be built via running go build from
 # the project's root directory
-assessment_tool_go_build: yes
+assessment_tool_go_build: true
 
 # Group ownership for the install directory
 assessment_tool_group: root
@@ -29,7 +29,7 @@ assessment_tool_owner: root
 
 # If this is a PowerShell project then we will install the powershell
 # system package
-assessment_tool_powershell: no
+assessment_tool_powershell: false
 
 # A Boolean that can indicate that Python is to be installed and a
 # pristine Python virtual environment created.  If any of
@@ -39,16 +39,16 @@ assessment_tool_powershell: no
 # environment created, but this variable is occasionally useful, e.g.,
 # when installing a tool that lacks any Python packaging and has no
 # dependencies.
-assessment_tool_python: no
+assessment_tool_python: false
 
 # If this is a Python 2 project then we will install a Python 2
 # interpreter and will create a Python 2 virtualenv
-assessment_tool_python2: no
+assessment_tool_python2: false
 
-# If yes then Python development dependencies will be installed.  This
+# If true then Python development dependencies will be installed.  This
 # is useful, e.g., if pip needs to build a wheel.
-assessment_tool_python_install_development_dependencies: no
+assessment_tool_python_install_development_dependencies: false
 
 # If this is a Rust project then we will install the cargo system
 # package
-assessment_tool_rust: no
+assessment_tool_rust: false

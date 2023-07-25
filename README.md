@@ -7,16 +7,16 @@ This Ansible role is used to install assessment tools to Debian,
 Ubuntu, or Kali Linux.  This role can also be configured to provide
 some language-specific extras:
 
-- C# - The `assessment_tool_csharp` role variable can be set to `yes`
+- C# - The `assessment_tool_csharp` role variable can be set to `true`
   to install the [Mono Project](https://www.mono-project.com/) tools
   for C# development on Linux.
-- Go - The `assessment_tool_go` role variable can be set to `yes` to
+- Go - The `assessment_tool_go` role variable can be set to `true` to
   install the [Go](https://go.dev/) development tools.
 - PowerShell - The `assessment_tool_powershell` role variable can be
-  set to `yes` to install
+  set to `true` to install
   [PowerShell](https://en.wikipedia.org/wiki/PowerShell).
 - Python - The `assessment_tool_python` role variable can be set to
-  `yes` and used in conjunction with the role variables
+  `true` and used in conjunction with the role variables
   `assessment_tool_pip_packages` or
   `assessment_tool_pip_requirements_file` to install a [Python virtual
   environment](https://docs.python.org/3/glossary.html#term-virtual-environment)
@@ -24,7 +24,7 @@ some language-specific extras:
   environment, simply use the command `source
   /path/to/tool/.venv/bin/activate`.  When you are done using the
   tool, simply `deactivate`.
-- Rust - The `assessment_tool_rust` role variable can be set to `yes`
+- Rust - The `assessment_tool_rust` role variable can be set to `true`
   and used in conjunction with the role variable
   `assessment_tool_cargo_packages` to install `assessment_tool_cargo`
   and the desired packages.
@@ -103,7 +103,7 @@ Here's how to use it in a playbook to install a C# tool:
 
 ```yaml
 - hosts: all
-  become: yes
+  become: true
   become_method: sudo
   tasks:
     - name: Install Internal-Monologue
@@ -112,7 +112,7 @@ Here's how to use it in a playbook to install a C# tool:
       vars:
         assessment_tool_archive_src: https://github.com/eladshamir/Internal-Monologue/tarball/master
         assessment_tool_install_dir: /tools/Internal-Monologue
-        assessment_tool_csharp: yes
+        assessment_tool_csharp: true
         assessment_tool_unarchive_extra_opts:
           - --strip-components=1
 ```
@@ -123,7 +123,7 @@ Here's how to use it in a playbook to install a Go tool:
 
 ```yaml
 - hosts: all
-  become: yes
+  become: true
   become_method: sudo
   tasks:
     - name: Install ScareCrow
@@ -132,7 +132,7 @@ Here's how to use it in a playbook to install a Go tool:
       vars:
         assessment_tool_archive_src: https://github.com/optiv/ScareCrow/tarball/main
         assessment_tool_install_dir: /tools/ScareCrow
-        assessment_tool_go: yes
+        assessment_tool_go: true
         assessment_tool_unarchive_extra_opts:
           - --strip-components=1
 ```
@@ -143,7 +143,7 @@ Here's how to use it in a playbook to install a PowerShell tool:
 
 ```yaml
 - hosts: all
-  become: yes
+  become: true
   become_method: sudo
   tasks:
     - name: Install PowerUpSQL
@@ -152,7 +152,7 @@ Here's how to use it in a playbook to install a PowerShell tool:
       vars:
         assessment_tool_archive_src: https://github.com/NetSPI/PowerUpSQL/tarball/master
         assessment_tool_install_dir: /tools/PowerUpSQL
-        assessment_tool_powershell: yes
+        assessment_tool_powershell: true
         assessment_tool_unarchive_extra_opts:
           - --strip-components=1
 ```
@@ -166,7 +166,7 @@ Here's how to use it in a playbook to install a Python tool using a
 
 ```yaml
 - hosts: all
-  become: yes
+  become: true
   become_method: sudo
   tasks:
     - name: Install dirsearch
@@ -187,7 +187,7 @@ Here's how to use it in a playbook to install a Python tool using a
 
 ```yaml
 - hosts: all
-  become: yes
+  become: true
   become_method: sudo
   tasks:
     - name: Install Hasher
@@ -209,7 +209,7 @@ list of `pip` packages:
 
 ```yaml
 - hosts: all
-  become: yes
+  become: true
   become_method: sudo
   tasks:
     - name: Install sshenum
@@ -231,7 +231,7 @@ environment:
 
 ```yaml
 - hosts: all
-  become: yes
+  become: true
   become_method: sudo
   tasks:
     - name: Install mitm6
@@ -250,7 +250,7 @@ Rust compiler:
 
 ```yaml
 - hosts: all
-  become: yes
+  become: true
   become_method: sudo
   tasks:
     - name: Install CrackMapExec
@@ -259,7 +259,7 @@ Rust compiler:
       vars:
         assessment_tool_archive_src: https://github.com/Porchetta-Industries/CrackMapExec/tarball/master
         assessment_tool_install_dir: /tools/CrackMapExec
-        assessment_tool_rust: yes
+        assessment_tool_rust: true
         assessment_tool_unarchive_extra_opts:
           - --strip-components=1
 ```
@@ -271,7 +271,7 @@ this case) tool:
 
 ```yaml
 - hosts: all
-  become: yes
+  become: true
   become_method: sudo
   tasks:
     - name: Install datapipe

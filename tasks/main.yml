@@ -80,5 +80,5 @@
     group: "{{ assessment_tool_group }}"
     owner: "{{ assessment_tool_owner }}"
     path: "{{ assessment_tool_install_dir }}"
-    recurse: yes
+    recurse: true
     state: directory

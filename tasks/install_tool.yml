@@ -12,7 +12,7 @@
     dest: "{{ assessment_tool_install_dir }}"
     extra_opts: "{{ assessment_tool_unarchive_extra_opts | default(omit) }}"
     group: "{{ assessment_tool_group }}"
-    remote_src: yes
+    remote_src: true
     src: "{{ assessment_tool_archive_src }}"
   tags:
     # The Ubuntu Focal version of the golang package is pretty old,
