@@ -111,8 +111,8 @@ Here's how to use it in a playbook to install a C# tool:
         name: assessment_tool
       vars:
         assessment_tool_archive_src: https://github.com/eladshamir/Internal-Monologue/tarball/master
-        assessment_tool_install_dir: /tools/Internal-Monologue
         assessment_tool_csharp: true
+        assessment_tool_install_dir: /tools/Internal-Monologue
         assessment_tool_unarchive_extra_opts:
           - --strip-components=1
 ```
@@ -131,8 +131,8 @@ Here's how to use it in a playbook to install a Go tool:
         name: assessment_tool
       vars:
         assessment_tool_archive_src: https://github.com/optiv/ScareCrow/tarball/main
-        assessment_tool_install_dir: /tools/ScareCrow
         assessment_tool_go: true
+        assessment_tool_install_dir: /tools/ScareCrow
         assessment_tool_unarchive_extra_opts:
           - --strip-components=1
 ```
