@@ -60,6 +60,6 @@
         assessment_tool_archive_src: "https://github.com/sqlmapproject/\
         sqlmap/tarball/master"
         assessment_tool_install_dir: /tools/sqlmap
-        assessment_tool_python: yes
+        assessment_tool_python: true
         assessment_tool_unarchive_extra_opts:
           - --strip-components=1
