@@ -8,14 +8,36 @@
           - virtualenv
       when: not assessment_tool_python2
 
-    - name: Install virtualenv via pip
-      ansible.builtin.pip:
-        name:
-          # virtualenv 20.22.0 removed support for creating Python 2
-          # venvs:
-          # https://virtualenv.pypa.io/en/latest/changelog.html#v20-22-0-2023-04-19
-          - virtualenv<20.22.0
+    # The shadiness is necessary because, on modern distributions, pip
+    # (correctly) refuses to uninstall Python packages installed via
+    # system packages.
+    - name: Shadily install virtualenv for Python 2 via pip
       when: assessment_tool_python2
+      tags:
+        # This kind of chicanery can never pass idempotence.
+        - molecule-idempotence-notest
+      block:
+        # We can revert to the system packages that provide virtualenv
+        # and platformdirs once the Python 2 virtual environment is
+        # created.
+        - name: >-
+            Shadily uninstall some Python 3 packages via the package
+            manager
+          ansible.builtin.package:
+            name:
+              - python3-platformdirs
+              - virtualenv
+            state: absent
+          register: shady_uninstall
+        - name: Shadily install necessary packages for Python 2 via pip
+          ansible.builtin.pip:
+            name:
+              - platformdirs
+              # virtualenv 20.22.0 removed support for creating Python 2
+              # venvs:
+              # https://virtualenv.pypa.io/en/latest/changelog.html#v20-22-0-2023-04-19
+              - virtualenv<20.22.0
+          register: shady_install
 
 - name: Create the virtualenv
   ansible.builtin.pip:
@@ -25,3 +47,34 @@
     requirements: "{{ assessment_tool_pip_requirements_file | default(omit) }}"
     virtualenv: "{{ assessment_tool_virtualenv_dir | default((assessment_tool_install_dir, '.venv') | path_join) }}"
     virtualenv_python: "{{ (assessment_tool_python2) | ternary('/usr/bin/python2', omit) }}"
+
+# Undo the shadiness that was done in order to create a Python 2
+# virtual environment.
+- name: Cleanup Python 2 chicanery
+  tags:
+    # This kind of chicanery can never pass idempotence.
+    - molecule-idempotence-notest
+  block:
+    - name: Uninstall shadily-installed virtualenv for Python 2 via pip
+      # The following line triggers an error from ansible-lint that
+      # "Tasks that run when changed should likely be handlers" but we
+      # need to undo this chicanery _now_ and not wait until handlers
+      # run.
+      when: shady_install.changed  # noqa: no-handler
+      ansible.builtin.pip:
+        name:
+          - platformdirs
+          - virtualenv
+        state: absent
+    - name: >-
+        Install shadily-uninstalled virtualenv for Python 3 via the
+        package manager
+      # The following line triggers an error from ansible-lint that
+      # "Tasks that run when changed should likely be handlers" but we
+      # need to undo this chicanery _now_ and not wait until handlers
+      # run.
+      when: shady_uninstall.changed  # noqa: no-handler
+      ansible.builtin.package:
+        name:
+          # This will pull in python3-platformdirs if necessary.
+          - virtualenv
