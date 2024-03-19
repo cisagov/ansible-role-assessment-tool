@@ -11,6 +11,8 @@
     # The shadiness is necessary because, on modern distributions, pip
     # (correctly) refuses to uninstall Python packages installed via
     # system packages.
+    #
+    # TODO: This nonsense will not work forever.  See #56 for details.
     - name: Shadily install virtualenv for Python 2 via pip
       when: assessment_tool_python2
       tags:
@@ -50,6 +52,8 @@
 
 # Undo the shadiness that was done in order to create a Python 2
 # virtual environment.
+#
+# TODO: This nonsense will not work forever.  See #56 for details.
 - name: Cleanup Python 2 chicanery
   tags:
     # This kind of chicanery can never pass idempotence.
