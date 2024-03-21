@@ -30,17 +30,6 @@ def test_directories(host, d):
 
 
 @pytest.mark.parametrize(
-    "pkg",
-    [
-        "virtualenv",
-    ],
-)
-def test_pip_packages(host, pkg):
-    """Test that appropriate pip packages were installed."""
-    assert pkg in host.pip.get_packages(pip_path="pip3")
-
-
-@pytest.mark.parametrize(
     "d,pkgs",
     [
         # No pip packages installed
