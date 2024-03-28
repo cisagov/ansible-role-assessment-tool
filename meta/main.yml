@@ -35,11 +35,19 @@ galaxy_info:
         - buster
         - bullseye
         - bookworm
+<<<<<<< HEAD
     # This Ansible role only supports Debian-based platforms for now.
     # - name: Fedora
     #   versions:
     #     - "37"
     #     - "38"
+=======
+        - trixie
+    - name: Fedora
+      versions:
+        - "38"
+        - "39"
+>>>>>>> c121f6c2d751ea234695e5ff5188c9a834537efd
     - name: Kali
       versions:
         - "2023"
