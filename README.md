@@ -95,6 +95,28 @@ None.
 - [cisagov/ansible-role-python](https://github.com/cisagov/ansible-role-python):
   Python is required to create a virtual environment for Python-based projects.
 
+## Installation ##
+
+This role can be installed via the command:
+
+```console
+ansible-galaxy install --role-file path/to/requirements.yml
+```
+
+where `requirements.yml` looks like:
+
+```yaml
+---
+- name: skeleton
+  src: https://github.com/cisagov/skeleton-ansible-role
+```
+
+and may contain other roles as well.
+
+For more information about installing Ansible roles via a YAML file,
+please see [the `ansible-galaxy`
+documentation](https://docs.ansible.com/ansible/latest/galaxy/user_guide.html#installing-multiple-roles-from-a-file).
+
 ## Example Playbook ##
 
 ### Installing a C# Tool ###
