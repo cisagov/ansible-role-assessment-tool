@@ -181,13 +181,17 @@ jobs:
           - amd64
           - arm64
         platform:
-          - amazonlinux2023-systemd
+          # This Ansible role only supports Debian-based platforms for
+          # now.
+          # - amazonlinux2023-systemd
           - debian10-systemd
           - debian11-systemd
           - debian12-systemd
           - debian13-systemd
-          - fedora39-systemd
-          - fedora40-systemd
+          # This Ansible role only supports Debian-based platforms for
+          # now.
+          # - fedora39-systemd
+          # - fedora40-systemd
           - kali-systemd
           - ubuntu-20-systemd
           - ubuntu-22-systemd
