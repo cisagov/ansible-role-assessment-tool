@@ -197,6 +197,23 @@ jobs:
           # Ubuntu Noble does not offer Python 2.
           - platform: ubuntu-24-systemd
             scenario: python2
+          # Debian Buster does not have a new enough version of cargo
+          # to parse the cargo.toml file for RustScan.  The
+          # buster-backports package repository no longer exists.
+          - platform: debian10-systemd
+            scenario: rust
+          # Debian Bullseye has an older version of cargo, which gives
+          # a "feature `resolver` is required" error when installing
+          # RustScan.  There is no newer version in backports.
+          - platform: debian11-systemd
+            scenario: rust
+          # Debian Bookworm has an older version of rustc, which gives
+          # a "package `regex-syntax v0.8.2` cannot be built because
+          # it requires rustc 1.65 or newer, while the currently
+          # active rustc version is 1.63.0" error when installing the
+          # tool.
+          - platform: debian12-systemd
+            scenario: rust
         platform:
           # This Ansible role only supports Debian-based platforms for
           # now.
