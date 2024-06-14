@@ -180,6 +180,15 @@ jobs:
         architecture:
           - amd64
           - arm64
+        exclude:
+          # Buster does not have a new enough version of the golang
+          # package to build any go projects of recent vintage.
+          - platform: debian10-systemd
+            scenario: go
+          # Focal does not have a new enough version of the golang
+          # package to build any go projects of recent vintage.
+          - platform: ubuntu-20-systemd
+            scenario: go
         platform:
           # This Ansible role only supports Debian-based platforms for
           # now.
