@@ -189,6 +189,9 @@ jobs:
           # package to build any go projects of recent vintage.
           - platform: ubuntu-20-systemd
             scenario: go
+          # PowerShell does not support ARM64 on Debian-based platforms.
+          - architecture: arm64
+            scenario: powershell
           # Debian Bookworm and Trixie do not offer Python 2.
           - platform: debian12-systemd
             scenario: python2
