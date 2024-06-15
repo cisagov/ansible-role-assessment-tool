@@ -31,6 +31,12 @@ assessment_tool_owner: root
 # system package
 assessment_tool_powershell: false
 
+# The version of the powershell system package to install.  Note that
+# this version is only applied to installations where the package is
+# downloaded from https://github.com/PowerShell/PowerShell; Kali
+# Linux, for instance, offers its own powershell system package.
+assessment_tool_powershell_version: 7.4.2
+
 # A Boolean that can indicate that Python is to be installed and a
 # pristine Python virtual environment created.  If any of
 # assessment_tool_pip_packages or
