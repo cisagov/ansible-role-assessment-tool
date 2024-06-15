@@ -194,15 +194,18 @@ platforms:
   #   privileged: true
   #   volumes:
   #     - /sys/fs/cgroup:/sys/fs/cgroup:rw
-  - cgroupns_mode: host
-    command: /lib/systemd/systemd
-    image: docker.io/geerlingguy/docker-ubuntu2404-ansible:latest
-    name: ubuntu-24-systemd-amd64
-    platform: amd64
-    pre_build_image: true
-    privileged: true
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:rw
+  # The latest official release of PowerShell does not support Ubuntu
+  # Noble.  It requires libicu <= 72, but Noble only offers libicu 74:
+  # https://packages.ubuntu.com/search?keywords=libicu&searchon=names&suite=noble&section=all
+  # - cgroupns_mode: host
+  #   command: /lib/systemd/systemd
+  #   image: docker.io/geerlingguy/docker-ubuntu2404-ansible:latest
+  #   name: ubuntu-24-systemd-amd64
+  #   platform: amd64
+  #   pre_build_image: true
+  #   privileged: true
+  #   volumes:
+  #     - /sys/fs/cgroup:/sys/fs/cgroup:rw
   # PowerShell does not support ARM64 on Ubuntu.
   # - cgroupns_mode: host
   #   command: /lib/systemd/systemd

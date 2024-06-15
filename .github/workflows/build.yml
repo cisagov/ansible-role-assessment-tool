@@ -192,6 +192,12 @@ jobs:
           # PowerShell does not support ARM64 on Debian-based platforms.
           - architecture: arm64
             scenario: powershell
+          # The latest official release of PowerShell does not support
+          # Ubuntu Noble.  It requires libicu <= 72, but Noble only
+          # offers libicu 74:
+          # https://packages.ubuntu.com/search?keywords=libicu&searchon=names&suite=noble&section=all
+          - platform: ubuntu-24-systemd
+            scenario: powershell
           # Debian Bookworm and Trixie do not offer Python 2.
           - platform: debian12-systemd
             scenario: python2
