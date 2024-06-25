@@ -168,12 +168,77 @@ jobs:
         uses: mxschmitt/action-tmate@v3
         if: env.RUN_TMATE
   test:
+    name: >-
+      test (${{ matrix.scenario }}) -
+      ${{ matrix.platform }}-${{ matrix.architecture }}
     needs:
       - diagnostics
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
+        architecture:
+          - amd64
+          - arm64
+        exclude:
+          # Buster does not have a new enough version of the golang
+          # package to build any go projects of recent vintage.
+          - platform: debian10-systemd
+            scenario: go
+          # Focal does not have a new enough version of the golang
+          # package to build any go projects of recent vintage.
+          - platform: ubuntu-20-systemd
+            scenario: go
+          # PowerShell does not support ARM64 on Debian-based platforms.
+          - architecture: arm64
+            scenario: powershell
+          # The latest official release of PowerShell does not support
+          # Ubuntu Noble.  It requires libicu <= 72, but Noble only
+          # offers libicu 74:
+          # https://packages.ubuntu.com/search?keywords=libicu&searchon=names&suite=noble&section=all
+          - platform: ubuntu-24-systemd
+            scenario: powershell
+          # Debian Bookworm and Trixie do not offer Python 2.
+          - platform: debian12-systemd
+            scenario: python2
+          - platform: debian13-systemd
+            scenario: python2
+          # Ubuntu Noble does not offer Python 2.
+          - platform: ubuntu-24-systemd
+            scenario: python2
+          # Debian Buster does not have a new enough version of cargo
+          # to parse the cargo.toml file for RustScan.  The
+          # buster-backports package repository no longer exists.
+          - platform: debian10-systemd
+            scenario: rust
+          # Debian Bullseye has an older version of cargo, which gives
+          # a "feature `resolver` is required" error when installing
+          # RustScan.  There is no newer version in backports.
+          - platform: debian11-systemd
+            scenario: rust
+          # Debian Bookworm has an older version of rustc, which gives
+          # a "package `regex-syntax v0.8.2` cannot be built because
+          # it requires rustc 1.65 or newer, while the currently
+          # active rustc version is 1.63.0" error when installing the
+          # tool.
+          - platform: debian12-systemd
+            scenario: rust
+        platform:
+          # This Ansible role only supports Debian-based platforms for
+          # now.
+          # - amazonlinux2023-systemd
+          - debian10-systemd
+          - debian11-systemd
+          - debian12-systemd
+          - debian13-systemd
+          # This Ansible role only supports Debian-based platforms for
+          # now.
+          # - fedora39-systemd
+          # - fedora40-systemd
+          - kali-systemd
+          - ubuntu-20-systemd
+          - ubuntu-22-systemd
+          - ubuntu-24-systemd
         scenario:
           - csharp
           - default
@@ -210,8 +275,15 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install --upgrade --requirement requirements-test.txt
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
       - name: Run molecule tests
-        run: molecule test --scenario-name ${{ matrix.scenario }}
+        run: >-
+          molecule test
+          --platform-name ${{ matrix.platform }}-${{ matrix.architecture }}
+          --scenario-name ${{ matrix.scenario }}
       - name: Setup tmate debug session
         uses: mxschmitt/action-tmate@v3
         if: env.RUN_TMATE
