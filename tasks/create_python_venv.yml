@@ -8,6 +8,13 @@
           - virtualenv
       when: not assessment_tool_python2
 
+    - name: Set pip_break_system_packages if necessary
+      ansible.builtin.set_fact:
+        pip_break_system_packages: --break-system-packages
+      when:
+        - ansible_distribution in ["Debian", "Kali", "Ubuntu"]
+        - ansible_distribution_release not in ["bullseye", "buster", "focal", "jammy"]
+
     # The shadiness is necessary because, on modern distributions, pip
     # (correctly) refuses to uninstall Python packages installed via
     # system packages.
@@ -33,6 +40,7 @@
           register: shady_uninstall
         - name: Shadily install necessary packages for Python 2 via pip
           ansible.builtin.pip:
+            extra_args: "{{ pip_break_system_packages | default(omit) }}"
             name:
               - platformdirs
               # virtualenv 20.22.0 removed support for creating Python 2
@@ -66,6 +74,7 @@
       # run.
       when: shady_install.changed  # noqa: no-handler
       ansible.builtin.pip:
+        extra_args: "{{ pip_break_system_packages | default(omit) }}"
         name:
           - platformdirs
           - virtualenv
