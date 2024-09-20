@@ -105,15 +105,16 @@ platforms:
     privileged: true
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:rw
-  - cgroupns_mode: host
-    command: /lib/systemd/systemd
-    image: docker.io/cisagov/docker-kali-ansible:latest
-    name: kali-systemd-arm64
-    platform: arm64
-    pre_build_image: true
-    privileged: true
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:rw
+  # Kali cannot build the wheels for HarmJ0y/ImpDump on ARM64.
+  # - cgroupns_mode: host
+  #   command: /lib/systemd/systemd
+  #   image: docker.io/cisagov/docker-kali-ansible:latest
+  #   name: kali-systemd-arm64
+  #   platform: arm64
+  #   pre_build_image: true
+  #   privileged: true
+  #   volumes:
+  #     - /sys/fs/cgroup:/sys/fs/cgroup:rw
   # This Ansible role only supports Debian-based platforms for now.
   # - cgroupns_mode: host
   #   command: /lib/systemd/systemd

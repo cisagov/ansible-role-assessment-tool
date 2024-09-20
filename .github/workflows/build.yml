@@ -203,6 +203,10 @@ jobs:
             scenario: python2
           - platform: debian13-systemd
             scenario: python2
+          # Kali cannot build the wheels for HarmJ0y/ImpDump on ARM64.
+          - architecture: arm64
+            platform: kali-systemd
+            scenario: python2
           # Ubuntu Noble does not offer Python 2.
           - platform: ubuntu-24-systemd
             scenario: python2
