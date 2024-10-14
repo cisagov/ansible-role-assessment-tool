@@ -198,6 +198,10 @@ jobs:
           # https://packages.ubuntu.com/search?keywords=libicu&searchon=names&suite=noble&section=all
           - platform: ubuntu-24-systemd
             scenario: powershell
+          # Buster does not offer a new enough version of Python 3 to
+          # support some of the tools that are installed.
+          - platform: debian10-systemd
+            scenario: python
           # Debian Bookworm and Trixie do not offer Python 2.
           - platform: debian12-systemd
             scenario: python2

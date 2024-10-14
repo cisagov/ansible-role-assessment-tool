@@ -32,7 +32,9 @@ galaxy_info:
     #     - "2023"
     - name: Debian
       versions:
-        - buster
+        # Buster's version of Python is too old to support some of the
+        # tools that are installed.
+        # - buster
         - bullseye
         - bookworm
         - trixie
