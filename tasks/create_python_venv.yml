@@ -13,7 +13,7 @@
         pip_break_system_packages: --break-system-packages
       when:
         - ansible_distribution in ["Debian", "Kali", "Ubuntu"]
-        - ansible_distribution_release not in ["bullseye", "buster", "focal", "jammy"]
+        - ansible_distribution_release not in ["bullseye", "focal", "jammy"]
 
     # The shadiness is necessary because, on modern distributions, pip
     # (correctly) refuses to uninstall Python packages installed via
