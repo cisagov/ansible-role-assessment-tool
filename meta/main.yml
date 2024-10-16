@@ -32,7 +32,12 @@ galaxy_info:
     #     - "2023"
     - name: Debian
       versions:
-        - buster
+        # Buster's version of Python is too old to support some of the
+        # tools that are installed.  Its versions of the Rust and Go
+        # toolchains are also too old to build projects of recent
+        # vintage.  So we're dropping support for this antiquated
+        # platform.
+        # - buster
         - bullseye
         - bookworm
         - trixie

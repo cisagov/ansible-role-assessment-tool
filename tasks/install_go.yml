@@ -1,15 +1,15 @@
 ---
 - name: Install Go toolchain
   block:
-    - name: Install Go toolchain (Debian Buster or Bullseye)
+    - name: Install Go toolchain (Debian Bullseye)
       when:
         - ansible_distribution == "Debian"
-        - ansible_distribution_release in ["buster", "bullseye"]
+        - ansible_distribution_release in ["bullseye"]
       block:
-        - name: Setup backports (Debian Buster or Bullseye)
+        - name: Setup backports (Debian Bullseye)
           ansible.builtin.include_role:
             name: backports
-        - name: Install Go toolchain and Git (Debian Buster or Bullseye)
+        - name: Install Go toolchain and Git (Debian Bullseye)
           ansible.builtin.package:
             default_release: "{{ ansible_distribution_release }}-backports"
             name:
@@ -17,11 +17,11 @@
               - git
               - golang
 
-    - name: Install Go toolchain and Git (not Debian Buster or Bullseye)
+    - name: Install Go toolchain and Git (not Debian Bullseye)
       ansible.builtin.package:
         name:
           # Third-party Go packages are often installed via git
           - git
           - golang
       when:
-        - not (ansible_distribution == "Debian" and ansible_distribution_release in ["buster", "bullseye"])
+        - not (ansible_distribution == "Debian" and ansible_distribution_release in ["bullseye"])

@@ -23,27 +23,6 @@ platforms:
   #   privileged: true
   #   volumes:
   #     - /sys/fs/cgroup:/sys/fs/cgroup:rw
-  # Debian Buster does not have a new enough version of cargo to parse
-  # the cargo.toml file for RustScan.  The buster-backports package
-  # repository no longer exists.
-  # - cgroupns_mode: host
-  #   command: /lib/systemd/systemd
-  #   image: docker.io/geerlingguy/docker-debian10-ansible:latest
-  #   name: debian10-systemd-amd64
-  #   platform: amd64
-  #   pre_build_image: true
-  #   privileged: true
-  #   volumes:
-  #     - /sys/fs/cgroup:/sys/fs/cgroup:rw
-  # - cgroupns_mode: host
-  #   command: /lib/systemd/systemd
-  #   image: docker.io/geerlingguy/docker-debian10-ansible:latest
-  #   name: debian10-systemd-arm64
-  #   platform: arm64
-  #   pre_build_image: true
-  #   privileged: true
-  #   volumes:
-  #     - /sys/fs/cgroup:/sys/fs/cgroup:rw
   # Debian Bullseye has an older version of cargo, which gives a
   # "feature `resolver` is required" error when installing RustScan.
   # There is no newer version in backports.

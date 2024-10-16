@@ -181,10 +181,6 @@ jobs:
           - amd64
           - arm64
         exclude:
-          # Buster does not have a new enough version of the golang
-          # package to build any go projects of recent vintage.
-          - platform: debian10-systemd
-            scenario: go
           # Focal does not have a new enough version of the golang
           # package to build any go projects of recent vintage.
           - platform: ubuntu-20-systemd
@@ -210,11 +206,6 @@ jobs:
           # Ubuntu Noble does not offer Python 2.
           - platform: ubuntu-24-systemd
             scenario: python2
-          # Debian Buster does not have a new enough version of cargo
-          # to parse the cargo.toml file for RustScan.  The
-          # buster-backports package repository no longer exists.
-          - platform: debian10-systemd
-            scenario: rust
           # Debian Bullseye has an older version of cargo, which gives
           # a "feature `resolver` is required" error when installing
           # RustScan.  There is no newer version in backports.
@@ -231,7 +222,6 @@ jobs:
           # This Ansible role only supports Debian-based platforms for
           # now.
           # - amazonlinux2023-systemd
-          - debian10-systemd
           - debian11-systemd
           - debian12-systemd
           - debian13-systemd
