@@ -2,7 +2,6 @@
 
 # Standard Python Libraries
 import os
-import stat
 
 # Third-Party Libraries
 import pytest
@@ -16,7 +15,7 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
 @pytest.mark.parametrize(
     "d",
     [
-        "/tools/ripgen",
+        "/tools/CrackMapExec",
     ],
 )
 def test_directories(host, d):
@@ -37,17 +36,3 @@ def test_directories(host, d):
 def test_packages(host, pkg):
     """Test that appropriate packages were installed."""
     assert host.package(pkg).is_installed
-
-
-@pytest.mark.parametrize(
-    "path",
-    [
-        "/tools/ripgen/target/release/ripgen",
-    ],
-)
-def test_build_product(host, path):
-    """Test that the build product exists."""
-    product = host.file(path)
-    assert product.exists
-    assert product.is_file
-    assert product.mode | stat.S_IXUSR

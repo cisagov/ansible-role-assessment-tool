@@ -2,15 +2,41 @@
 - name: Converge
   hosts: all
   tasks:
-    - name: Install resyncgg/ripgen
-      # We do prepend the name of the role to the role variables, but
-      # Molecule does its own role discovery with inconsistent naming.
-      # This is the reason for the noqa below.
+    # CrackMapExec itself requires that git be installed because some
+    # of its Python dependencies are pulled directly via git.
+    #
+    # The following CrackMapExec dependencies require the specified
+    # packages be installed:
+    # * gssapi requires the krb5-config executable from the
+    #   libkrb5-dev package
+    - name: Install CrackMapExec dependencies
+      ansible.builtin.package:
+        name:
+          - git
+          - libkrb5-dev
+
+    # We do prepend the name of the role to the role variables, but
+    # Molecule does its own role discovery with inconsistent naming.
+    # This is the reason for the noqa below.
+    - name: Install Porchetta-Industries/CrackMapExec
       ansible.builtin.include_role: # noqa var-naming[no-role-prefix]
         name: ansible-role-assessment-tool
+      # The fact that CrackMapExec has Python dependencies that are
+      # pulled directly via git means that this role cannot possibly
+      # pass idempotence.
+      tags:
+        - molecule-idempotence-notest
       vars:
-        assessment_tool_archive_src: https://github.com/resyncgg/ripgen/tarball/main
-        assessment_tool_install_dir: /tools/ripgen
+        assessment_tool_archive_src: >
+          https://github.com/Porchetta-Industries/CrackMapExec/tarball/master
+        # This is not a cargo project, although it requires a Rust
+        # compiler.
+        assessment_tool_cargo_build: false
+        assessment_tool_install_dir: /tools/CrackMapExec
+        assessment_tool_pip_packages:
+          - .
+        # Although this is a Python project, the dependency aardwolf
+        # requires a Rust compiler to build its native code.
         assessment_tool_rust: true
         assessment_tool_unarchive_extra_opts:
           - --strip-components=1
