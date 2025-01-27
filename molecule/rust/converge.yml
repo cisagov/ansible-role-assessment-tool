@@ -29,7 +29,7 @@
       vars:
         assessment_tool_archive_src: >
           https://github.com/Porchetta-Industries/CrackMapExec/tarball/master
-        # This is not a cargo project, although it requires a Rust
+        # This is not a Cargo project, although it requires a Rust
         # compiler.
         assessment_tool_cargo_build: false
         assessment_tool_install_dir: /tools/CrackMapExec
