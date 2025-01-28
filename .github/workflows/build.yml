@@ -222,6 +222,10 @@ jobs:
           # tool.
           - platform: debian12-systemd
             scenario: rust
+          # The build of the lxml wheel currently fails under Python
+          # 3.13, which is the current version of Python on Debian 13.
+          - platform: debian13-systemd
+            scenario: rust
         platform:
           # This Ansible role only supports Debian-based platforms for
           # now.
