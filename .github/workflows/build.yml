@@ -210,22 +210,6 @@ jobs:
           # Ubuntu Noble does not offer Python 2.
           - platform: ubuntu-24-systemd
             scenario: python2
-          # Debian Bullseye has an older version of cargo, which gives
-          # a "feature `resolver` is required" error when installing
-          # RustScan.  There is no newer version in backports.
-          - platform: debian11-systemd
-            scenario: rust
-          # Debian Bookworm has an older version of rustc, which gives
-          # a "package `regex-syntax v0.8.2` cannot be built because
-          # it requires rustc 1.65 or newer, while the currently
-          # active rustc version is 1.63.0" error when installing the
-          # tool.
-          - platform: debian12-systemd
-            scenario: rust
-          # The build of the lxml wheel currently fails under Python
-          # 3.13, which is the current version of Python on Debian 13.
-          - platform: debian13-systemd
-            scenario: rust
         platform:
           # This Ansible role only supports Debian-based platforms for
           # now.
@@ -249,7 +233,12 @@ jobs:
           - powershell
           - python
           - python2
-          - rust
+          # TODO: Porchetta-Industries/CrackMapExec is no longer being
+          # installed in our Kali AMI as of cisagov/kali-packer#182,
+          # so we no longer have an example of a Rust installation.
+          # This testing should be revived when we do have such an
+          # example.  See #64 for more details.
+          # - rust
     steps:
       - uses: GitHubSecurityLab/actions-permissions/monitor@v1
         with:
