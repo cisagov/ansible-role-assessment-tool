@@ -15,6 +15,7 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
 @pytest.mark.parametrize(
     "d",
     [
+        "/tools/Auto-Egress-Assess",
         "/tools/dirsearch",
         "/tools/mitm6",
         "/tools/sqlmap",
@@ -33,6 +34,7 @@ def test_directories(host, d):
 @pytest.mark.parametrize(
     "pkg",
     [
+        "pipenv",
         "virtualenv",
     ],
 )
@@ -44,6 +46,17 @@ def test_packages(host, pkg):
 @pytest.mark.parametrize(
     "d,pkgs",
     [
+        (
+            "/tools/Auto-Egress-Assess/.venv",
+            [
+                "scapy",
+                "paramiko",
+                "dnspython",
+                "dnslib",
+                "pyftpdlib",
+                "impacket",
+            ],
+        ),
         (
             "/tools/dirsearch/.venv",
             [
