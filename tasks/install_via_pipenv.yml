@@ -1,0 +1,15 @@
+---
+- name: Install pipenv via the system package manager
+  ansible.builtin.package:
+    name:
+      - pipenv
+
+- name: Install the tool via pipenv
+  ansible.builtin.command:
+    argv:
+      - pipenv
+      - sync
+    chdir: "{{ assessment_tool_install_dir }}"
+    creates: "{{ (assessment_tool_install_dir, '.venv') | path_join }}"
+  environment:
+    PIPENV_VENV_IN_PROJECT: "1"
