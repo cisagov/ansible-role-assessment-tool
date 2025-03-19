@@ -27,6 +27,9 @@ assessment_tool_mode: 0775
 # User ownership for the install directory
 assessment_tool_owner: root
 
+# If true then the tool should be installed via pipenv
+assessment_tool_pipenv: false
+
 # If this is a PowerShell project then we will install the powershell
 # system package
 assessment_tool_powershell: false
