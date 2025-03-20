@@ -49,11 +49,18 @@ def test_packages(host, pkg):
         (
             "/tools/Auto-Egress-Assess/.venv",
             [
-                "bdist_mpkg",
+                # This package shows up with a different name in pip list
+                # (bdist_mpkg versus bdist-mpkg) depending on the platform on
+                # which it is installed, so we will skip testing for it.
+                # "bdist_mpkg",
                 "chardet",
                 "dnslib",
                 "impacket",
-                "importlib_metadata",
+                # This package shows up with a different name in pip list
+                # (importlib_metadata versus importlib-metadata) depending on
+                # the platform on which it is installed, so we will skip
+                # testing for it.
+                # "importlib_metadata",
                 "paramiko",
                 "progress",
                 "py2app",
