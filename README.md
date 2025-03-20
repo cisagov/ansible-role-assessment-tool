@@ -17,7 +17,7 @@ some language-specific extras:
   [PowerShell](https://en.wikipedia.org/wiki/PowerShell).
 - Python - The `assessment_tool_python` role variable can be set to
   `true` and used in conjunction with the role variables
-  `assessment_tool_pip_packages` or
+  `assessment_tool_pip_packages`, `assessment_tool_pipenv`, or
   `assessment_tool_pip_requirements_file` to install a [Python virtual
   environment](https://docs.python.org/3/glossary.html#term-virtual-environment)
   with the tool's dependencies pre-installed.  To activate the virtual
@@ -74,6 +74,7 @@ None.
 | assessment_tool_install_dir | The directory on the remote host where the tool should be installed. | n/a | Yes |
 | assessment_tool_mode | The mode to assign the directory where this tool is installed. | `0775` | No |
 | assessment_tool_owner | The user that will own the directory where this tool is installed. | `root` | No |
+| assessment_tool_pipenv | A Boolean indicating that the tool should be installed via `pipenv`. | `false` | No |
 | assessment_tool_pip_extra_args | Extra arguments to give to `pip` when installing packages into the Python virtualenv. | [Omitted](https://docs.ansible.com/ansible/latest/user_guide/playbooks_filters.html#making-variables-optional) | No |
 | assessment_tool_pip_packages | A list of `pip` packages to install into the Python virtualenv. | [Omitted](https://docs.ansible.com/ansible/latest/user_guide/playbooks_filters.html#making-variables-optional) | No |
 | assessment_tool_pip_requirements_file | The path to a `pip` requirements file listing dependencies to install into the Python virtualenv. | [Omitted](https://docs.ansible.com/ansible/latest/user_guide/playbooks_filters.html#making-variables-optional) | No |

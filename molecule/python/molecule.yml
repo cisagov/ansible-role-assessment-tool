@@ -150,42 +150,46 @@ platforms:
   #   privileged: true
   #   volumes:
   #     - /sys/fs/cgroup:/sys/fs/cgroup:rw
-  - cgroupns_mode: host
-    command: /lib/systemd/systemd
-    image: docker.io/geerlingguy/docker-ubuntu2004-ansible:latest
-    name: ubuntu-20-systemd-amd64
-    platform: amd64
-    pre_build_image: true
-    privileged: true
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:rw
-  - cgroupns_mode: host
-    command: /lib/systemd/systemd
-    image: docker.io/geerlingguy/docker-ubuntu2004-ansible:latest
-    name: ubuntu-20-systemd-arm64
-    platform: arm64
-    pre_build_image: true
-    privileged: true
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:rw
-  - cgroupns_mode: host
-    command: /lib/systemd/systemd
-    image: docker.io/geerlingguy/docker-ubuntu2204-ansible:latest
-    name: ubuntu-22-systemd-amd64
-    platform: amd64
-    pre_build_image: true
-    privileged: true
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:rw
-  - cgroupns_mode: host
-    command: /lib/systemd/systemd
-    image: docker.io/geerlingguy/docker-ubuntu2204-ansible:latest
-    name: ubuntu-22-systemd-arm64
-    platform: arm64
-    pre_build_image: true
-    privileged: true
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:rw
+  # Ubuntu 20.04 only has Python 3.8, which is too old to support,
+  # e.g., tarrell13/Auto-Egress-Assess.
+  # - cgroupns_mode: host
+  #   command: /lib/systemd/systemd
+  #   image: docker.io/geerlingguy/docker-ubuntu2004-ansible:latest
+  #   name: ubuntu-20-systemd-amd64
+  #   platform: amd64
+  #   pre_build_image: true
+  #   privileged: true
+  #   volumes:
+  #     - /sys/fs/cgroup:/sys/fs/cgroup:rw
+  # - cgroupns_mode: host
+  #   command: /lib/systemd/systemd
+  #   image: docker.io/geerlingguy/docker-ubuntu2004-ansible:latest
+  #   name: ubuntu-20-systemd-arm64
+  #   platform: arm64
+  #   pre_build_image: true
+  #   privileged: true
+  #   volumes:
+  #     - /sys/fs/cgroup:/sys/fs/cgroup:rw
+  # pipenv is broken on Ubuntu 22.04.  See this bug:
+  # https://bugs.launchpad.net/ubuntu/+source/pipenv/+bug/1998280
+  # - cgroupns_mode: host
+  #   command: /lib/systemd/systemd
+  #   image: docker.io/geerlingguy/docker-ubuntu2204-ansible:latest
+  #   name: ubuntu-22-systemd-amd64
+  #   platform: amd64
+  #   pre_build_image: true
+  #   privileged: true
+  #   volumes:
+  #     - /sys/fs/cgroup:/sys/fs/cgroup:rw
+  # - cgroupns_mode: host
+  #   command: /lib/systemd/systemd
+  #   image: docker.io/geerlingguy/docker-ubuntu2204-ansible:latest
+  #   name: ubuntu-22-systemd-arm64
+  #   platform: arm64
+  #   pre_build_image: true
+  #   privileged: true
+  #   volumes:
+  #     - /sys/fs/cgroup:/sys/fs/cgroup:rw
   - cgroupns_mode: host
     command: /lib/systemd/systemd
     image: docker.io/geerlingguy/docker-ubuntu2404-ansible:latest

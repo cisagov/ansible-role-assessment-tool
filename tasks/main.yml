@@ -60,6 +60,10 @@
       when:
         - assessment_tool_pip_packages is defined or assessment_tool_pip_requirements_file is defined
 
+- name: Install tool via pipenv
+  when: assessment_tool_pipenv
+  ansible.builtin.include_tasks: install_via_pipenv.yml
+
 - name: Install PowerShell if necessary
   ansible.builtin.include_tasks: "{{ lookup('first_found', params) }}"
   vars:
