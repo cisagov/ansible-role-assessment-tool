@@ -55,8 +55,12 @@
     extra_args: "{{ assessment_tool_pip_extra_args | default(omit) }}"
     name: "{{ assessment_tool_pip_packages | default(omit) }}"
     requirements: "{{ assessment_tool_pip_requirements_file | default(omit) }}"
-    virtualenv: "{{ assessment_tool_virtualenv_dir | default((assessment_tool_install_dir, '.venv') | path_join) }}"
-    virtualenv_python: "{{ (assessment_tool_python2) | ternary('/usr/bin/python2', omit) }}"
+    virtualenv: >-
+      {{ assessment_tool_virtualenv_dir
+      | default((assessment_tool_install_dir, '.venv')
+      | path_join) }}
+    virtualenv_python: >-
+      {{ (assessment_tool_python2) | ternary('/usr/bin/python2', omit) }}
 
 # Undo the shadiness that was done in order to create a Python 2
 # virtual environment.
