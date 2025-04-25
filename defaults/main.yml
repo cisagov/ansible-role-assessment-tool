@@ -22,7 +22,7 @@ assessment_tool_go_build: true
 assessment_tool_group: root
 
 # Mode for the install directory
-assessment_tool_mode: 0775
+assessment_tool_mode: u=rwx,g=rx,o=rx
 
 # User ownership for the install directory
 assessment_tool_owner: root
