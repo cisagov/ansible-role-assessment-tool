@@ -50,6 +50,10 @@
 
 - name: Install Python and create Python virtualenv
   when:
+    # yamllint/ansible-lint complain about this line being too
+    # long, but there is no clean way to shorten it.
+    #
+    # yamllint disable rule:line-length
     - assessment_tool_python or assessment_tool_python2 or assessment_tool_python_install_development_dependencies or assessment_tool_pip_packages is defined or assessment_tool_pip_requirements_file is defined
   block:
     - name: Install Python if necessary
@@ -58,6 +62,10 @@
     - name: Create a Python virtualenv if necessary
       ansible.builtin.include_tasks: create_python_venv.yml
       when:
+        # yamllint/ansible-lint complain about this line being too
+        # long, but there is no clean way to shorten it.
+        #
+        # yamllint disable rule:line-length
         - assessment_tool_pip_packages is defined or assessment_tool_pip_requirements_file is defined
 
 - name: Install tool via pipenv
@@ -69,7 +77,9 @@
   vars:
     params:
       files:
-        - install_powershell_{{ ansible_distribution }}_{{ ansible_distribution_release }}.yml
+        - >-
+          install_powershell_{{ ansible_distribution }}_{{
+          ansible_distribution_release }}.yml
         - install_powershell_{{ ansible_distribution }}.yml
         - install_powershell_{{ ansible_os_family }}.yml
       paths:

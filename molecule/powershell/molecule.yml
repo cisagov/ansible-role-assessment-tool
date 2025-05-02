@@ -1,8 +1,7 @@
 ---
-dependency:
-  name: galaxy
-driver:
-  name: docker
+# See ../../.config/molecule/config.yml for the Molecule configuration
+# that is shared among all scenarios.  Any values set here will
+# override the values in that file.
 platforms:
   # This Ansible role only supports Debian-based platforms for now.
   # - cgroupns_mode: host
@@ -61,15 +60,17 @@ platforms:
   #   privileged: true
   #   volumes:
   #     - /sys/fs/cgroup:/sys/fs/cgroup:rw
-  - cgroupns_mode: host
-    command: /lib/systemd/systemd
-    image: docker.io/cisagov/docker-debian13-ansible:latest
-    name: debian13-systemd-amd64
-    platform: amd64
-    pre_build_image: true
-    privileged: true
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:rw
+  # The latest official release of PowerShell does not support Debian
+  # Trixie because Trixie has too new a version of libicu (76).
+  # - cgroupns_mode: host
+  #   command: /lib/systemd/systemd
+  #   image: docker.io/cisagov/docker-debian13-ansible:latest
+  #   name: debian13-systemd-amd64
+  #   platform: amd64
+  #   pre_build_image: true
+  #   privileged: true
+  #   volumes:
+  #     - /sys/fs/cgroup:/sys/fs/cgroup:rw
   # - cgroupns_mode: host
   #   command: /lib/systemd/systemd
   #   image: docker.io/cisagov/docker-debian13-ansible:latest
@@ -193,18 +194,15 @@ platforms:
   #   privileged: true
   #   volumes:
   #     - /sys/fs/cgroup:/sys/fs/cgroup:rw
-  # The latest official release of PowerShell does not support Ubuntu
-  # Noble.  It requires libicu <= 72, but Noble only offers libicu 74:
-  # https://packages.ubuntu.com/search?keywords=libicu&searchon=names&suite=noble&section=all
-  # - cgroupns_mode: host
-  #   command: /lib/systemd/systemd
-  #   image: docker.io/geerlingguy/docker-ubuntu2404-ansible:latest
-  #   name: ubuntu-24-systemd-amd64
-  #   platform: amd64
-  #   pre_build_image: true
-  #   privileged: true
-  #   volumes:
-  #     - /sys/fs/cgroup:/sys/fs/cgroup:rw
+  - cgroupns_mode: host
+    command: /lib/systemd/systemd
+    image: docker.io/geerlingguy/docker-ubuntu2404-ansible:latest
+    name: ubuntu-24-systemd-amd64
+    platform: amd64
+    pre_build_image: true
+    privileged: true
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
   # PowerShell does not support ARM64 on Ubuntu.
   # - cgroupns_mode: host
   #   command: /lib/systemd/systemd
@@ -215,16 +213,5 @@ platforms:
   #   privileged: true
   #   volumes:
   #     - /sys/fs/cgroup:/sys/fs/cgroup:rw
-provisioner:
-  name: ansible
-  env:
-    # Molecule used to add ${MOLECULE_PROJECT_DIRECTORY}/. to this
-    # path for us pre-25.2.0, but now we have to do it ourselves.  See
-    # ansible/molecule#4380 and
-    # https://github.com/ansible/molecule/releases/tag/v25.2.0 for
-    # more details.
-    ANSIBLE_ROLES_PATH: ~/.cache/molecule/skeleton-ansible-role/${MOLECULE_SCENARIO_NAME}/roles:${MOLECULE_PROJECT_DIRECTORY}/..:~/.ansible/roles:/usr/share/ansible/roles:/etc/ansible/roles
 scenario:
   name: powershell
-verifier:
-  name: testinfra

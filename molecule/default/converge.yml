@@ -9,8 +9,7 @@
       ansible.builtin.include_role: # noqa var-naming[no-role-prefix]
         name: ansible-role-assessment-tool
       vars:
-        assessment_tool_archive_src: "https://github.com/michenriksen/aquatone/\
-        releases/download/v1.7.0/aquatone_linux_amd64_1.7.0.zip"
+        assessment_tool_archive_src: https://github.com/michenriksen/aquatone/releases/download/v1.7.0/aquatone_linux_amd64_1.7.0.zip
         assessment_tool_install_dir: /tools/aquatone
     - name: Install datapipe
       # We do prepend the name of the role to the role variables, but

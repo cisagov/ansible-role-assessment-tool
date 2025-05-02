@@ -7,7 +7,9 @@
 - name: Install cargo packages
   community.general.cargo:
     name: "{{ assessment_tool_cargo_packages }}"
-    path: "{{ assessment_tool_cargo_install_dir | default(assessment_tool_install_dir) }}"
+    path: >-
+      {{ assessment_tool_cargo_install_dir
+      | default(assessment_tool_install_dir) }}
   when:
     - assessment_tool_cargo_packages is defined
 
@@ -20,6 +22,9 @@
     cmd: >
       /usr/bin/cargo build -Z unstable-options
       --profile={{ assessment_tool_cargo_profile }}
-    creates: "{{ assessment_tool_install_dir }}/target/{{ assessment_tool_cargo_profile }}/{{ assessment_tool_install_dir | basename }}"
+    creates: >-
+      {{ assessment_tool_install_dir }}/target/{{
+      assessment_tool_cargo_profile }}/{{
+      assessment_tool_install_dir | basename }}
   when:
     - assessment_tool_cargo_build

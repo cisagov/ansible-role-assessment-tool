@@ -27,6 +27,10 @@
           - paramiko
         assessment_tool_unarchive_extra_opts:
           - --strip-components=1
+    # yamllint/ansible-lint complain about a long line in this
+    # comment, but there is nothing I can do to shorten it.
+    #
+    # yamllint disable rule:line-length
     # It would be nice to test this case, but pip install . is not
     # idempotent.
     # - name: Install Hasher in a venv
@@ -40,6 +44,7 @@
     #     assessment_tool_install_dir: /tools/Hasher
     #     assessment_tool_pip_packages:
     #       - '.'
+    # yamllint enable rule:line-length
     - name: Install dirsearch and a requirements file in a venv
       # We do prepend the name of the role to the role variables, but
       # Molecule does its own role discovery with inconsistent naming.
@@ -78,8 +83,7 @@
       ansible.builtin.include_role: # noqa var-naming[no-role-prefix]
         name: ansible-role-assessment-tool
       vars:
-        assessment_tool_archive_src: "https://github.com/sqlmapproject/\
-        sqlmap/tarball/master"
+        assessment_tool_archive_src: https://github.com/sqlmapproject/sqlmap/tarball/master
         assessment_tool_install_dir: /tools/sqlmap
         assessment_tool_python: true
         assessment_tool_unarchive_extra_opts:
