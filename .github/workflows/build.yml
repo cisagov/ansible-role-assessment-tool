@@ -257,11 +257,9 @@ jobs:
           - debian13-systemd
           # This Ansible role only supports Debian-based platforms for
           # now.
-          # - fedora39-systemd
-          # - fedora40-systemd
           # - fedora41-systemd
+          # - fedora42-systemd
           - kali-systemd
-          - ubuntu-20-systemd
           - ubuntu-22-systemd
           - ubuntu-24-systemd
         scenario:
