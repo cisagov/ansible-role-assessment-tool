@@ -216,10 +216,6 @@ jobs:
           - amd64
           - arm64
         exclude:
-          # Focal does not have a new enough version of the golang
-          # package to build any go projects of recent vintage.
-          - platform: ubuntu-20-systemd
-            scenario: go
           # PowerShell does not support ARM64 on Debian-based platforms.
           - architecture: arm64
             scenario: powershell
@@ -228,10 +224,6 @@ jobs:
           # libicu (76).
           - platform: debian13-systemd
             scenario: powershell
-          # Ubuntu 20.04 only has Python 3.8, which is too old to
-          # support, e.g., tarrell13/Auto-Egress-Assess.
-          - platform: ubuntu-20-systemd
-            scenario: python
           # pipenv is broken on Ubuntu 22.04.  See this bug:
           # https://bugs.launchpad.net/ubuntu/+source/pipenv/+bug/1998280
           - platform: ubuntu-22-systemd
@@ -257,11 +249,9 @@ jobs:
           - debian13-systemd
           # This Ansible role only supports Debian-based platforms for
           # now.
-          # - fedora39-systemd
-          # - fedora40-systemd
           # - fedora41-systemd
+          # - fedora42-systemd
           - kali-systemd
-          - ubuntu-20-systemd
           - ubuntu-22-systemd
           - ubuntu-24-systemd
         scenario:
