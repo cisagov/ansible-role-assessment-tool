@@ -2,6 +2,18 @@
 - name: Converge
   hosts: all
   tasks:
+    - name: Install Auto-Egress-Assess in a venv via pipenv
+      # We do prepend the name of the role to the role variables, but
+      # Molecule does its own role discovery with inconsistent naming.
+      # This is the reason for the noqa below.
+      ansible.builtin.include_role: # noqa var-naming[no-role-prefix]
+        name: ansible-role-assessment-tool
+      vars:
+        assessment_tool_archive_src: https://github.com/tarrell13/Auto-Egress-Assess/tarball/main
+        assessment_tool_install_dir: /tools/Auto-Egress-Assess
+        assessment_tool_pipenv: true
+        assessment_tool_unarchive_extra_opts:
+          - --strip-components=1
     - name: Install sshenum and a pip package in a venv
       # We do prepend the name of the role to the role variables, but
       # Molecule does its own role discovery with inconsistent naming.
