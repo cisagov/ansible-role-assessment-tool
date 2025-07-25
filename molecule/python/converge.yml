@@ -30,6 +30,7 @@
           - paramiko
         assessment_tool_unarchive_extra_opts:
           - --strip-components=1
+
     # yamllint/ansible-lint complain about a long line in this
     # comment, but there is nothing I can do to shorten it.
     #
@@ -48,6 +49,7 @@
     #     assessment_tool_pip_packages:
     #       - '.'
     # yamllint enable rule:line-length
+
     - name: Install dirsearch and a requirements file in a venv
       # We do prepend the name of the role to the role variables, but
       # Molecule does its own role discovery with inconsistent naming.
@@ -60,6 +62,7 @@
         assessment_tool_pip_requirements_file: requirements.txt
         assessment_tool_unarchive_extra_opts:
           - --strip-components=1
+
     - name: Install the mitm6 package in a venv
       # We do prepend the name of the role to the role variables, but
       # Molecule does its own role discovery with inconsistent naming.
@@ -79,6 +82,7 @@
         # Ubuntu 20:
         # https://packages.ubuntu.com/search?suite=focal&searchon=names&keywords=python3
         - molecule-idempotence-notest
+
     - name: Install the sqlmap tool
       # We do prepend the name of the role to the role variables, but
       # Molecule does its own role discovery with inconsistent naming.
