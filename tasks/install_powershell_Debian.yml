@@ -15,10 +15,11 @@
   when:
     - ansible_distribution_release in ["trixie"]
   block:
-    - name: Install equivs
+    - name: Install equivs and libicu76
       ansible.builtin.package:
         name:
           - equivs
+          - libicu76
 
     - name: Copy dummy control file for libicu74
       ansible.builtin.copy:
