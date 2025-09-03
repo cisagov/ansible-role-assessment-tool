@@ -1,0 +1,13 @@
+Section: misc
+Priority: optional
+Standards-Version: 4.1.4
+
+Package: libicu74
+Version: 74
+Provides: libicu74
+Architecture: all
+Description: Dummy libicu74 package to satisfy Powershell dependency on Debian 13 (libicu76)
+ This is a dummy package that provides no files.  It exists only to satisfy
+ the Powershell package dependency on libicu74, allowing installation on
+ Debian 13 which uses libicu76.  See
+ https://github.com/PowerShell/PowerShell/issues/25865 for more information.

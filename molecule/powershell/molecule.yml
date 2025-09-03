@@ -60,17 +60,16 @@ platforms:
   #   privileged: true
   #   volumes:
   #     - /sys/fs/cgroup:/sys/fs/cgroup:rw
-  # The latest official release of PowerShell does not support Debian
-  # Trixie because Trixie has too new a version of libicu (76).
-  # - cgroupns_mode: host
-  #   command: /lib/systemd/systemd
-  #   image: docker.io/cisagov/docker-debian13-ansible:latest
-  #   name: debian13-systemd-amd64
-  #   platform: amd64
-  #   pre_build_image: true
-  #   privileged: true
-  #   volumes:
-  #     - /sys/fs/cgroup:/sys/fs/cgroup:rw
+  - cgroupns_mode: host
+    command: /lib/systemd/systemd
+    image: docker.io/cisagov/docker-debian13-ansible:latest
+    name: debian13-systemd-amd64
+    platform: amd64
+    pre_build_image: true
+    privileged: true
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
+  # PowerShell does not support ARM64 on Debian.
   # - cgroupns_mode: host
   #   command: /lib/systemd/systemd
   #   image: docker.io/cisagov/docker-debian13-ansible:latest
