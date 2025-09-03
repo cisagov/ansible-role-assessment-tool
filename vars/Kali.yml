@@ -1,3 +1,7 @@
 ---
+# A list of packages to be installed for mono
+mono_packages:
+  - mono-devel
+
 # The name of the package to install for PowerShell
 powershell_package_name: powershell

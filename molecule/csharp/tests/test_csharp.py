@@ -27,12 +27,15 @@ def test_directories(host, d):
     assert host.run_expect([0], f'[ -n "$(ls --almost-all {d})" ]')
 
 
-@pytest.mark.parametrize(
-    "pkg",
-    [
-        "mono-complete",
-    ],
-)
-def test_packages(host, pkg):
+def test_packages(host):
     """Test that appropriate packages were installed."""
-    assert host.package(pkg).is_installed
+    distribution = host.system_info.distribution
+    pkg = None
+    if distribution in ["debian", "ubuntu"]:
+        pkg = "mono-complete"
+    elif distribution in ["kali"]:
+        pkg = "mono-devel"
+    else:
+        assert False, f"Distribution {distribution} not supported."
+
+    assert host.package(pkg).is_installed, f"Package {pkg} not installed."
