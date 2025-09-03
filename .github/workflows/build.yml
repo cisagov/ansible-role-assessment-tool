@@ -219,11 +219,6 @@ jobs:
           # PowerShell does not support ARM64 on Debian-based platforms.
           - architecture: arm64
             scenario: powershell
-          # The latest official release of PowerShell does not support
-          # Debian Trixie because Trixie has too new a version of
-          # libicu (76).
-          - platform: debian13-systemd
-            scenario: powershell
           # pipenv is broken on Ubuntu 22.04.  See this bug:
           # https://bugs.launchpad.net/ubuntu/+source/pipenv/+bug/1998280
           - platform: ubuntu-22-systemd
