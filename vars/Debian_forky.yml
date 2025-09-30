@@ -1,0 +1,10 @@
+---
+# A list of packages to be installed for mono
+mono_packages:
+  - mono-devel
+
+# The name of the package to install for PowerShell
+powershell_package_name: >-
+  https://github.com/PowerShell/PowerShell/releases/download/v{{
+  assessment_tool_powershell_version }}/powershell_{{
+  assessment_tool_powershell_version }}-1.deb_amd64.deb
