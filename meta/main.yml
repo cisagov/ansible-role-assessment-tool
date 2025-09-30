@@ -41,6 +41,7 @@ galaxy_info:
         - bullseye
         - bookworm
         - trixie
+        - forky
     # This Ansible role only supports Debian-based platforms for now.
     # - name: Fedora
     #   versions:
