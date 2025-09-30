@@ -223,10 +223,12 @@ jobs:
           # https://bugs.launchpad.net/ubuntu/+source/pipenv/+bug/1998280
           - platform: ubuntu-22-systemd
             scenario: python
-          # Debian Bookworm and Trixie do not offer Python 2.
+          # Debian Bookworm and later do not offer Python 2.
           - platform: debian12-systemd
             scenario: python2
           - platform: debian13-systemd
+            scenario: python2
+          - platform: debian14-systemd
             scenario: python2
           # Kali cannot build the wheels for HarmJ0y/ImpDump on ARM64.
           - architecture: arm64
