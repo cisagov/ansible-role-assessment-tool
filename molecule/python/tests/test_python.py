@@ -78,7 +78,6 @@ def test_packages(host, pkg):
                 "certifi",
                 "cffi",
                 "cryptography",
-                "MarkupSafe",
                 "urllib3",
             ],
         ),

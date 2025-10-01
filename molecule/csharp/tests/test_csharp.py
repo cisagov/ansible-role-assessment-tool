@@ -30,9 +30,13 @@ def test_directories(host, d):
 def test_packages(host):
     """Test that appropriate packages were installed."""
     distribution = host.system_info.distribution
+    codename = host.system_info.codename
     pkg = None
     if distribution in ["debian", "ubuntu"]:
-        pkg = "mono-complete"
+        if codename in ["forky"]:
+            pkg = "mono-devel"
+        else:
+            pkg = "mono-complete"
     elif distribution in ["kali"]:
         pkg = "mono-devel"
     else:

@@ -11,9 +11,11 @@
 # install PowerShell/PowerShell.  When run, PowerShell/PowerShell will
 # use the libicu76 dependency installed from the official Debian
 # Trixie package repository.
-- name: Build and install equivs dummy package for libicu74 for Trixie
+- name: >-
+    Build and install equivs dummy package for libicu74 for Trixie and
+    later
   when:
-    - ansible_distribution_release in ["trixie"]
+    - ansible_distribution_release in ["trixie", "forky"]
   block:
     - name: Install equivs and libicu76
       ansible.builtin.package:
