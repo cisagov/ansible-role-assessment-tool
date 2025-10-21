@@ -30,14 +30,14 @@ assessment_tool_owner: root
 # If true then the tool should be installed via pipenv
 assessment_tool_pipenv: false
 
-# If this is a PowerShell project then we will install the powershell
+# If this is a PowerShell project then we will install a PowerShell
 # system package
 assessment_tool_powershell: false
 
-# The version of the powershell system package to install.  Note that
+# The version of the PowerShell system package to install.  Note that
 # this version is only applied to installations where the package is
-# downloaded from https://github.com/PowerShell/PowerShell; Kali
-# Linux, for instance, offers its own powershell system package.
+# downloaded from https://github.com/PowerShell/PowerShell; Kali Linux
+# offers its own PowerShell system package.
 assessment_tool_powershell_version: 7.5.4
 
 # A Boolean that can indicate that Python is to be installed and a
