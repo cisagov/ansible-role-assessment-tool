@@ -31,7 +31,7 @@ assessment_tool_owner: root
 assessment_tool_pipenv: false
 
 # If this is a PowerShell project then we will install a PowerShell
-# system package
+# system package.
 assessment_tool_powershell: false
 
 # The version of the PowerShell system package to install.  Note that
