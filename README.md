@@ -1,6 +1,7 @@
 # ansible-role-assessment-tool #
 
 [![GitHub Build Status](https://github.com/cisagov/ansible-role-assessment-tool/workflows/build/badge.svg)](https://github.com/cisagov/ansible-role-assessment-tool/actions)
+[![License](https://img.shields.io/github/license/cisagov/ansible-role-assessment-tool)](https://spdx.org/licenses/)
 [![CodeQL](https://github.com/cisagov/ansible-role-assessment-tool/workflows/CodeQL/badge.svg)](https://github.com/cisagov/ansible-role-assessment-tool/actions/workflows/codeql-analysis.yml)
 
 This Ansible role is used to install assessment tools to Debian,
