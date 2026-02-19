@@ -16,7 +16,10 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
     "d",
     [
         "/tools/Auto-Egress-Assess",
-        "/tools/dirsearch",
+        # This tool can no longer be installed on Bullseye because it
+        # pins mysql-connector-python to version 9.5.0, which requires
+        # Python 3.10 or later.  Bullseye only provides Python 3.9.
+        # "/tools/dirsearch",
         "/tools/mitm6",
         "/tools/sqlmap",
         "/tools/sshenum",
@@ -72,15 +75,18 @@ def test_packages(host, pkg):
                 "scapy",
             ],
         ),
-        (
-            "/tools/dirsearch/.venv",
-            [
-                "certifi",
-                "cffi",
-                "cryptography",
-                "urllib3",
-            ],
-        ),
+        # This tool can no longer be installed on Bullseye because it
+        # pins mysql-connector-python to version 9.5.0, which requires
+        # Python 3.10 or later.  Bullseye only provides Python 3.9.
+        # (
+        #     "/tools/dirsearch/.venv",
+        #     [
+        #         "certifi",
+        #         "cffi",
+        #         "cryptography",
+        #         "urllib3",
+        #     ],
+        # ),
         ("/tools/mitm6/.venv", ["mitm6"]),
         # There is no venv for sqlmap since it has no dependencies.
         # ("/tools/sqlmap/.venv", []),
