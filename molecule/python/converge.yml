@@ -69,18 +69,24 @@
     #       - '.'
     # yamllint enable rule:line-length
 
-    - name: Install dirsearch and a requirements file in a venv
-      # We do prepend the name of the role to the role variables, but
-      # Molecule does its own role discovery with inconsistent naming.
-      # This is the reason for the noqa below.
-      ansible.builtin.include_role: # noqa var-naming[no-role-prefix]
-        name: ansible-role-assessment-tool
-      vars:
-        assessment_tool_archive_src: https://github.com/maurosoria/dirsearch/tarball/master
-        assessment_tool_install_dir: /tools/dirsearch
-        assessment_tool_pip_requirements_file: requirements.txt
-        assessment_tool_unarchive_extra_opts:
-          - --strip-components=1
+    # This tool can no longer be installed on Bullseye because it pins
+    # mysql-connector-python to version 9.5.0, which requires Python
+    # 3.10 or later.  Bullseye only provides Python 3.9.
+    #
+    # TODO - Revert this change.  See #78 for more details.
+    # - name: Install dirsearch and a requirements file in a venv
+    #   # We do prepend the name of the role to the role variables, but
+    #   # Molecule does its own role discovery with inconsistent naming.
+    #   # This is the reason for the noqa below.
+    #   ansible.builtin.include_role: # noqa var-naming[no-role-prefix]
+    #     name: ansible-role-assessment-tool
+    #   vars:
+    #     assessment_tool_archive_src: >-
+    #       https://github.com/maurosoria/dirsearch/tarball/master
+    #     assessment_tool_install_dir: /tools/dirsearch
+    #     assessment_tool_pip_requirements_file: requirements.txt
+    #     assessment_tool_unarchive_extra_opts:
+    #       - --strip-components=1
 
     - name: Install the mitm6 package in a venv
       # We do prepend the name of the role to the role variables, but
