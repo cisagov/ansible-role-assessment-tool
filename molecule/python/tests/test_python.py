@@ -19,6 +19,8 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
         # This tool can no longer be installed on Bullseye because it
         # pins mysql-connector-python to version 9.5.0, which requires
         # Python 3.10 or later.  Bullseye only provides Python 3.9.
+        #
+        # TODO - Revert this change.  See #78 for more details.
         # "/tools/dirsearch",
         "/tools/mitm6",
         "/tools/sqlmap",
@@ -78,6 +80,8 @@ def test_packages(host, pkg):
         # This tool can no longer be installed on Bullseye because it
         # pins mysql-connector-python to version 9.5.0, which requires
         # Python 3.10 or later.  Bullseye only provides Python 3.9.
+        #
+        # TODO - Revert this change.  See #78 for more details.
         # (
         #     "/tools/dirsearch/.venv",
         #     [
