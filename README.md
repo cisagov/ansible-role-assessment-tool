@@ -57,7 +57,8 @@ therefore avoids this issue altogether.
 
 ## Requirements ##
 
-None.
+- Requires the `community.general` Ansible collection since
+  `tasks/install_rust.yml` uses `community.general.cargo`.
 
 ## Role Variables ##
 
@@ -97,8 +98,6 @@ None.
   Pip is required to create a virtual environment for Python-based projects.
 - [cisagov/ansible-role-python](https://github.com/cisagov/ansible-role-python):
   Python is required to create a virtual environment for Python-based projects.
-- Depends on the `community.general` Ansible collection since
-  `tasks/install_rust.yml` uses `community.general.cargo`.
 
 ## Installation ##
 
