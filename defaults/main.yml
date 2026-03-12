@@ -38,7 +38,7 @@ assessment_tool_powershell: false
 # this version is only applied to installations where the package is
 # downloaded from https://github.com/PowerShell/PowerShell; Kali Linux
 # offers its own PowerShell system package.
-assessment_tool_powershell_version: 7.5.4
+assessment_tool_powershell_version: 7.5.5
 
 # A Boolean that can indicate that Python is to be installed and a
 # pristine Python virtual environment created.  If any of
