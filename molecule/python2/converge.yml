@@ -15,6 +15,11 @@
         assessment_tool_unarchive_extra_opts:
           - --strip-components=1
 
+    - name: Install prerequisites for ImpDump
+      ansible.builtin.package:
+        name:
+          - libcrypt-dev
+
     - name: Install the ImpDump package in a venv
       # We do prepend the name of the role to the role variables, but
       # Molecule does its own role discovery with inconsistent naming.
