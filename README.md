@@ -57,7 +57,8 @@ therefore avoids this issue altogether.
 
 ## Requirements ##
 
-None.
+- Requires the `community.general` Ansible collection since
+  `tasks/install_rust.yml` uses `community.general.cargo`.
 
 ## Role Variables ##
 
