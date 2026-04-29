@@ -38,13 +38,15 @@ assessment_tool_powershell: false
 # this version is only applied to installations where the package is
 # downloaded from https://github.com/PowerShell/PowerShell; Kali Linux
 # offers its own PowerShell system package.
-assessment_tool_powershell_version: 7.6.0
+assessment_tool_powershell_version: 7.6.1
 
 # A Boolean that can indicate that Python is to be installed and a
-# pristine Python virtual environment created.  If any of
+# pristine Python virtual environment created.  If either
 # assessment_tool_pip_packages or
-# assessment_tool_pip_requirements_file or assessment_tool_python2 is
-# defined then Python will be installed anyway and a Python virtual
+# assessment_tool_pip_requirements_file is defined, or if either
+# assessment_tool_python2 or
+# assessmemt_tool_python_install_development_dependencies is `true`,
+# then Python will be installed anyway and a Python virtual
 # environment created, but this variable is occasionally useful, e.g.,
 # when installing a tool that lacks any Python packaging and has no
 # dependencies.
