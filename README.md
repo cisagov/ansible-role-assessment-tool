@@ -63,7 +63,7 @@ therefore avoids this issue altogether.
 ## Role Variables ##
 
 | Variable | Description | Default | Required |
-|----------|-------------|---------|----------|
+| -------- | ----------- | ------- | -------- |
 | assessment_tool_archive_src | A URL or a file path on the remote host pointing to an archive (tar or zip) containing the tool.  If left undefined then no archive will be installed, but the install directory will still be created and language-specific tooling will still be installed. | n/a | No |
 | assessment_tool_cargo_build | A Boolean indicating whether or not the Rust tool should be built using `cargo`; if so then we will run `cargo build` from the project's root directory. | `true` | No |
 | assessment_tool_cargo_install_dir | The directory where the `cargo` packages should be installed.  Only read if  `assessment_tool_cargo_packages` is present. | `install_dir` | No |
