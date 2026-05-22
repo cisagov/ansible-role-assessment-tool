@@ -33,7 +33,7 @@ def test_packages(host):
     codename = host.system_info.codename
     pkg = None
     if distribution in ["debian", "ubuntu"]:
-        if codename in ["forky"]:
+        if codename in ["forky", "resolute"]:
             pkg = "mono-devel"
         else:
             pkg = "mono-complete"
