@@ -40,6 +40,6 @@ def test_packages(host):
     elif distribution in ["kali"]:
         pkg = "mono-devel"
     else:
-        pytest.fail(f"Distribution {distribution} not supported.")
+        raise AssertionError(f"Distribution {distribution} not supported.")
 
     assert host.package(pkg).is_installed, f"Package {pkg} not installed."
