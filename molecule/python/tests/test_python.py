@@ -15,7 +15,13 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
 @pytest.mark.parametrize(
     "d",
     [
-        "/tools/Auto-Egress-Assess",
+        # TODO - This test is currently allowed to fail for Ubuntu
+        # Resolute, but that behavior should be reverted when possible.
+        # See #84 for more details.
+        pytest.param(
+            "/tools/Auto-Egress-Assess",
+            marks=pytest.mark.xfail(reason="Ubuntu Resolute cannot install this tool."),
+        ),
         # This tool can no longer be installed on Bullseye because it
         # pins mysql-connector-python to version 9.5.0, which requires
         # Python 3.10 or later.  Bullseye only provides Python 3.9.
@@ -39,7 +45,18 @@ def test_directories(host, d):
 @pytest.mark.parametrize(
     "pkg",
     [
-        "pipenv",
+        # TODO - This test is currently allowed to fail for Ubuntu
+        # Resolute, but that behavior should be reverted when possible.
+        # See #84 for more details.
+        pytest.param(
+            "pipenv",
+            marks=pytest.mark.xfail(
+                reason=(
+                    "This package isn't installed on Ubuntu Resolute because "
+                    "Auto-Egress-Assess is not installed there."
+                )
+            ),
+        ),
         "virtualenv",
     ],
 )
@@ -49,9 +66,12 @@ def test_packages(host, pkg):
 
 
 @pytest.mark.parametrize(
-    "d,pkgs",
+    "d, pkgs",
     [
-        (
+        # TODO - This test is currently allowed to fail for Ubuntu
+        # Resolute, but that behavior should be reverted when possible.
+        # See #84 for more details.
+        pytest.param(
             "/tools/Auto-Egress-Assess/.venv",
             [
                 # This package shows up with a different name in pip list
@@ -76,6 +96,7 @@ def test_packages(host, pkg):
                 "requests",
                 "scapy",
             ],
+            marks=pytest.mark.xfail(reason="Ubuntu Resolute cannot install this tool."),
         ),
         # This tool can no longer be installed on Bullseye because it
         # pins mysql-connector-python to version 9.5.0, which requires
@@ -105,4 +126,4 @@ def test_venvs(host, d, pkgs):
     # Make sure that the virtualenv contains the expected packages
     installed_pkgs = host.pip.get_packages(pip_path=os.path.join(d, "bin", "pip"))
     for pkg in pkgs:
-        assert pkg in installed_pkgs
+        assert pkg in installed_pkgs, f"Expected package {pkg} not installed in {d}."
