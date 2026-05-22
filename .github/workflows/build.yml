@@ -241,8 +241,10 @@ jobs:
           - architecture: arm64
             platform: kali-systemd
             scenario: python2
-          # Ubuntu Noble does not offer Python 2.
+          # Ubuntu Noble and later do not offer Python 2.
           - platform: ubuntu-24-systemd
+            scenario: python2
+          - platform: ubuntu-26-systemd
             scenario: python2
         platform:
           # This Ansible role only supports Debian-based platforms for
