@@ -27,9 +27,28 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
         "/tools/sshenum",
     ],
 )
-def test_directories(host, d):
+def test_directories(host, d, request):
     """Test that appropriate directories were created."""
     directory = host.file(d)
+
+    # TODO - This test is currently allowed to fail for Ubuntu Resolute,
+    # but that behavior should be reverted when possible.  See #84 for
+    # more details.
+    #
+    # Note that we must add the xfail marker for this test here instead
+    # of in the decorator since the condition under which it should be
+    # added requires access to the host fixture.
+    if (
+        host.system_info.distribution == "ubuntu"
+        and host.system_info.codename == "resolute"
+        and d == "/tools/Auto-Egress-Assess"
+    ):
+        request.node.add_marker(
+            pytest.mark.xfail(
+                reason="Ubuntu Resolute cannot currently install Auto-Egress-Assess."
+            )
+        )
+
     assert directory.exists
     assert directory.is_directory
     # Make sure that the directory is not empty
@@ -43,13 +62,34 @@ def test_directories(host, d):
         "virtualenv",
     ],
 )
-def test_packages(host, pkg):
+def test_packages(host, pkg, request):
     """Test that appropriate packages were installed."""
+    # TODO - This test is currently allowed to fail for Ubuntu
+    # Resolute, but that behavior should be reverted when possible.
+    # See #84 for more details.
+    #
+    # Note that we must add the xfail marker for this test here instead
+    # of in the decorator since the condition under which it should be
+    # added requires access to the host fixture.
+    if (
+        host.system_info.distribution == "ubuntu"
+        and host.system_info.codename == "resolute"
+        and pkg == "pipenv"
+    ):
+        request.node.add_marker(
+            pytest.mark.xfail(
+                reason=(
+                    "This package isn't installed on Ubuntu Resolute because "
+                    "Auto-Egress-Assess cannot be installed there."
+                )
+            )
+        )
+
     assert host.package(pkg).is_installed
 
 
 @pytest.mark.parametrize(
-    "d,pkgs",
+    "d, pkgs",
     [
         (
             "/tools/Auto-Egress-Assess/.venv",
@@ -97,12 +137,31 @@ def test_packages(host, pkg):
         ("/tools/sshenum/.venv", ["paramiko"]),
     ],
 )
-def test_venvs(host, d, pkgs):
+def test_venvs(host, d, pkgs, request):
     """Test that appropriate Python virtualenvs were created."""
     directory = host.file(d)
+
+    # TODO - This test is currently allowed to fail for Ubuntu
+    # Resolute, but that behavior should be reverted when possible.
+    # See #84 for more details.
+    #
+    # Note that we must add the xfail marker for this test here instead
+    # of in the decorator since the condition under which it should be
+    # added requires access to the host fixture.
+    if (
+        host.system_info.distribution == "ubuntu"
+        and host.system_info.codename == "resolute"
+        and d == "/tools/Auto-Egress-Assess/.venv"
+    ):
+        request.node.add_marker(
+            pytest.mark.xfail(
+                reason="Ubuntu Resolute cannot currently install Auto-Egress-Assess."
+            )
+        )
+
     assert directory.exists
     assert directory.is_directory
     # Make sure that the virtualenv contains the expected packages
     installed_pkgs = host.pip.get_packages(pip_path=os.path.join(d, "bin", "pip"))
     for pkg in pkgs:
-        assert pkg in installed_pkgs
+        assert pkg in installed_pkgs, f"Expected package {pkg} not installed in {d}."

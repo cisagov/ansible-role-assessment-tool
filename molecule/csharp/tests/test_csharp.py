@@ -33,13 +33,13 @@ def test_packages(host):
     codename = host.system_info.codename
     pkg = None
     if distribution in ["debian", "ubuntu"]:
-        if codename in ["forky"]:
+        if codename in ["forky", "resolute"]:
             pkg = "mono-devel"
         else:
             pkg = "mono-complete"
     elif distribution in ["kali"]:
         pkg = "mono-devel"
     else:
-        pytest.fail(f"Distribution {distribution} not supported.")
+        raise AssertionError(f"Distribution {distribution} not supported.")
 
     assert host.package(pkg).is_installed, f"Package {pkg} not installed."

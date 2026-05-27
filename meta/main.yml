@@ -54,5 +54,6 @@ galaxy_info:
       versions:
         - jammy
         - noble
+        - resolute
   role_name: assessment_tool
   standalone: true
