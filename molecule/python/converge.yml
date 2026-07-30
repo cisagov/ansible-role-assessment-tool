@@ -2,45 +2,6 @@
 - name: Converge
   hosts: all
   tasks:
-    - name: Install Auto-Egress-Assess in a venv via pipenv
-      # Ubuntu Resolute (26.04) only has Python 3.14 and therefore
-      # cannot support this project.  See #84 for more details.
-      when:
-        - ansible_python_version is ansible.builtin.version("3.14", "<")
-      block:
-        # After version 1.0.0 this tool requires Python 3.13 or newer
-        - name: >-
-            Determine the version of Auto-Egress-Assess that should be
-            installed
-          block:
-            - name: Set the version for Python<3.13
-              ansible.builtin.set_fact:
-                aea_version: v1.0.0
-              when:
-                - ansible_python_version is ansible.builtin.version("3.13", "<")
-
-            - name: Set the version for Python>=3.13,<3.14
-              ansible.builtin.set_fact:
-                aea_version: main
-              when:
-                - ansible_python_version is ansible.builtin.version("3.13", ">=")
-                - ansible_python_version is ansible.builtin.version("3.14", "<")
-
-        - name: Install Auto-Egress-Assess in a venv via pipenv
-          # We do prepend the name of the role to the role variables,
-          # but Molecule does its own role discovery with inconsistent
-          # naming.  This is the reason for the noqa below.
-          ansible.builtin.include_role: # noqa var-naming[no-role-prefix]
-            name: ansible-role-assessment-tool
-          vars:
-            assessment_tool_archive_src: >-
-              https://github.com/tarrell13/Auto-Egress-Assess/tarball/{{
-              aea_version }}
-            assessment_tool_install_dir: /tools/Auto-Egress-Assess
-            assessment_tool_pipenv: true
-            assessment_tool_unarchive_extra_opts:
-              - --strip-components=1
-
     - name: Install sshenum and a pip package in a venv
       # We do prepend the name of the role to the role variables, but
       # Molecule does its own role discovery with inconsistent naming.
