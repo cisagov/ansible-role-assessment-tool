@@ -7,16 +7,21 @@
       - unzip
       - zip
 
-- name: Install the tool from {{ assessment_tool_archive_src }}
+- name: Download the tool archive from {{ assessment_tool_archive_src }}
+  ansible.builtin.get_url:
+    dest: "{{ assessment_tool_install_dir }}"
+    headers: >-
+      {{ assessment_tool_custom_headers
+      if assessment_tool_custom_headers is defined
+      else omit }}
+    mode: u=rw,g=rw,o=rw
+    url: "{{ assessment_tool_archive_src }}"
+  register: download
+
+- name: Unarchive the tool
   ansible.builtin.unarchive:
     dest: "{{ assessment_tool_install_dir }}"
     extra_opts: "{{ assessment_tool_unarchive_extra_opts | default(omit) }}"
     group: "{{ assessment_tool_group }}"
     remote_src: true
-    src: "{{ assessment_tool_archive_src }}"
-  tags:
-    # The Ubuntu Focal version of the golang package is pretty old,
-    # and there is no newer version in backports.  When we build a
-    # project via go build, that version modifies or adds some files
-    # that cause this task to fail when idempotence runs.
-    - molecule-idempotence-notest
+    src: "{{ download.dest }}"
