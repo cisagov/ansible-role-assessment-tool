@@ -7,16 +7,42 @@
       - unzip
       - zip
 
+# I can't get "{{ assessment_tool_custom_headers | default(omit) }}"
+# to stop turning the dict into a string; hence, I am using this
+# repetitive code instead.  Using a newer version of Ansible _may_ fix
+# the problem.
 - name: Download the tool archive from {{ assessment_tool_archive_src }}
-  ansible.builtin.get_url:
-    dest: "{{ assessment_tool_install_dir }}"
-    headers: >-
-      {{ assessment_tool_custom_headers
-      if assessment_tool_custom_headers is defined
-      else omit }}
-    mode: u=rw,g=rw,o=rw
-    url: "{{ assessment_tool_archive_src }}"
-  register: download
+  block:
+    - name: >-
+        Download the tool archive from {{ assessment_tool_archive_src }}
+        with custom headers
+      ansible.builtin.get_url:
+        dest: "{{ assessment_tool_install_dir }}"
+        # The YAML round trip is necessary becase otherwise Ansible
+        # insists on turning the dict role var into a string.  Using a
+        # newer version of Ansible _may_ fix the problem.
+        headers: "{{ assessment_tool_custom_headers | to_yaml | from_yaml }}"
+        mode: u=rw,g=rw,o=rw
+        url: "{{ assessment_tool_archive_src }}"
+      register: download_with_headers
+      when: assessment_tool_custom_headers is defined
+
+    - name: >-
+        Download the tool archive from {{ assessment_tool_archive_src }}
+        without custom headers
+      ansible.builtin.get_url:
+        dest: "{{ assessment_tool_install_dir }}"
+        mode: u=rw,g=rw,o=rw
+        url: "{{ assessment_tool_archive_src }}"
+      register: download_without_headers
+      when: assessment_tool_custom_headers is not defined
+
+    - name: Assign correct register var
+      ansible.builtin.set_fact:
+        download: >-
+          {{ download_with_headers
+          if assessment_tool_custom_headers is defined
+          else download_without_headers }}
 
 - name: Unarchive the tool
   ansible.builtin.unarchive:
