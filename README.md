@@ -70,6 +70,7 @@ therefore avoids this issue altogether.
 | assessment_tool_cargo_packages | A list of `cargo` packages to install. | [Omitted](https://docs.ansible.com/ansible/latest/user_guide/playbooks_filters.html#making-variables-optional) | No |
 | assessment_tool_cargo_profile | The `cargo` profile to use when building the project. | `release` | No |
 | assessment_tool_csharp | A Boolean indicating whether or not the tool is written in C#; if it is then we will install the mono C# toolchain. | `false` | No |
+| assessment_tool_custom_headers | A dictionary of custom header names and values to include, e.g., for authentication purposes when downloading a tarball for a private repository. | [Omitted](https://docs.ansible.com/ansible/latest/user_guide/playbooks_filters.html#making-variables-optional) | No |
 | assessment_tool_go | A Boolean indicating whether or not the tool is written in Go; if it is then we will install the Go development toolchain. | `false` | No |
 | assessment_tool_go_build | A Boolean indicating whether or not the Go tool should be built; if so then we will run `go build` from the project's root directory. | `true` | No |
 | assessment_tool_group | The group that will own the directory where this tool is installed. | `root` | No |
