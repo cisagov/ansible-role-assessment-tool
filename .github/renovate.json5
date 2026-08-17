@@ -1,0 +1,22 @@
+{
+  $schema: "https://docs.renovatebot.com/renovate-schema.json",
+  // Dependabot keeps handling github-actions + pip; Renovate only manages the
+  // PowerShell pin, so restrict it to the custom manager to avoid overlap.
+  customManagers: [
+    {
+      customType: "regex",
+      datasourceTemplate: "github-releases",
+      depNameTemplate: "PowerShell/PowerShell",
+      managerFilePatterns: ["/^defaults/main\\.yml$/", "/^README\\.md$/"],
+      matchStrings: [
+        "powershell_version:\\s*(?<currentValue>\\S+)", // defaults/main.yml
+        "powershell\\\\?_version[^`]*`(?<currentValue>[^`]+)`", // README table cell
+      ],
+      versioningTemplate: "semver-coerced", // handles the leading `v`
+    },
+  ],
+  dependencyDashboard: true,
+  enabledManagers: ["custom.regex"],
+  extends: ["config:recommended"],
+  labels: ["dependencies"],
+}
