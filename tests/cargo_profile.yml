@@ -1,0 +1,64 @@
+---
+- name: Create fixture source directory
+  ansible.builtin.file:
+    path: "{{ cargo_test_directory.path }}/fixture/src"
+    state: directory
+    mode: "0700"
+
+- name: Write a dependency-free Cargo manifest
+  ansible.builtin.copy:
+    dest: "{{ cargo_test_directory.path }}/fixture/Cargo.toml"
+    mode: "0600"
+    content: |
+      [package]
+      name = "fixture"
+      version = "0.1.0"
+      edition = "2018"
+      {% if cargo_test_profile == 'audit' %}
+      [profile.audit]
+      inherits = "release"
+      opt-level = 1
+      {% endif %}
+
+- name: Write fixture source
+  ansible.builtin.copy:
+    dest: "{{ cargo_test_directory.path }}/fixture/src/main.rs"
+    mode: "0600"
+    content: |
+      fn main() { println!("cargo fixture"); }
+
+- name: Build the fixture with the role's Rust tasks
+  ansible.builtin.include_tasks: ../tasks/install_rust.yml
+  vars:
+    assessment_tool_install_dir: "{{ cargo_test_directory.path }}/fixture"
+    assessment_tool_cargo_profile: "{{ cargo_test_profile }}"
+
+- name: Run the compiled fixture
+  ansible.builtin.command:
+    argv:
+      - >-
+        {{ cargo_test_directory.path }}/fixture/target/{{
+        'debug' if cargo_test_profile in ['dev', 'test'] else
+        'release' if cargo_test_profile == 'bench' else cargo_test_profile }}/fixture
+  changed_when: false
+  register: cargo_test_result
+
+- name: Verify fixture output
+  ansible.builtin.assert:
+    that: cargo_test_result.stdout == 'cargo fixture'
+
+- name: Remove manifest to verify the existing binary skips rebuilding
+  ansible.builtin.file:
+    path: "{{ cargo_test_directory.path }}/fixture/Cargo.toml"
+    state: absent
+
+- name: Repeat the build with the existing binary and no manifest
+  ansible.builtin.include_tasks: ../tasks/install_rust.yml
+  vars:
+    assessment_tool_install_dir: "{{ cargo_test_directory.path }}/fixture"
+    assessment_tool_cargo_profile: "{{ cargo_test_profile }}"
+
+- name: Remove build artifacts before testing the next profile
+  ansible.builtin.file:
+    path: "{{ cargo_test_directory.path }}/fixture/target"
+    state: absent
