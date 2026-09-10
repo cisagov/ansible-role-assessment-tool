@@ -16,14 +16,17 @@
 - name: Build cargo tool
   ansible.builtin.command:
     chdir: "{{ assessment_tool_install_dir }}"
-    # The version of cargo on Kali and Debian 12 (Bookworm) does not
-    # support the --profile option without -Z unstable-options;
-    # furthermore, there is no long option equivalent for -Z.
+    # Built-in profiles also work on older stable Cargo versions without
+    # --profile support. Custom profiles require Cargo 1.57 or newer.
     cmd: >
-      /usr/bin/cargo build -Z unstable-options
-      --profile={{ assessment_tool_cargo_profile }}
+      /usr/bin/cargo build
+      {{ '--release' if assessment_tool_cargo_profile == 'release' else
+      '' if assessment_tool_cargo_profile == 'dev' else
+      '--profile=' ~ assessment_tool_cargo_profile }}
     creates: >-
       {{ assessment_tool_install_dir }}/target/{{
+      'debug' if assessment_tool_cargo_profile in ['dev', 'test'] else
+      'release' if assessment_tool_cargo_profile == 'bench' else
       assessment_tool_cargo_profile }}/{{
       assessment_tool_install_dir | basename }}
   when:

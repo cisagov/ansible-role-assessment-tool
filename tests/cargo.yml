@@ -1,0 +1,27 @@
+---
+- name: Verify Cargo builds with stable system packages
+  hosts: all
+  gather_facts: false
+  vars_files:
+    - ../defaults/main.yml
+  tasks:
+    - name: Create an isolated test directory
+      ansible.builtin.tempfile:
+        state: directory
+        prefix: assessment-cargo-
+      register: cargo_test_directory
+
+    - name: Exercise built-in and custom profiles
+      block:
+        - name: Exercise a Cargo profile
+          ansible.builtin.include_tasks: cargo_profile.yml
+          loop: >-
+            {{ cargo_test_profiles
+            | default(['release', 'dev', 'test', 'bench', 'audit']) }}
+          loop_control:
+            loop_var: cargo_test_profile
+      always:
+        - name: Remove the isolated test directory
+          ansible.builtin.file:
+            path: "{{ cargo_test_directory.path }}"
+            state: absent
