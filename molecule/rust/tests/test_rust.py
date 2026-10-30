@@ -12,27 +12,7 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
 ).get_hosts("all")
 
 
-@pytest.mark.parametrize(
-    "d",
-    [
-        "/tools/CrackMapExec",
-    ],
-)
-def test_directories(host, d):
-    """Test that appropriate directories were created."""
-    directory = host.file(d)
-    assert directory.exists
-    assert directory.is_directory
-    # Make sure that the directory is not empty
-    assert host.run_expect([0], f'[ -n "$(ls --almost-all {d})" ]')
-
-
-@pytest.mark.parametrize(
-    "pkg",
-    [
-        "cargo",
-    ],
-)
-def test_packages(host, pkg):
-    """Test that appropriate packages were installed."""
-    assert host.package(pkg).is_installed
+@pytest.mark.parametrize("x", [True])
+def test_packages(host, x):
+    """Run a dummy test, just to show what one would look like."""
+    assert x

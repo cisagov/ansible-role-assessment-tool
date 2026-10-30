@@ -4,3 +4,17 @@
 # override the values in that file.
 scenario:
   name: rust
+  test_sequence:
+    - dependency
+    - cleanup
+    - destroy
+    - syntax
+    - create
+    - prepare
+    - converge
+    # Our rust tests take place in Ansible and are self-contained.
+    # - idempotence
+    - side_effect
+    - verify
+    - cleanup
+    - destroy
