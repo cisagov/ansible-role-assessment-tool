@@ -28,7 +28,7 @@
       fn main() { println!("cargo fixture"); }
 
 - name: Build the fixture with the role's Rust tasks
-  ansible.builtin.include_tasks: ../tasks/install_rust.yml
+  ansible.builtin.include_tasks: ../../../tasks/install_rust.yml
   vars:
     assessment_tool_install_dir: "{{ cargo_test_directory.path }}/fixture"
     assessment_tool_cargo_profile: "{{ cargo_test_profile }}"
@@ -53,7 +53,7 @@
     state: absent
 
 - name: Repeat the build with the existing binary and no manifest
-  ansible.builtin.include_tasks: ../tasks/install_rust.yml
+  ansible.builtin.include_tasks: ../../../tasks/install_rust.yml
   vars:
     assessment_tool_install_dir: "{{ cargo_test_directory.path }}/fixture"
     assessment_tool_cargo_profile: "{{ cargo_test_profile }}"
