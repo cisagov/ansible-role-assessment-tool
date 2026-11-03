@@ -6,6 +6,10 @@
 collections:
   - name: community.docker
     version: ">=3.10.2"
+  # Necessary for community.general.from_toml, used in
+  # tasks/install_rust.yml.
+  - name: community.general
+    version: ">=13.1.0"
 
 roles:
   - name: backports
