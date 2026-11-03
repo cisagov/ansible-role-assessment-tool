@@ -4,5 +4,20 @@
   vars_files:
     - ../../defaults/main.yml
   tasks:
-    - name: Verify Cargo builds with stable system packages
-      ansible.builtin.include_tasks: tasks/cargo.yml
+    - name: Install peterschutt/rust-hello-cargo
+      # We do prepend the name of the role to the role variables, but
+      # Molecule does its own role discovery with inconsistent naming.
+      # This is the reason for the noqa below.
+      ansible.builtin.include_role: # noqa var-naming[no-role-prefix]
+        name: ansible-role-assessment-tool
+      loop:
+        - dev
+        - release
+      vars:
+        assessment_tool_archive_src: >-
+          https://github.com/peterschutt/rust-hello-cargo/tarball/master
+        assessment_tool_cargo_profile: "{{ item }}"
+        assessment_tool_install_dir: /tools/rust-hello-cargo
+        assessment_tool_rust: true
+        assessment_tool_unarchive_extra_opts:
+          - --strip-components=1
