@@ -14,20 +14,34 @@
     - assessment_tool_cargo_packages is defined
 
 - name: Build cargo tool
-  ansible.builtin.command:
-    chdir: "{{ assessment_tool_install_dir }}"
-    # Built-in profiles also work on older stable Cargo versions without
-    # --profile support. Custom profiles require Cargo 1.57 or newer.
-    cmd: >
-      /usr/bin/cargo build
-      {{ '--release' if assessment_tool_cargo_profile == 'release' else
-      '' if assessment_tool_cargo_profile == 'dev' else
-      '--profile=' ~ assessment_tool_cargo_profile }}
-    creates: >-
-      {{ assessment_tool_install_dir }}/target/{{
-      'debug' if assessment_tool_cargo_profile in ['dev', 'test'] else
-      'release' if assessment_tool_cargo_profile == 'bench' else
-      assessment_tool_cargo_profile }}/{{
-      assessment_tool_install_dir | basename }}
   when:
     - assessment_tool_cargo_build
+  block:
+    - name: Grab the target name from the cargo manifest
+      block:
+        - name: Slurp the cargo manifest
+          ansible.builtin.slurp:
+            src: "{{ assessment_tool_install_dir }}/Cargo.toml"
+          register: manifest
+
+        - name: Convert TOML data into dictionary
+          ansible.builtin.set_fact:
+            manifest_content: >-
+              {{ manifest['content'] | b64decode | community.general.from_toml }}
+
+    - name: Build cargo tool
+      ansible.builtin.command:
+        chdir: "{{ assessment_tool_install_dir }}"
+        # Built-in profiles also work on older stable Cargo versions
+        # without --profile support. Custom profiles require Cargo
+        # 1.57 or newer.
+        cmd: >
+          /usr/bin/cargo build
+          {{ '--release' if assessment_tool_cargo_profile == 'release' else
+          '' if assessment_tool_cargo_profile == 'dev' else
+          '--profile=' ~ assessment_tool_cargo_profile }}
+        creates: >-
+          {{ assessment_tool_install_dir }}/target/{{
+          'debug' if assessment_tool_cargo_profile in ['dev', 'test'] else
+          'release' if assessment_tool_cargo_profile == 'bench' else
+          assessment_tool_cargo_profile }}/{{ manifest_content['package']['name'] }}
