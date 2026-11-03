@@ -269,12 +269,7 @@ jobs:
           - powershell
           - python
           - python2
-          # TODO: Porchetta-Industries/CrackMapExec is no longer being
-          # installed in our Kali AMI as of cisagov/kali-packer#182,
-          # so we no longer have an example of a Rust installation.
-          # This testing should be revived when we do have such an
-          # example.  See #64 for more details.
-          # - rust
+          - rust
     steps:
       - name: Apply standard cisagov job preamble
         uses: cisagov/action-job-preamble@v1

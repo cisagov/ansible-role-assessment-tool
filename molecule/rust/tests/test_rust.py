@@ -15,7 +15,7 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
 @pytest.mark.parametrize(
     "d",
     [
-        "/tools/CrackMapExec",
+        "/tools/rust-hello-cargo",
     ],
 )
 def test_directories(host, d):
@@ -28,11 +28,14 @@ def test_directories(host, d):
 
 
 @pytest.mark.parametrize(
-    "pkg",
+    "target",
     [
-        "cargo",
+        "debug",
+        "release",
     ],
 )
-def test_packages(host, pkg):
-    """Test that appropriate packages were installed."""
-    assert host.package(pkg).is_installed
+def test_run_executables(host, target):
+    """Test running the compiled executables."""
+    cmd = host.run(f"/tools/rust-hello-cargo/target/{target}/hello_cargo")
+    assert cmd.rc == 0, "hello_cargo command did not complete successfully"
+    assert cmd.stdout == "Hello, world!\n"
